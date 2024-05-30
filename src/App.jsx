@@ -1,10 +1,10 @@
 import './App.css';
-
+import NavBar from './App/Components/Narbar/index.jsx';
 function App() {
   return (
     <>
       {' '}
-      <h1 className='text-3xl text-[gray] font-bold underline'>Hello world!</h1>
+      <NavBar />
     </>
   );
 }
