@@ -3,10 +3,7 @@ import imagesholder from "../../../../assets/imagesholder.png";
 import mobilmeImage from "../../../../assets/imagemobielView.png";
 const Index = () => {
   return (
-    <div
-      className=" relative max-w-full overflow-x-hidden h-full"
-      // style={{ zIndex: "-1" }}
-    >
+    <div className=" relative max-w-full overflow-x-hidden h-full">
       <div>
         <picture>
           <source srcSet={mobilmeImage} media="(max-width: 1023px)" />
@@ -26,9 +23,15 @@ const Index = () => {
         <h1 className="md:text-[48px] text-[24px] font-[800] mb-3 uppercase">
           SLEEK ASSURED REMOVALS
         </h1>
-        <p className="lg:text-[24px] text-[16px] font-[500]">
-          Enjoy the most reliable service in the United Kingdom
-        </p>
+        <div class="lg:flex lg:justify-center">
+          <p
+            class="lg:text-[24px] text-[16px] font-[500]"
+            style={{ textAlignLast: "center" }}
+          >
+            Enjoy the most reliable service in the United Kingdom
+          </p>
+        </div>
+
         <div className="mt-5 mb-4 flex flex-wrap center gap-5 ">
           <div>
             <p className="text-[20px] font-[500] mb-2">Collection Address</p>
@@ -55,6 +58,62 @@ const Index = () => {
             alt="left Arrow"
             className="w-[24px] h-[24px]"
           />
+        </div>
+      </div>
+      <div className="relative px-0 sm:px-20 max-w-full overflow-x-hidden h-full flex justify-center mt-0 sm:mt-[-120px]">
+        <div className="sm:w-[1170px] w-[430px] h-full xl:p-10 sm:h-full rounded-0 sm:rounded-[8px] bg-[#E97B08] gap-2 grid lg:grid-cols-2 sm:grid-cols-2">
+          <div class="p-5">
+            <div class="sm:w-[280px] h-[40px] py-[8px] font-[700] text-[24px] text-white relative border-b-2 mb-3">
+              Home Removals
+            </div>
+
+            <div class="sm:w-[350px]  w-[190px] ">
+              <p class="sm:text-[16px] text-[14pxs] overflow-auto break-all">
+                Lorem ipsum dolor sit amet, ster sadipscing elit, sed diam sonar
+                enmod tempor invidunt ut labore et dolore magna aliquyam aret
+                sed diam volatus Al sero eos et accusam et justo duo dolores et
+              </p>
+            </div>
+          </div>
+
+          <div class="p-5">
+            <div class="w-[280px] h-[40px] py-[8px] font-[700] text-[24px] text-white relative border-b-2 mb-3">
+              MAN & VAN
+            </div>
+
+            <div class="sm:w-[350px]  w-[190px] ">
+              <p class="sm:text-[16px] text-[14pxs] overflow-auto break-all">
+                Lorem ipsum dolor sit amet, ster sadipscing elit, sed diam sonar
+                enmod tempor invidunt ut labore et dolore magna aliquyam aret
+                sed diam volatus Al sero eos et accusam et justo duo dolores et
+              </p>
+            </div>
+          </div>
+          <div class="p-5">
+            <div class="w-[280px] h-[40px] py-[8px] font-[700] text-[24px] text-white relative border-b-2 mb-3">
+              STORAGE & REMOVAL
+            </div>
+
+            <div class="sm:w-[350px]  w-[190px] ">
+              <p class="sm:text-[16px] text-[14pxs] overflow-auto break-all">
+                Lorem ipsum dolor sit amet, ster sadipscing elit, sed diam sonar
+                enmod tempor invidunt ut labore et dolore magna aliquyam aret
+                sed diam volatus Al sero eos et accusam et justo duo dolores et
+              </p>
+            </div>
+          </div>
+          <div class="p-5">
+            <div class="w-[280px] h-[40px] py-[8px] font-[700] text-[24px] text-white relative border-b-2 mb-3">
+              PICK UP & DELIVERY
+            </div>
+            <div class="sm:w-[350px]  w-[190px] ">
+              <p class="sm:text-[16px] text-[14pxs] overflow-auto break-all">
+                Lorem ipsum dolor sit amet, ster sadipscing elit, sed diam sonar
+                enmod tempor invidunt ut labore et dolore magna aliquyam aret
+                sed diam volatus Al sero eos et accusam et justo duo dolores et
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </div>

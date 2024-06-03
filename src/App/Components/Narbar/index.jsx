@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import { NavLink } from "react-router-dom";
 export const Index = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -11,9 +11,14 @@ export const Index = () => {
     <>
       <div className="flex justify-between items-center relative w-full">
         <div className="hidden md:flex justify-between items-center w-full">
-          <div className="ms-24">
-            <img src="/Sleek_Logo.svg" alt="Sleek Logo" />
+          <div class="ms-24 lg:ms-7 xl:ms-24">
+            <img
+              src="/Sleek_Logo.svg"
+              alt="Sleek Logo"
+              className="w-50 lg:w-40"
+            />
           </div>
+
           <div className="w-[1021px]   h-[140px] bg-NavBar flex justify-start items-center relative">
             <div className="absolute w-11/12 md:5/6 lg:5/6 2xl:w-4/6 top-0 left-0 right-0 mx-auto -mt-18 flex justify-between items-center">
               <div className="w-50"></div>
@@ -28,28 +33,72 @@ export const Index = () => {
             </div>
 
             <div className="ps-20 mt-12 uppercase ">
-              <div className="flex lg:gap-5  justify-between  items-center">
-                <p className="text-[#E97B08] font-bold">home</p>
-                <p className="text-[#FFFFFF] text-[15px] Inter font-medium">
+              <div className="flex gap-5  justify-between  items-center">
+                <NavLink
+                  className={(e) => {
+                    return e.isActive
+                      ? "text-[#E97B08] text-[15px] font-bold"
+                      : "text-[#FFFF] font-medium text-[15px]";
+                  }}
+                  to="/home"
+                >
+                  home
+                </NavLink>
+                <NavLink
+                  to="/service"
+                  className={(e) => {
+                    return e.isActive
+                      ? "text-[#E97B08] text-[15px] font-bold"
+                      : "text-[#FFFF] font-medium text-[15px]";
+                  }}
+                >
                   Services
-                </p>
-                <p className="text-[#FFFFFF] text-[15px] Inter font-medium">
+                </NavLink>
+                <NavLink
+                  to="/faq"
+                  className={(e) => {
+                    return e.isActive
+                      ? "text-[#E97B08] text-[15px] font-bold"
+                      : "text-[#FFFF] font-medium text-[15px]";
+                  }}
+                >
                   FAQ
-                </p>
-                <p className="text-[#FFFFFF] text-[15px] Inter font-medium">
+                </NavLink>
+                <NavLink
+                  to="/blog"
+                  className={(e) => {
+                    return e.isActive
+                      ? "text-[#E97B08] text-[15px] font-bold"
+                      : "text-[#FFFF] font-medium text-[15px]";
+                  }}
+                >
                   Blog
-                </p>
-                <p className="text-[#FFFFFF] text-[15px] Inter font-medium">
+                </NavLink>
+                <NavLink
+                  to="/instant"
+                  className={(e) => {
+                    return e.isActive
+                      ? "text-[#E97B08] text-[15px] font-bold"
+                      : "text-[#FFFF] font-medium text-[15px]";
+                  }}
+                >
                   Instant Quote
-                </p>
-                <p className="text-[#FFFFFF] text-[15px] Inter font-medium">
+                </NavLink>
+                <NavLink
+                  to="/"
+                  className={(e) => {
+                    return e.isActive
+                      ? "text-[#E97B08] text-[15px] font-bold"
+                      : "text-[#FFFF] font-medium text-[15px]";
+                  }}
+                >
                   Reviews
-                </p>
-                <button className="rounded-[8px] bg-[#E97B08] text-[#FFFFFF] text-[16px] py-3 px-8">
+                </NavLink>
+                <button className="rounded-[8px] bg-[#E97B08] text-[#FFFFFF] text-[16px] py-[12px] px-[40px]">
                   Contact
                 </button>
-                <img src="/Layer_1.svg" alt="" />
                 <img src="/ri_facebook-fill.svg" alt="" />
+                <img src="/Layer_1.svg" alt="" />
               </div>
             </div>
           </div>
