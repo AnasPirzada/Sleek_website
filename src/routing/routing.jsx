@@ -1,5 +1,5 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Index from "../../src/App/Components/Pages/Home/index";
+import Index from "../../src/App/Components/Pages/Home/Index";
 import Navbar from "../../src/App/Components/Narbar/index";
 import Blog from "../App/Components/Pages/Blog/Blog";
 export const router = createBrowserRouter([
