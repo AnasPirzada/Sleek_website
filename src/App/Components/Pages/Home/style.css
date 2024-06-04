@@ -1,8 +1,12 @@
-.background-image {
-    background-image: url("./../../../../assets/imagesholder.png");
-    background-size: cover; 
-    background-position: center; 
-    width: 1440px;
-    height: 680px;
-  }
-  
+.bgImage {
+  background-image: url("./../../../../assets/image 5.png");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+}
+
+.mobileBgimg {
+  background-image: url("./../../../../assets/imagemobielView.png");
+  background-size: cover;
+  background-position: center;
+}
