@@ -13,15 +13,7 @@ export const router = createBrowserRouter([
     element: (
       <>
         <Navbar />
-      </>
-    ),
-  },
-  {
-    path: "/home",
-    element: (
-      <>
-        <Navbar />
-        <Home />
+        <Index />
       </>
     ),
   },
