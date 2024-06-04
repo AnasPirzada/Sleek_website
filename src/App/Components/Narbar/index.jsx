@@ -45,7 +45,7 @@ export const Index = () => {
                   home
                 </NavLink>
                 <NavLink
-                  to="/service"
+                  to="/"
                   className={(e) => {
                     return e.isActive
                       ? "text-[#E97B08] text-[15px] font-bold"
@@ -105,7 +105,7 @@ export const Index = () => {
         </div>
       </div>
       {/* Mobile Design */}
-      <div className="block z-[5] md:hidden w-[100%] ">
+      <div className="block  md:hidden w-[100%] relative z-[5]">
         <div className="flex items-center p-4  bg-[#010066] border-b-">
           <div className="w-[20px] ">
             <img
