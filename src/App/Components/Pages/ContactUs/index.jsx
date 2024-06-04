@@ -49,17 +49,17 @@ const index = () => {
               </button>
             </div>
           </div>
-          <div className="h-auto">
+          <div className="m-auto">
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2487.472877168982!2d-0.0662394244766312!3d51.431109016275194!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487603d8a7abbeaf%3A0xf0b2e9f32a1915ac!2s9%20Dallas%20Rd%2C%20London%20SE26%206JP%2C%20UK!5e0!3m2!1sen!2s!4v1717502733809!5m2!1sen!2s&zoom=control:false&q=London"
               width="600"
-              height="450"
+              height="650"
               allowfullscreen=""
               loading="lazy"
             ></iframe>
           </div>{" "}
         </div>
-        <div className="grid sm:grid-cols-4 grid-cols-1 gap-5 p-4">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 grid-cols-1 gap-2 mt-10">
           <div className="text-center">
             <img src={callicon} alt="Call Icon" className="w-16 mx-auto mb-2" />
             <p className="text-[20px] font-normal mb-2">Phone Number</p>
@@ -95,9 +95,11 @@ const index = () => {
               alt="Location Icon"
               className="w-16 mx-auto mb-2"
             />
-            <p className="text-[20px] font-normal mb-2">Address</p>
+            <p className="text-[20px] font-normal mb-2">Our Address</p>
             <div className="text-[#383939]">
-              <p className="text-[18px]">Your Address Here</p>
+              <p className="text-[18px]">
+                9 Dallas Road, Sydenham, London SE26 6JP
+              </p>
             </div>
           </div>
         </div>
