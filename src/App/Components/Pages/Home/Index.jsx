@@ -51,6 +51,64 @@ const Index = () => {
           </div>
         </div>
       </div>
+      <div className="relative px-0 sm:px-20 max-w-full overflow-x-hidden h-full flex justify-center mt-0 sm:mt-[-120px]">
+        <div className="sm:w-[1170px] pr-5 sm:pr-0 w-[430px] h-full xl:p-10 sm:h-full rounded-0 sm:rounded-[8px] bg-[#E97B08] gap-2 grid lg:grid-cols-2 grid-cols-2 sm:grid-cols-2">
+          <div class="p-5">
+            <div class="sm:w-[280px] w-[160px] leading-3 h-[24px] py-[8px] font-[700] text-[14px] sm:text-[24px] text-white relative border-b-2 mb-3">
+              Home Removals
+            </div>
+
+            <div class="sm:w-[350px]  h-[105px] w-[180px] ">
+              <p class="sm:text-[16px] text-[12px] overflow-auto break-all">
+                Lorem ipsum dolor sit amet, ster sadipscing elit, sed diam sonar
+                enmod tempor invidunt ut labore et dolore magna aliquyam aret
+                sed diam volatus Al sero eos et accusam et justo duo dolores et
+              </p>
+            </div>
+          </div>
+
+          <div class="p-5">
+            <div class="sm:w-[280px] w-[160px] leading-3 h-[24px] py-[8px] font-[700] text-[14px] sm:text-[24px] text-white relative border-b-2 mb-3">
+              MAN & VAN
+            </div>
+
+            <div class="sm:w-[350px]  h-[105px] w-[180px] ">
+              <p class="sm:text-[16px] text-[12px] overflow-auto break-all">
+                Lorem ipsum dolor sit amet, ster sadipscing elit, sed diam sonar
+                enmod tempor invidunt ut labore et dolore magna aliquyam aret
+                sed diam volatus Al sero eos et accusam et justo duo dolores et
+              </p>
+            </div>
+          </div>
+          <div class="p-5">
+            <div class="sm:w-[280px] w-[160px] leading-3 h-[24px] py-[8px] font-[700] text-[14px] sm:text-[24px] text-white relative border-b-2 mb-3">
+              STORAGE & REMOVAL
+            </div>
+
+            <div class="sm:w-[350px]  h-[105px] w-[180px] ">
+              <p class="sm:text-[16px] text-[12px] overflow-auto break-all">
+                Lorem ipsum dolor sit amet, ster sadipscing elit, sed diam sonar
+                enmod tempor invidunt ut labore et dolore magna aliquyam aret
+                sed diam volatus Al sero eos et accusam et justo duo dolores et
+              </p>
+            </div>
+          </div>
+
+          <div class="p-5">
+            <div class="sm:w-[280px] w-[160px] leading-3 h-[24px] py-[8px] font-[700] text-[14px] sm:text-[24px] text-white relative border-b-2 mb-3">
+              PICKUP & Delivery
+            </div>
+
+            <div class="sm:w-[350px]  h-[105px] w-[180px] ">
+              <p class="sm:text-[16px] text-[12px] overflow-auto break-all">
+                Lorem ipsum dolor sit amet, ster sadipscing elit, sed diam sonar
+                enmod tempor invidunt ut labore et dolore magna aliquyam aret
+                sed diam volatus Al sero eos et accusam et justo duo dolores et
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
