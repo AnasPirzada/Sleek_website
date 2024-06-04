@@ -55,7 +55,17 @@ export const Index = () => {
                   Services
                 </NavLink>
                 <NavLink
-                  to="/faq"
+                  to="/contactus"
+                  className={(e) => {
+                    return e.isActive
+                      ? "text-[#E97B08] text-[15px] font-bold"
+                      : "text-[#FFFF] font-medium text-[15px]";
+                  }}
+                >
+                  Contact US
+                </NavLink>
+                <NavLink
+                  to="/faqs"
                   className={(e) => {
                     return e.isActive
                       ? "text-[#E97B08] text-[15px] font-bold"
@@ -75,7 +85,7 @@ export const Index = () => {
                   Blog
                 </NavLink>
                 <NavLink
-                  to="/instant"
+                  to="/instantQuotes"
                   className={(e) => {
                     return e.isActive
                       ? "text-[#E97B08] text-[15px] font-bold"
