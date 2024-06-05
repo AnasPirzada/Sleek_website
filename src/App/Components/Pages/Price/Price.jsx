@@ -1,10 +1,7 @@
 import React, { useState } from "react";
-import Navbar from "../../Narbar/index"
-
-
+import Navbar from "../../Narbar/index";
 
 const Price = () => {
-
   const [activeDiv, setActiveDiv] = useState(null);
 
   const handleClick = (id) => {
@@ -12,9 +9,9 @@ const Price = () => {
   };
 
   return (
-   <>
-   <Navbar/>
-   <section className="px-5 sm:px-8 md:px-16 lg:px-24 xl:px-40 2xl:px-[280px] border border-red-500">
+    <>
+      <Navbar />
+      <section className="px-5 sm:px-8 md:px-16 lg:px-24 xl:px-40 2xl:px-[280px] border border-red-500">
         <div className="pt-10 sm:pt-12 md:pt-16 lg:pt-20 xl:pt-24 2xl:pt-[120px]">
           <h1 className="font-semibold text-2xl sm:text-3xl md:text-4xl lg:text-[36px] xl:text-[40px] leading-tight text-[#E97B08] text-center">
             Price Breakdown
@@ -111,8 +108,7 @@ const Price = () => {
         </div>
         <div className=" px-12 py-4 ">
           <p className=" text-normal text-base leading-[24px] text-[#E97B08]">
-            width: 441px; height: 24px; top: 1232px; left: 320px; gap: 0px;
-            opacity: 0px;
+            ANY ADDITIONAL TIME WILL BE CHARGED AT Hour £42.50 Per Half
           </p>
         </div>
         <div className=" px-12 pt-[18px]">
@@ -131,73 +127,71 @@ const Price = () => {
           </div>
         </div>
         <div className=" pt-6 px-12">
-      <h1 className="font-semibold text-2xl text-[#181919] leading-[29.5px]">
-        Choose the payment method
-      </h1>
-      <div className=" flex flex-col md:flex-row gap-6 pt-5">
-       
-        <div className="flex gap-2 items-center">
-          <div
-            id="div1"
-            className={`h-[26px] w-[26px] border-2 flex justify-center items-center text-center rounded-full ${
-              activeDiv === 'div1' ? 'active' : ''
-            }`}
-            onClick={() => handleClick('div1')}
-            style={{
-              borderColor: activeDiv === 'div1' ? '#E97B08' : 'black',
-              backgroundColor: activeDiv === 'div1' ? '' : 'white',
-              height: activeDiv === 'div1' ? '26px' : '26px',
-              width: activeDiv === 'div1' ? '26px' : '26px',
-            }}
-          >
-            <div
-              className={`h-[15px] w-[15px] rounded-full ${
-                activeDiv === 'div1' ? 'active' : ''
-              }`}
-              style={{
-                backgroundColor: activeDiv === 'div1' ? '#E97B08' : '',
-              }}
-            ></div>
-          </div>
-          <img src="logos_stripe.svg" alt="" />
-        </div>
+          <h1 className="font-semibold text-2xl text-[#181919] leading-[29.5px]">
+            Choose the payment method
+          </h1>
+          <div className=" flex flex-col md:flex-row gap-6 pt-5">
+            <div className="flex gap-2 items-center">
+              <div
+                id="div1"
+                className={`h-[26px] w-[26px] border-2 flex justify-center items-center text-center rounded-full ${
+                  activeDiv === "div1" ? "active" : ""
+                }`}
+                onClick={() => handleClick("div1")}
+                style={{
+                  borderColor: activeDiv === "div1" ? "#E97B08" : "black",
+                  backgroundColor: activeDiv === "div1" ? "" : "white",
+                  height: activeDiv === "div1" ? "26px" : "26px",
+                  width: activeDiv === "div1" ? "26px" : "26px",
+                }}
+              >
+                <div
+                  className={`h-[15px] w-[15px] rounded-full ${
+                    activeDiv === "div1" ? "active" : ""
+                  }`}
+                  style={{
+                    backgroundColor: activeDiv === "div1" ? "#E97B08" : "",
+                  }}
+                ></div>
+              </div>
+              <img src="logos_stripe.svg" alt="" />
+            </div>
 
-       
-        <div className="flex gap-2 items-center">
-          <div
-            id="div2"
-            className={`h-[26px] w-[26px] border-2 flex justify-center items-center text-center rounded-full ${
-              activeDiv === 'div2' ? 'active' : ''
-            }`}
-            onClick={() => handleClick('div2')}
-            style={{
-              borderColor: activeDiv === 'div2' ? '#E97B08' : 'black',
-              backgroundColor: activeDiv === 'div2' ? '' : 'white',
-              height: activeDiv === 'div2' ? '26px' : '26px',
-              width: activeDiv === 'div2' ? '26px' : '26px',
-            }}
-          >
-            <div
-              className={`h-[15px] w-[15px] rounded-full ${
-                activeDiv === 'div2' ? 'active' : ''
-              }`}
-              style={{
-                backgroundColor: activeDiv === 'div2' ? '#E97B08' : '',
-              }}
-            ></div>
+            <div className="flex gap-2 items-center">
+              <div
+                id="div2"
+                className={`h-[26px] w-[26px] border-2 flex justify-center items-center text-center rounded-full ${
+                  activeDiv === "div2" ? "active" : ""
+                }`}
+                onClick={() => handleClick("div2")}
+                style={{
+                  borderColor: activeDiv === "div2" ? "#E97B08" : "black",
+                  backgroundColor: activeDiv === "div2" ? "" : "white",
+                  height: activeDiv === "div2" ? "26px" : "26px",
+                  width: activeDiv === "div2" ? "26px" : "26px",
+                }}
+              >
+                <div
+                  className={`h-[15px] w-[15px] rounded-full ${
+                    activeDiv === "div2" ? "active" : ""
+                  }`}
+                  style={{
+                    backgroundColor: activeDiv === "div2" ? "#E97B08" : "",
+                  }}
+                ></div>
+              </div>
+              <img src="paypallogo.svg" alt="" />
+            </div>
           </div>
-          <img src="Frame 109.svg" alt="" />
+          <div className="flex justify-center text-center items-center py-20">
+            <button className="bg-[#E97B08] h-[54px] w-[220px] text-[#FFFFFF] shadow-md rounded-lg">
+              Pay Now
+            </button>
+          </div>
         </div>
-      </div>
-      <div className="flex justify-center text-center items-center py-20">
-        <button className="bg-[#E97B08] h-[54px] w-[220px] text-[#FFFFFF] shadow-md rounded-lg">
-          Pay Now
-        </button>
-      </div>
-    </div>
       </section>
-   </>
-  )
-}
+    </>
+  );
+};
 
-export default Price
+export default Price;

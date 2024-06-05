@@ -40,12 +40,12 @@ export const Index = () => {
                       ? "text-[#E97B08] text-[15px] font-bold"
                       : "text-[#FFFF] font-medium text-[15px]";
                   }}
-                  to="/home"
+                  to="/"
                 >
                   home
                 </NavLink>
                 <NavLink
-                  to="/"
+                  to="/services"
                   className={(e) => {
                     return e.isActive
                       ? "text-[#E97B08] text-[15px] font-bold"
@@ -85,7 +85,7 @@ export const Index = () => {
                   Blog
                 </NavLink>
                 <NavLink
-                  to="/instantQuotes"
+                  to="/instantmain"
                   className={(e) => {
                     return e.isActive
                       ? "text-[#E97B08] text-[15px] font-bold"
