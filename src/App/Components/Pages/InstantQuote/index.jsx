@@ -1,6 +1,9 @@
 import React from "react";
 
 const index = () => {
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <div>
       <div className="pt-[90px]">

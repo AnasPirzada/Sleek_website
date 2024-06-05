@@ -5,6 +5,9 @@ import Date_Time from "./DateTime";
 import { useNavigate } from "react-router";
 
 const SectionVehicl = () => {
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const navigate = useNavigate();
   const vehicleOptions = [
     { label: "Small Van", value: "small-van", imgSrc: "smallVan.svg" },
@@ -369,7 +372,7 @@ const SectionVehicl = () => {
         </div>
         <div className="flex text-center justify-center items-center pt-[77px] md:pt-[50px] lg:pt-[40px] xl:pt-[30px] 2xl:pt-[20px]">
           <button
-            onClick={() => navigate("/instantQuotes")}
+            onClick={() => navigate("/instantmain")}
             className="h-[64px] w-[250px] md:w-[300px] lg:w-[350px] xl:w-[400px] 2xl:w-[450px] rounded-lg bg-[#E97B08] text-white font-semibold flex text-center justify-center items-center gap-4"
           >
             GET MY FREE QUOTES

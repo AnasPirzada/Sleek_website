@@ -2,9 +2,9 @@ import React from "react";
 
 const OurVision = () => {
   return (
-    <div className="container mx-auto p-4 sm:mt-24">
+    <div className="container mx-auto  sm:mt-24">
       <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-4">
-        <div className="p-4">
+        <div className="">
           <h2 className="text-2xl sm:text-5xl font-bold mb-8 text-[#010066]">
             OUR VISION
           </h2>
@@ -33,12 +33,8 @@ const OurVision = () => {
             </div>
           </div>
         </div>
-        <div className="p-4 flex justify-center">
-          <img
-            src="/Rectangle 2.png"
-            alt="Our Vision"
-            className="w-full max-w-md h-auto"
-          />
+        <div className="flex justify-center">
+          <img src="/Rectangle 2.png" alt="Our Vision" />
         </div>
       </div>
     </div>

@@ -85,7 +85,7 @@ export const Index = () => {
                   Blog
                 </NavLink>
                 <NavLink
-                  to="/instantmain"
+                  to="/instantQuotes"
                   className={(e) => {
                     return e.isActive
                       ? "text-[#E97B08] text-[15px] font-bold"
@@ -95,7 +95,7 @@ export const Index = () => {
                   Instant Quote
                 </NavLink>
                 <NavLink
-                  to="/"
+                  to="/review"
                   className={(e) => {
                     return e.isActive
                       ? "text-[#E97B08] text-[15px] font-bold"
@@ -143,12 +143,72 @@ export const Index = () => {
             <div className="bg-[#010066]">
               <div className=" p-10 w-full rounded-sm">
                 <ul className="text-white text-[14px]  font-[400]">
-                  <li className="mb-6">Home</li>
-                  <li className="mb-6">Services</li>
-                  <li className="mb-6">FAQ</li>
-                  <li className="mb-6">Blog</li>
-                  <li className="mb-6">Instant Quote</li>
-                  <li className="mb-6">Reviews</li>
+                  <NavLink
+                    to="/"
+                    className={(e) => {
+                      return e.isActive
+                        ? "mb-6 text-[#E97B08] text-[15px] font-bold"
+                        : "text-[#FFFF] font-medium text-[15px] mb-6";
+                    }}
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    <li className="mb-6">Home</li>
+                  </NavLink>
+                  <NavLink
+                    to="/services"
+                    className={(e) => {
+                      return e.isActive
+                        ? "mb-6 text-[#E97B08] text-[15px] font-bold"
+                        : "text-[#FFFF] font-medium text-[15px] mb-6";
+                    }}
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    <li className="mb-6">Services</li>
+                  </NavLink>
+                  <NavLink
+                    to="/faqs"
+                    className={(e) => {
+                      return e.isActive
+                        ? "mb-6 text-[#E97B08] text-[15px] font-bold"
+                        : "text-[#FFFF] font-medium text-[15px] mb-6";
+                    }}
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    <li className="mb-6">FAQ</li>
+                  </NavLink>
+                  <NavLink
+                    to="/blog"
+                    className={(e) => {
+                      return e.isActive
+                        ? "mb-6 text-[#E97B08] text-[15px] font-bold"
+                        : "text-[#FFFF] font-medium text-[15px] mb-6";
+                    }}
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    <li className="mb-6">Blog</li>
+                  </NavLink>
+                  <NavLink
+                    to="/instantQuotes"
+                    className={(e) => {
+                      return e.isActive
+                        ? "mb-6 text-[#E97B08] text-[15px] font-bold"
+                        : "text-[#FFFF] font-medium text-[15px] mb-6";
+                    }}
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    <li className="mb-6">Instant Quote</li>
+                  </NavLink>
+                  <NavLink
+                    to="/review"
+                    className={(e) => {
+                      return e.isActive
+                        ? "mb-6 text-[#E97B08] text-[15px] font-bold"
+                        : "text-[#FFFF] font-medium text-[15px] mb-6";
+                    }}
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    <li className="mb-6">Reviews</li>
+                  </NavLink>
                 </ul>
                 <div className="flex gap-4 mt-4">
                   <img
