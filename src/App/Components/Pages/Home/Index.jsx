@@ -14,7 +14,7 @@ const Index = () => {
   return (
     <>
       {" "}
-      <div className=" mobileBgimg lg:bgImages h-full">
+      <div className="mobileBgimg sm:bgImage h-full">
         <div className="py-12 md:py-32 px-2 sm:px-24 ">
           <div>
             <p className="text-2xl font-medium text-white mb-3 text-center sm:text-left">
