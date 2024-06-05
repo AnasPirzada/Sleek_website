@@ -5,6 +5,9 @@ import location from "../../../../assets/locationIcon.png";
 import clockIcon from "../../../../assets/clockIcon.png";
 
 const index = () => {
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <div className="p-10">
       <div className="sm:p-20  p-0">

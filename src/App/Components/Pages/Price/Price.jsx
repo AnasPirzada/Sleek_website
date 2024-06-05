@@ -7,6 +7,9 @@ const Price = () => {
   const handleClick = (id) => {
     setActiveDiv(id === activeDiv ? null : id); // Toggle active state
   };
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <>
@@ -17,7 +20,7 @@ const Price = () => {
             Price Breakdown
           </h1>
         </div>
-        <div className="mt-10 sm:mt-12 md:mt-16 lg:mt-20 xl:mt-24 2xl:mt-[80px] bg-[#F5F5F5] rounded-xl px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 flex flex-col justify-between">
+        <div className="mt-5 sm:mt-12 md:mt-16 lg:mt-20 xl:mt-24 2xl:mt-[80px] bg-[#F5F5F5] rounded-xl px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 flex flex-col justify-between">
           <div className="rounded-xl py-6 sm:py-8 md:py-10">
             <div className="justify-between flex">
               <p className="text-base sm:text-lg md:text-xl lg:text-2xl font-normal text-[#272828]">
@@ -106,28 +109,28 @@ const Price = () => {
             </div>
           </div>
         </div>
-        <div className=" px-12 py-4 ">
+        <div className=" px-5 sm:px-12 py-4 ">
           <p className=" text-normal text-base leading-[24px] text-[#E97B08]">
             ANY ADDITIONAL TIME WILL BE CHARGED AT Hour £42.50 Per Half
           </p>
         </div>
-        <div className=" px-12 pt-[18px]">
+        <div className="px-5 sm:px-12 pt-[18px]">
           <div className=" flex justify-between">
-            <h2 className=" font-semibold text-2xl">Total Cost</h2>
-            <p className=" font-medium text-2xl">£428.00</p>
+            <h2 className=" font-semibold text-lg sm:text-2xl">Total Cost</h2>
+            <p className=" font-medium text-lg sm:text-2xl">£428.00</p>
           </div>
           <div className=" flex justify-between py-4">
-            <h2 className="font-semibold text-2xl">
+            <h2 className="font-semibold text-lg sm:text-2xl">
               To Pay now{" "}
               <span className=" text-base font-normal leading-[24px]">
                 (10% deposit)
               </span>
             </h2>
-            <p className=" font-medium text-2xl">£42.80</p>
+            <p className=" font-medium text-lg sm:text-2xl">£42.80</p>
           </div>
         </div>
-        <div className=" pt-6 px-12">
-          <h1 className="font-semibold text-2xl text-[#181919] leading-[29.5px]">
+        <div className=" pt-6 px-5 sm:px-12">
+          <h1 className="font-semibold text-lg sm:text-2xl text-[#181919] leading-[29.5px]">
             Choose the payment method
           </h1>
           <div className=" flex flex-col md:flex-row gap-6 pt-5">

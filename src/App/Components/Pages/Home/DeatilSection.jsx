@@ -5,7 +5,7 @@ const DeatilSection = () => {
     <>
       <div className="grid grid-cols-2 rounded-0 sm:rounded-[8px] bg-[#E97B08] gap-2 p-3 md:p-16 md:-mt-12">
         <div>
-          <p className="sm:w-[280px] w-[160px] text-lg sm:text-3xl text-white  border-b-2 mb-3 ">
+          <p className="sm:w-[280px] w-[160px] text-lg sm:text-2xl text-white  border-b-2 mb-3 ">
             Home Removals
           </p>
           <p>
@@ -15,7 +15,7 @@ const DeatilSection = () => {
           </p>
         </div>
         <div>
-          <p className="sm:w-[280px] w-[160px] text-lg sm:text-3xl text-white  border-b-2 mb-3 ">
+          <p className="sm:w-[280px] w-[160px] text-lg sm:text-2xl text-white  border-b-2 mb-3 ">
             MAN & VAN
           </p>
           <p>
@@ -25,7 +25,7 @@ const DeatilSection = () => {
           </p>
         </div>
         <div>
-          <p className="sm:w-[280px] w-[160px] text-lg sm:text-3xl text-white  border-b-2 mb-3 ">
+          <p className="sm:w-[280px] w-[160px] text-lg sm:text-2xl text-white  border-b-2 mb-3 ">
             STORAGE & REMOVAL
           </p>
           <p>
@@ -35,7 +35,7 @@ const DeatilSection = () => {
           </p>
         </div>
         <div>
-          <p className="sm:w-[280px] w-[160px] text-lg sm:text-3xl text-white  border-b-2 mb-3 ">
+          <p className="sm:w-[280px] w-[160px] text-lg sm:text-2xl text-white  border-b-2 mb-3 ">
             PICK UP & DELIVERY
           </p>
           <p>

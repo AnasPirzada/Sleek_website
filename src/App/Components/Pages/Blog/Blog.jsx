@@ -1,5 +1,9 @@
+import React from "react";
 import blogimg from "../../../../assets/blogimg.svg";
 const Blog = () => {
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const blogPosts = [
     {
       image: blogimg,

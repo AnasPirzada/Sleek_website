@@ -3,7 +3,7 @@ import React from "react";
 const Input = ({ Name, inputType, NameInput, NamInput }) => {
   return (
     <>
-      <div className="pt-6 md:pt-8 lg:pt-10">
+      <div className="pt-6 md:pt-8 lg:pt-10 h-screen">
         <h1 className="text-lg md:text-xl lg:text-2xl text-[#000000] font-medium">
           {Name}
           <span className="text-sm md:text-base lg:text-lg leading-[19.36px] text-[#E97B08] font-medium px-2">
