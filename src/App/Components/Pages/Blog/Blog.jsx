@@ -1,9 +1,13 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import blogimg from "../../../../assets/blogimg.svg";
+import {} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 const Blog = () => {
   React.useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+  const navigate = useNavigate();
   const blogPosts = [
     {
       image: blogimg,
@@ -11,6 +15,7 @@ const Blog = () => {
       title: "London House Removals: What to Look for in a Removal Company",
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris",
+      route: "/blogDetails1",
     },
     {
       image: blogimg,
@@ -18,10 +23,11 @@ const Blog = () => {
       title: "London House Removals: What to Look for in a Removal Company",
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris",
+      route: "/blogDetails2",
     },
   ];
 
-  const BlogPost = ({ image, date, title, description }) => (
+  const BlogPost = ({ image, date, title, description, route }) => (
     <div className="shadow-md rounded-md flex flex-col justify-between sm:flex-row sm:h-auto md:flex-col lg:w-[360px] xl:w-[500px] 2xl:w-[500px]">
       <img
         src={image}
@@ -35,7 +41,11 @@ const Blog = () => {
         </div>
         <h1 className="font-semibold text-base pt-2">{title}</h1>
         <p className="text-[#444545] pt-2">{description}</p>
-        <button className="bg-[#E97B08] h-9 w-28 text-white font-medium rounded-md self-start  mt-4 sm:self-start">
+
+        <button
+          onClick={() => navigate(route)}
+          className="bg-[#E97B08] h-9 w-28 text-white font-medium rounded-md self-start  mt-4 sm:self-start inline-block text-center"
+        >
           Read More
         </button>
       </div>
@@ -58,11 +68,11 @@ const Blog = () => {
       <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-2 pt-8 justify-center">
         {blogPosts.map((post, index) => (
           <BlogPost
-            key={index}
             image={post.image}
             date={post.date}
             title={post.title}
             description={post.description}
+            route={post.route}
           />
         ))}
       </div>
