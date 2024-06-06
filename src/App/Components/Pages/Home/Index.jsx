@@ -8,6 +8,9 @@ import Carousel from "./Carousel";
 import ContactUs from "./ContactUs";
 
 const Index = () => {
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <>
       {" "}
