@@ -12,7 +12,7 @@ const Index = () => {
   };
 
   return (
-    <div>
+    <div className="h-screen">
       <div className="pt-8 md:pt-16">
         <h1 className="text-center uppercase text-[#E97B08] text-3xl md:text-4xl font-bold leading-[48.41px] md:leading-[57.6px]">
           FAQ’s

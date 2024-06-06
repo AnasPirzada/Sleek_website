@@ -36,8 +36,8 @@ const index = () => {
             </ul>
           </div>
         </div>
-        <div className="w-full text-center bg-[#010066]">
-          <p className="uppercase text-white text-xs md:text-sm">
+        <div className="w-full text-center sm:bg-[#010066] bg-white">
+          <p className="uppercase sm:text-white text-black text-xs md:text-sm">
             Copyright by Company name Online 2024. All rights reserved
           </p>
         </div>

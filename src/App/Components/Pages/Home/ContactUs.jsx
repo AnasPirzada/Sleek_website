@@ -4,8 +4,10 @@ import React from "react";
 
 const ContactUs = () => {
   return (
-    <div className="flex flex-col items-center  bg-white mt-16 ">
-      <h1 className="text-4xl font-bold text-blue-900 mb-8">CONTACT US</h1>
+    <div className="flex flex-col items-center  bg-white mt-5 sm:mt-10">
+      <h1 className="sm:text-4xl text-xl font-bold text-blue-900 mb-8">
+        CONTACT US
+      </h1>
       <div className="w-full bg-orange-500 p-10 flex flex-col md:flex-row justify-around text-white sm:p-6">
         <div className="text-center mb-4 md:mb-0">
           <h2 className="text-lg font-bold mb-2">CALL CENTER</h2>

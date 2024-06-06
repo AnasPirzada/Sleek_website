@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
+import { navLinks } from "../../../utils/data";
 export const Index = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -7,6 +8,11 @@ export const Index = () => {
     setMenuOpen(!menuOpen);
   };
 
+  const getActiveClass = (isActive) => {
+    return isActive
+      ? "text-[#E97B08] text-[15px] font-bold"
+      : "text-[#FFFF] font-medium text-[15px]";
+  };
   return (
     <>
       <div className="flex justify-between items-center relative w-full">
@@ -34,76 +40,16 @@ export const Index = () => {
 
             <div className="ps-20 mt-12 uppercase ">
               <div className="flex gap-5  justify-between  items-center">
-                <NavLink
-                  className={(e) => {
-                    return e.isActive
-                      ? "text-[#E97B08] text-[15px] font-bold"
-                      : "text-[#FFFF] font-medium text-[15px]";
-                  }}
-                  to="/"
-                >
-                  home
-                </NavLink>
-                <NavLink
-                  to="/services"
-                  className={(e) => {
-                    return e.isActive
-                      ? "text-[#E97B08] text-[15px] font-bold"
-                      : "text-[#FFFF] font-medium text-[15px]";
-                  }}
-                >
-                  Services
-                </NavLink>
-                <NavLink
-                  to="/contactus"
-                  className={(e) => {
-                    return e.isActive
-                      ? "text-[#E97B08] text-[15px] font-bold"
-                      : "text-[#FFFF] font-medium text-[15px]";
-                  }}
-                >
-                  Contact US
-                </NavLink>
-                <NavLink
-                  to="/faqs"
-                  className={(e) => {
-                    return e.isActive
-                      ? "text-[#E97B08] text-[15px] font-bold"
-                      : "text-[#FFFF] font-medium text-[15px]";
-                  }}
-                >
-                  FAQ
-                </NavLink>
-                <NavLink
-                  to="/blog"
-                  className={(e) => {
-                    return e.isActive
-                      ? "text-[#E97B08] text-[15px] font-bold"
-                      : "text-[#FFFF] font-medium text-[15px]";
-                  }}
-                >
-                  Blog
-                </NavLink>
-                <NavLink
-                  to="/instantQuotes"
-                  className={(e) => {
-                    return e.isActive
-                      ? "text-[#E97B08] text-[15px] font-bold"
-                      : "text-[#FFFF] font-medium text-[15px]";
-                  }}
-                >
-                  Instant Quote
-                </NavLink>
-                <NavLink
-                  to="/review"
-                  className={(e) => {
-                    return e.isActive
-                      ? "text-[#E97B08] text-[15px] font-bold"
-                      : "text-[#FFFF] font-medium text-[15px]";
-                  }}
-                >
-                  Reviews
-                </NavLink>
+                {/* Your desktop navigation code */}
+                {navLinks.map((link, index) => (
+                  <NavLink
+                    key={index}
+                    className={(e) => getActiveClass(e.isActive)}
+                    to={link.route}
+                  >
+                    {link.text}
+                  </NavLink>
+                ))}
                 <button className="rounded-[8px] bg-[#E97B08] text-[#FFFFFF] text-[16px] py-[12px] px-[40px]">
                   Contact
                 </button>
@@ -115,13 +61,13 @@ export const Index = () => {
         </div>
       </div>
       {/* Mobile Design */}
-      <div className="block  md:hidden w-[100%] relative z-[5]">
-        <div className="flex items-center p-4  bg-[#010066] border-b-">
+      <div className="block  md:hidden w-[100%] relative z-[5] ">
+        <div className="flex items-center p-4  bg-[#010066] border-b-4 border-[#E97B08]">
           <div className="w-[20px] ">
             <img
               src={menuOpen ? "/ic_round-arrow-back.svg" : "/ic_round-menu.svg"}
               alt="Menu Icon"
-              className="cursor-pointer"
+              className="cursor-pointer "
               onClick={toggleMenu}
             />
           </div>
@@ -141,75 +87,20 @@ export const Index = () => {
               />
             </div>
             <div className="bg-[#010066]">
-              <div className=" p-10 w-full rounded-sm">
-                <ul className="text-white text-[14px]  font-[400]">
-                  <NavLink
-                    to="/"
-                    className={(e) => {
-                      return e.isActive
-                        ? "mb-6 text-[#E97B08] text-[15px] font-bold"
-                        : "text-[#FFFF] font-medium text-[15px] mb-6";
-                    }}
-                    onClick={() => setMenuOpen(false)}
-                  >
-                    <li className="mb-6">Home</li>
-                  </NavLink>
-                  <NavLink
-                    to="/services"
-                    className={(e) => {
-                      return e.isActive
-                        ? "mb-6 text-[#E97B08] text-[15px] font-bold"
-                        : "text-[#FFFF] font-medium text-[15px] mb-6";
-                    }}
-                    onClick={() => setMenuOpen(false)}
-                  >
-                    <li className="mb-6">Services</li>
-                  </NavLink>
-                  <NavLink
-                    to="/faqs"
-                    className={(e) => {
-                      return e.isActive
-                        ? "mb-6 text-[#E97B08] text-[15px] font-bold"
-                        : "text-[#FFFF] font-medium text-[15px] mb-6";
-                    }}
-                    onClick={() => setMenuOpen(false)}
-                  >
-                    <li className="mb-6">FAQ</li>
-                  </NavLink>
-                  <NavLink
-                    to="/blog"
-                    className={(e) => {
-                      return e.isActive
-                        ? "mb-6 text-[#E97B08] text-[15px] font-bold"
-                        : "text-[#FFFF] font-medium text-[15px] mb-6";
-                    }}
-                    onClick={() => setMenuOpen(false)}
-                  >
-                    <li className="mb-6">Blog</li>
-                  </NavLink>
-                  <NavLink
-                    to="/instantQuotes"
-                    className={(e) => {
-                      return e.isActive
-                        ? "mb-6 text-[#E97B08] text-[15px] font-bold"
-                        : "text-[#FFFF] font-medium text-[15px] mb-6";
-                    }}
-                    onClick={() => setMenuOpen(false)}
-                  >
-                    <li className="mb-6">Instant Quote</li>
-                  </NavLink>
-                  <NavLink
-                    to="/review"
-                    className={(e) => {
-                      return e.isActive
-                        ? "mb-6 text-[#E97B08] text-[15px] font-bold"
-                        : "text-[#FFFF] font-medium text-[15px] mb-6";
-                    }}
-                    onClick={() => setMenuOpen(false)}
-                  >
-                    <li className="mb-6">Reviews</li>
-                  </NavLink>
+              <div className="p-10 w-full rounded-sm">
+                <ul className="text-white text-[14px] font-[400]">
+                  {navLinks.map((link, index) => (
+                    <NavLink
+                      key={index}
+                      to={link.route}
+                      className={(e) => getActiveClass(e.isActive)}
+                      onClick={() => setMenuOpen(false)}
+                    >
+                      <li className="mb-6">{link.text}</li>
+                    </NavLink>
+                  ))}
                 </ul>
+                {/* Social icons */}
                 <div className="flex gap-4 mt-4">
                   <img
                     src="/facebookIcon.svg"
@@ -223,6 +114,7 @@ export const Index = () => {
                   />
                 </div>
               </div>
+
               <div>
                 <div className="align-bottom " style={{ marginTop: "200px" }}>
                   <div className="flex justify-center items-center mb-3">

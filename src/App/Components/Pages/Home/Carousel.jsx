@@ -1,23 +1,5 @@
 import React, { useState } from "react";
-
-const testimonials = [
-  {
-    image: "/Rectangle 3.png", // Replace with your image paths
-    text: "Lorem ipsum dolor sit amet, consectetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd.",
-    author: "Mohsin",
-  },
-  {
-    image: "/Rectangle 3.png", // Replace with your image paths
-    text: "Lorem ipsum dolor sit amet, consectetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd.",
-    author: "Ali",
-  },
-  {
-    image: "/Rectangle 3.png", // Replace with your image paths
-    text: "Lorem ipsum dolor sit amet, consectetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd.",
-    author: "Daniyal",
-  },
-];
-
+import { testimonials } from "../../../../utils/data";
 const Carousel = () => {
   const [current, setCurrent] = useState(0);
 
@@ -37,11 +19,11 @@ const Carousel = () => {
           alt="Client"
           className="px-3 sm:px-0 w-567 h-auto md:h-full md:max-w-md rounded-lg shadow-lg "
         />
-        <div className="ml-10 sm:mt-0 mt-5">
-          <h2 className="text-2xl font-bold text-blue-900">
+        <div className="ml-10 sm:mt-0 mt-5 order-first sm:order-last">
+          <h2 className="sm:text-2xl text-lg font-bold text-blue-900 text-right sm:text-left px-5 sm:px-0 ">
             WHAT OUR CLIENTS SAY...
           </h2>
-          <p className="mt-4 text-gray-700 ml-2 sm:ml-5 w-full sm:pr-0 pr-2">
+          <p className="mt-4 text-gray-700 ml-0 sm:ml-5 w-full sm:pr-0 pr-2">
             {testimonials[current].text}
           </p>
           <p className="mt-4 font-semibold text-orange-600 text-end sm:pr-0 pr-2">
