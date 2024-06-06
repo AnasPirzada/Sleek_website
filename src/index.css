@@ -1,7 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+/* 
 
 input[type="date"]::-webkit-inner-spin-button,
 input[type="date"]::-webkit-calendar-picker-indicator {
@@ -33,4 +33,4 @@ input[type="date"]:before {
 input[type="date"]:focus:before,
 input[type="date"]:valid:before {
     display: none;
-}
+} */

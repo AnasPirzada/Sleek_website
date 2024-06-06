@@ -4,3 +4,8 @@ body {
   background-color: #FFFFFF;
   font-family: 'Inter', sans-serif;
 }
+
+/* .input[type="date"] {
+  border: none !important;
+  background-color: transparent !important;
+} */
