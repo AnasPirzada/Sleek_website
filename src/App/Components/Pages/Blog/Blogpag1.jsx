@@ -1,5 +1,5 @@
 import React from "react";
-import "./style.css"; // Correct the import statement
+import "./Bolg.css"; // Correct the import statement
 const Blogpag1 = () => {
   React.useEffect(() => {
     window.scrollTo(0, 0);

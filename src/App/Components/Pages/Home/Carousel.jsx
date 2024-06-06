@@ -43,7 +43,7 @@ const Carousel = () => {
               </>
             ))}
           </div>
-          <div className="my-5 flex gap-4 justify-end">
+          <div className="my-5 flex gap-4 justify-end px-3">
             <button onClick={handlePrev} className="text-orange-600">
               <img
                 src="material-symbols-light_navigate-next.svg"

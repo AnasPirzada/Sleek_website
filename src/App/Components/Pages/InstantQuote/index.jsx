@@ -39,10 +39,10 @@ const index = () => {
           Your Quote
         </h1>
 
-        <div className="w-[90%] m-auto leading-[50px]">
+        <div className="w-[90%] m-auto leading-[50px] mt-10">
           <p className="text-[15px] sm:text-[24px] font-[400]">
             You are moving from
-            <span className="font-[700]">{selectedValue}</span> to
+            <span className="font-[700]">{PICKUPSTAIRS}</span> to
             <span className="font-[700]">SE23 1AA (no stairs).</span>
           </p>
           <p className="text-[15px] sm:text-[24px] font-[400]">
@@ -54,10 +54,10 @@ const index = () => {
           </p>
         </div>
         <div className="flex flex-row justify-center gap-5 my-20 mx-2">
-          <button className="border-[#E97B08] border text-[18px] radius-[8px] w-[220px] h-[54px] bg-white text-[#E97B08] py-[16px] px-[40px]">
+          <button className="border-[#E97B08] border  radius-[8px] w-[220px] h-[54px] bg-white text-[#E97B08] py-[16px] px-[40px]">
             Edit
           </button>
-          <button className=" bg-[#E97B08] text-white border py-[16px]   w-[220px] h-[54px] px-[40px] radius-[8px]">
+          <button className=" bg-[#E97B08] text-white border    w-[220px] h-[54px] px-[40px] radius-[8px]">
             Book Now
           </button>
         </div>
