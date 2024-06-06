@@ -15,6 +15,19 @@ const SectionVehicl = () => {
     { label: "Large Van", value: "large-van", imgSrc: "largeVan.svg" },
     { label: "Giant Van", value: "giant-van", imgSrc: "GiantVan.svg" },
   ];
+  const stairsOptions = [
+    {
+      label: "There are no flights of stairs",
+      value: "There are no flights of stairs",
+    },
+    { label: "is 1 flight of stairs", value: "is 1 flight of stairs" },
+    { label: "are 2 flight of stairs", value: "are 2 flight of stairs" },
+    { label: "are 3 flight of stairs", value: "are 3 flight of stairs" },
+    { label: "are 4 flight of stairs", value: "are 4 flight of stairs" },
+    { label: "are 5 flight of stairs", value: "are 5 flight of stairs" },
+    { label: "are 6 flight of stairs", value: "are 6 flight of stairs" },
+    { label: "are 7+ flight of stairs", value: "are 7+ flight of stairs" },
+  ];
 
   const helpOptions = [
     { label: "No Need Help", value: "No Need Help", imgSrc: "noNeedHelp.svg" },
@@ -53,7 +66,10 @@ const SectionVehicl = () => {
   const [textareaData, setTextareaData] = useState("");
   const [selectedDate, setSelectedDate] = useState("");
   const [selectedTime, setSelectedTime] = useState("");
-
+  const hoursOptions = Array.from({ length: 23 }, (_, i) => ({
+    label: `${i + 2} hour(s)`,
+    value: `${i + 2} hours`,
+  }));
   const inputFieldsData = [
     {
       placeholder: "",
@@ -364,8 +380,11 @@ const SectionVehicl = () => {
                 onChange={handleSelectChange}
                 value={selectedValue}
               >
-                <option value="yes">Yes</option>
-                <option value="no">There are no flights of stairs</option>
+                {stairsOptions.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
               </select>
             </div>
           </div>
@@ -405,12 +424,11 @@ const SectionVehicl = () => {
                 onChange={handleStairsChange}
                 value={selectedStairsValue}
               >
-                <option value="no flights of stairs">
-                  are no flights of stairs
-                </option>
-                <option value="yes flights of stairs">
-                  Yes i have Flight of stairs
-                </option>
+                {stairsOptions.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
               </select>
             </div>
           </div>
@@ -524,8 +542,11 @@ const SectionVehicl = () => {
               className="w-40 h-[40px]"
               onChange={hourhandleChange}
             >
-              <option value="2 hours">2 hours</option>
-              <option value="3 hours">3 hours</option>
+              {hoursOptions.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
             </select>
           </div>
         </div>
@@ -642,7 +663,7 @@ const SectionVehicl = () => {
         </div>
 
         <div className="pt-[47px]">
-          <h1 className=" font-medium text-xl leading-[24px] text-[#181919]">
+          <h1 className=" font-medium text-lg sm:text-xl leading-[24px] text-[#181919]">
             We'd love to keep in touch about this move by email and text
             message.
           </h1>
@@ -694,7 +715,7 @@ const SectionVehicl = () => {
             onClick={() => {
               navigate("/instantmain"), handleGetQuotes;
             }}
-            className="h-[64px] w-[250px] md:w-[300px] lg:w-[350px] xl:w-[400px] 2xl:w-[450px] rounded-lg bg-[#E97B08] text-white font-semibold flex text-center justify-center items-center gap-4"
+            className="h-16 md:h-20 lg:h-24 xl:h-28 2xl:h-32 w-64 md:w-80 lg:w-96 xl:w-112 2xl:w-128 rounded-lg bg-[#E97B08] text-white font-semibold flex text-center justify-center items-center gap-4"
           >
             GET MY FREE QUOTES
             <img src="getFree.svg" alt="" className="" />
