@@ -51,8 +51,8 @@ const Index = () => {
               />
             </div>
           </div>
-          <div className="flex justify-center sm:justify-start">
-            <button className="bg-[#E97B08] text-white flex mt-8 py-2 px-28 sm:px-8 rounded-[8px]">
+          <div className="flex justify-center sm:justify-start w-full">
+            <button className="bg-[#E97B08] text-white flex sm:w-auto w-full mt-8 justify-center py-2 px-28 sm:px-8 rounded-[8px]">
               Show quote
               <span>
                 <img

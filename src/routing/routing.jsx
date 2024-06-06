@@ -8,7 +8,6 @@ import InstantQuotes from "../App/Components/Pages/InstantQuote/index";
 import Faqs from "../App/Components/Pages/Faqs";
 import ContactUS from "../App/Components/Pages/ContactUs/index";
 import InstantMain from "../App/Components/Pages/instantMain/SectionVehicl";
-import YourQuotes from "../App/Components/Pages/YourQuote/index";
 import Footer from "../App/Components/Footer/index";
 import Input from "../App/Components/Pages/instantMain/Input";
 import Blogpag1 from "../App/Components/Pages/Blog/Blogpag1";
@@ -82,16 +81,6 @@ export const router = createBrowserRouter([
       <>
         <Navbar />
         <InstantQuotes />
-        <Footer />
-      </>
-    ),
-  },
-  {
-    path: "/yourquotes",
-    element: (
-      <>
-        <Navbar />
-        <YourQuotes />
         <Footer />
       </>
     ),

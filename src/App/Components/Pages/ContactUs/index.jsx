@@ -59,47 +59,49 @@ const index = () => {
             ></iframe>
           </div>
         </div>
-        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-5 mt-10">
-          <div className="text-center">
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 mt-10">
+          <div className="text-center bg-gray-100 p-4 rounded-lg">
             <img src={callicon} alt="Call Icon" className="w-12 mx-auto mb-2" />
-            <p className="sm:text-lg text-sm font-normal mb-2">Phone Number</p>
+            <p className="text-lg font-normal mb-2">Phone Number</p>
             <div className="text-[#383939]">
-              <p className="text-sm sm:text-lg">07462 877455</p>
-              <p className="text-sm sm:text-lg">07462 911888</p>
-              <p className="text-sm sm:text-lg">0203 4176141</p>
+              <p className="text-sm">07462 877455</p>
+              <p className="text-sm">07462 911888</p>
+              <p className="text-sm">0203 4176141</p>
             </div>
           </div>
-          <div className="text-center">
+          <div className="text-center bg-gray-100 p-4 rounded-lg ">
             <img src={mailicon} alt="Mail Icon" className="w-12 mx-auto mb-2" />
-            <p className="sm:text-lg text-sm font-normal mb-2">Email Address</p>
-            <div className="text-[#383939]">
-              <p className="text-sm sm:text-lg">
-                info@sleekassuredremovals.com
+            <p className="text-lg font-normal mb-2">Email Address</p>
+            <div className="text-[#383939] overflow-wrap break-word">
+              <p className="text-sm whitespace-normal ">
+                <span className="break-all sm:break-keep">
+                  info@sleekassuredremovals.com
+                </span>
               </p>
             </div>
           </div>
-          <div className="text-center">
+          <div className="text-center bg-gray-100 p-4 rounded-lg">
             <img
               src={clockIcon}
               alt="Clock Icon"
               className="w-12 mx-auto mb-2"
             />
-            <p className="sm:text-lg text-sm font-normal mb-2">Working Hours</p>
+            <p className="text-lg font-normal mb-2">Working Hours</p>
             <div className="text-[#383939]">
-              <p className="sm:text-lg text-sm">Mon – Fri: 7AM – 10PM</p>
-              <p className="sm:text-lg text-sm">Sat: 8AM – 10PM</p>
-              <p className="sm:text-lg text-sm">Sun: 8AM – 10PM</p>
+              <p className="text-sm">Mon – Fri: 7AM – 10PM</p>
+              <p className="text-sm">Sat: 8AM – 10PM</p>
+              <p className="text-sm">Sun: 8AM – 10PM</p>
             </div>
           </div>
-          <div className="text-center">
+          <div className="text-center bg-gray-100 p-4 rounded-lg">
             <img
               src={location}
               alt="Location Icon"
               className="w-12 mx-auto mb-2"
             />
-            <p className="sm:text-lg text-sm font-normal mb-2">Our Address</p>
-            <div className="text-[#383939] overflow-visible ">
-              <p className="sm:text-lg text-sm">
+            <p className="text-lg font-normal mb-2">Our Address</p>
+            <div className="text-[#383939] overflow-visible">
+              <p className="text-sm">
                 9 Dallas Road, Sydenham, London SE26 6JP
               </p>
             </div>
