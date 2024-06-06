@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 const index = () => {
-  // State variables to hold the retrieved data
+
   const [PICKUPSTAIRS, setSelectedValue] = useState('PICKUPSTAIRS');
   const [selectedStairsValue, setSelectedStairsValue] = useState('');
   const [selectedDate, setSelectedDate] = useState('');
@@ -28,6 +28,8 @@ const index = () => {
     setSelectedVehicle(storedSelectedVehicle);
     setSelectedHelp(storedSelectedHelp);
     setDeliveryValues(storedDeliveryValues);
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
   }, []);
   return (
     <div>

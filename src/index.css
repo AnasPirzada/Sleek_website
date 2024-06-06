@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 /* 
 
 input[type="date"]::-webkit-inner-spin-button,
@@ -34,3 +35,10 @@ input[type="date"]:focus:before,
 input[type="date"]:valid:before {
     display: none;
 } */
+
+
+.bg-collapse{
+    background-color: wheat;
+    opacity: 0.5;
+}
+

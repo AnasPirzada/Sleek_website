@@ -9,6 +9,8 @@ import Faqs from "../App/Components/Pages/Faqs";
 import ContactUS from "../App/Components/Pages/ContactUs/index";
 import InstantMain from "../App/Components/Pages/instantMain/SectionVehicl";
 import YourQuotes from "../App/Components/Pages/YourQuote/index";
+import Footer from "../App/Components/Footer/index";
+import Input from "../App/Components/Pages/instantMain/Input";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -16,6 +18,7 @@ export const router = createBrowserRouter([
       <>
         <Navbar />
         <Home />
+        <Footer />
       </>
     ),
   },
@@ -25,6 +28,7 @@ export const router = createBrowserRouter([
       <>
         <Navbar />
         <Blog />
+        <Footer />
       </>
     ),
   },
@@ -34,6 +38,7 @@ export const router = createBrowserRouter([
       <>
         <Navbar />
         <Blog />
+        <Footer />
       </>
     ),
   },
@@ -42,15 +47,17 @@ export const router = createBrowserRouter([
     element: (
       <>
         <Price />
+        <Footer />
       </>
     ),
   },
   {
-    path: "/instantQuotes",
+    path: "/instantmain",
     element: (
       <>
         <Navbar />
         <InstantQuotes />
+        <Footer />
       </>
     ),
   },
@@ -60,6 +67,7 @@ export const router = createBrowserRouter([
       <>
         <Navbar />
         <YourQuotes />
+        <Footer />
       </>
     ),
   },
@@ -69,6 +77,7 @@ export const router = createBrowserRouter([
       <>
         <Navbar />
         <Faqs />
+        <Footer />
       </>
     ),
   },
@@ -78,15 +87,17 @@ export const router = createBrowserRouter([
       <>
         <Navbar />
         <ContactUS />
+        <Footer />
       </>
     ),
   },
   {
-    path: "/instantmain",
+    path: "/instantQuotes",
     element: (
       <>
         <Navbar />
         <InstantMain />
+        <Footer />
       </>
     ),
   },
