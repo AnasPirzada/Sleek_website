@@ -10,7 +10,7 @@ const Index = () => {
 
   return (
     <>
-      <div className="flex justify-center flex-col">
+      <div className="flex justify-center flex-col ">
              {" "}
         <div className="pt-16">
                  {" "}
