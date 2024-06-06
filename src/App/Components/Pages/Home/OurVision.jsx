@@ -2,13 +2,13 @@ import React from "react";
 
 const OurVision = () => {
   return (
-    <div className="container mx-auto  sm:mt-24">
+    <div className="container mx-auto  sm:mt-24  sm:my-0 my-10">
       <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-4">
-        <div className="">
-          <h2 className="text-2xl sm:text-5xl font-bold mb-8 text-[#010066]">
+        <div className="px-4 sm:px-0">
+          <h2 className="text-base sm:text-3xl font-bold sm:mb-8 mb-4 text-[#010066]">
             OUR VISION
           </h2>
-          <p className="text-gray-700 mb-2">
+          <p className="text-gray-700 mb-2 sm:text-base text-xs ">
             Lorem Ipsum Dolor Sit Amet, Consectetur Sadipscing Elitr, Sed Diam
             Nonumy Eirmod Tempor Invidunt Ut Labore Et Dolore Magna Aliquyam
             Erat, Sed Diam Voluptua. At Vero Eos Et Accusam Et Justo Duo Dolores
@@ -33,7 +33,7 @@ const OurVision = () => {
             </div>
           </div>
         </div>
-        <div className="flex justify-center">
+        <div className="flex justify-center px-4 sm:px-0">
           <img src="/Rectangle 2.png" alt="Our Vision" />
         </div>
       </div>

@@ -14,7 +14,7 @@ const Index = () => {
   return (
     <>
       {" "}
-      <div className="mobileBgimg sm:bgImage h-full">
+      <div className="bgImage h-full w-full ">
         <div className="py-12 md:py-32 px-2 sm:px-24 ">
           <div>
             <p className="text-2xl font-medium text-white mb-3 text-center sm:text-left">
@@ -28,14 +28,14 @@ const Index = () => {
             </p>
           </div>
 
-          <div className=" flex flex-col md:flex-row  md:justify-start items-center md:space-x-5 mt-12">
+          <div className=" flex flex-col md:flex-row  md:justify-start sm:items-center items-left md:space-x-5 mt-12">
             <div>
               <p className="text-lg font-normal mb-2 text-white">
                 Collection Address
               </p>
               <input
                 type="text"
-                className="rounded-[8px] px-14 md:px-24 py-2"
+                className="rounded-[8px] sm:w-[400px] w-full  h-[40px] py-2"
               />
             </div>
             <div className="hidden md:block md:mt-10">
@@ -47,7 +47,7 @@ const Index = () => {
               </p>
               <input
                 type="text"
-                className="rounded-[8px] px-14 md:px-24 py-2"
+                className="rounded-[8px] sm:w-[400px] w-full h-[40px] py-2"
               />
             </div>
           </div>
