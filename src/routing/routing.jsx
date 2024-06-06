@@ -34,6 +34,28 @@ export const router = createBrowserRouter([
         <Footer />
       </>
     ),
+    children: [
+      {
+        path: "blogpage1",
+        element: (
+          <>
+            <Navbar />
+            <Blogpag1 />
+            <Footer />
+          </>
+        ),
+      },
+      {
+        path: "blogpage1",
+        element: (
+          <>
+            <Navbar />
+            <Blogpag2 />
+            <Footer />
+          </>
+        ),
+      },
+    ],
   },
   {
     path: "/faq",
@@ -105,7 +127,7 @@ export const router = createBrowserRouter([
     ),
   },
   {
-    path: "/blogpage",
+    path: "/blogDetails1",
     element: (
       <>
         <Navbar />
@@ -115,7 +137,7 @@ export const router = createBrowserRouter([
     ),
   },
   {
-    path: "/blogpage2",
+    path: "/blogDetails2",
     element: (
       <>
         <Navbar />

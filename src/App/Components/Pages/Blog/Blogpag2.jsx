@@ -1,6 +1,9 @@
 import React from "react";
-import "./Bolg.css"; // Correct the import statement
-function Blogpag2() {
+import "./style.css";
+const Blogpag2 = () => {
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <>
       <section className="px-4 sm:px-6 md:px-8 lg:px-16 xl:px-24 2xl:px-32">
@@ -11,7 +14,7 @@ function Blogpag2() {
         </div>
 
         <div className=" py-6 px-6">
-          <h1 className=" text-[#313437] text-3xl font-semibold text1 cursor-default">
+          <h1 className=" text-[#313437] text-xl sm:text-3xl font-semibold text1 cursor-default">
             How a Man and Van Service in London Can Simplify Your Life​
           </h1>
         </div>
@@ -32,7 +35,7 @@ function Blogpag2() {
             daunting tasks. Brace yourself for the versatility this service
             brings to the table.
           </p>
-          <h1 className=" text-[#222222] text-3xl font-semibold cursor-default">
+          <h1 className=" text-[#222222] text-xl sm:text-2xl font-semibold cursor-default">
             DIVERSE APPLICATIONS OF MAN AND VAN SERVICES
           </h1>
           <p className="text-[#7A7A7A] text-base leading-6">
@@ -65,7 +68,7 @@ function Blogpag2() {
             </span>
             service has you covered.
           </p>
-          <h1 className="text-[#222222] text-3xl font-semibold cursor-default ">
+          <h1 className="text-[#222222] text-xl sm:text-2xl font-semibold cursor-default ">
             THE UNIVERSITY MOVE MADE EASY
           </h1>
           <p className="text-[#7A7A7A] text-base leading-6">
@@ -87,7 +90,7 @@ function Blogpag2() {
             services offer bespoke student removal packages, including packing
             materials, taking another worry off your plate.
           </p>
-          <h1 className=" text-[#222222] text-3xl font-semibold cursor-default text-[#314337]">
+          <h1 className="  text-xl sm:text-2xl font-semibold cursor-default text-[#314337]">
             OFFICE RELOCATIONS? SORTED!
           </h1>
           <p className="text-[#7A7A7A] text-base leading-6">
@@ -258,23 +261,28 @@ function Blogpag2() {
             </li>
           </ul>
 
-         
           <p className="  text-[#7A7A7A] text-base leading-6">
-          To wrap up, the versatility of a  <span className=" cursor-default font-bold">
-          Man and Van London{" "}
-            </span>{" "} service stretches far beyond the simplicity of its name. Be it a house move, office relocation, furniture transfer, or even rubbish clearance, they offer safe and secure transportation for your belongings. So, why not use their services and simplify your life today?
+            To wrap up, the versatility of a{" "}
+            <span className=" cursor-default font-bold">
+              Man and Van London{" "}
+            </span>{" "}
+            service stretches far beyond the simplicity of its name. Be it a
+            house move, office relocation, furniture transfer, or even rubbish
+            clearance, they offer safe and secure transportation for your
+            belongings. So, why not use their services and simplify your life
+            today?
           </p>
-          
+
           <p className="text-[#7A7A7A]  text-base font-bold pt-10 leading-6">
-          Read another post:
+            Read another post:
           </p>
           <h1 className=" text-2xl py-10 font-semibold tracking-wide text1 text-[#314337]">
-          What to Look for in a Removal Company in London UK
+            What to Look for in a Removal Company in London UK
           </h1>
-                 </div>
+        </div>
       </section>
     </>
   );
-}
+};
 
 export default Blogpag2;
