@@ -31,7 +31,7 @@ const Index = () => {
                     <img
                       src="plusicon.svg"
                       alt="plus icon"
-                      className="mr-2 cursor-pointer sm:w-5 w-auto"
+                      className="mr-2 cursor-pointer w-5"
                       onClick={() => toggleQuestion(index)}
                     />{" "}
                     <div className="text-sm md:text-lg font-medium px-2 md:px-4">
@@ -46,7 +46,7 @@ const Index = () => {
                       <img
                         src="MinusSign.svg"
                         alt="minus icon"
-                        className="cursor-pointer sm:w-5 w-auto"
+                        className="cursor-pointer w-5 "
                         onClick={() => toggleQuestion(index)}
                       />{" "}
                       <div className="text-xs md:text-base px-6 py-2 font-bold">
