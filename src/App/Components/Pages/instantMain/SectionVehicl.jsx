@@ -13,7 +13,7 @@ const SectionVehicl = () => {
     { label: "Small Van", value: "small-van", imgSrc: "smallVan.svg" },
     { label: "Medium Van", value: "medium-van", imgSrc: "mediumVan.svg" },
     { label: "Large Van", value: "large-van", imgSrc: "largeVan.svg" },
-    { label: "Giant Van", value: "giant-van", imgSrc: "GiantVan.svg" },
+    { label: "Luton Van", value: "giant-van", imgSrc: "GiantVan.svg" },
   ];
   const stairsOptions = [
     {
@@ -251,12 +251,22 @@ const SectionVehicl = () => {
             Which size of van do you need?
           </h1>
           <p className="font-normal text-sm md:text-base leading-4 md:leading-5 xl:leading-[19px] text-[#444545] pt-2 md:pt-4 xl:pt-[8px]">
-            It is important that you select the suitable van for what you want
-            to move to save money. If you are moving from two or three bedrooms
-            house/flat; Choose Luton van. One or two bedrooms house/flat with
-            few furniture; Choose Large van. One room with few boxes, bags, and
-            small furniture; Choose medium van. Picking up few boxes and bags
-            (10-15); Choose small van
+            The Small Van is mostly used for luggage and boxes. Small vans can
+            take up to 8 full suitcases and few boxes.
+          </p>
+          <p className="font-normal text-sm md:text-base leading-4 md:leading-5 xl:leading-[19px] text-[#444545] pt-2 md:pt-4 xl:pt-[8px]">
+            Medium Van is suitable for one room move with few boxes, luggage,
+            and small furniture. It is also good for single items
+            pickups/delivery.
+          </p>
+          <p className="font-normal text-sm md:text-base leading-4 md:leading-5 xl:leading-[19px] text-[#444545] pt-2 md:pt-4 xl:pt-[8px]">
+            Large Van is perfect for 1 or 2 bedroom flat/house moves with no
+            white goods and heavy furniture.
+          </p>
+          <p className="font-normal text-sm md:text-base leading-4 md:leading-5 xl:leading-[19px] text-[#444545] pt-2 md:pt-4 xl:pt-[8px]">
+            Luton Van suitable for 3 bedroom flat/house with white goods. It’s
+            perfect for heavy items move because it has a tail lift for heavy
+            lifting.
           </p>
         </div>
 
@@ -715,7 +725,7 @@ const SectionVehicl = () => {
             onClick={() => {
               navigate("/instantmain"), handleGetQuotes;
             }}
-            className="h-16 md:h-20 lg:h-24 xl:h-28 2xl:h-32 w-64 md:w-80 lg:w-96 xl:w-112 2xl:w-128 rounded-lg bg-[#E97B08] text-white font-semibold flex text-center justify-center items-center gap-4"
+            className="w-auto px-10 py-5 rounded-lg bg-[#E97B08] text-white font-semibold flex text-center justify-center items-center gap-4"
           >
             GET MY FREE QUOTES
             <img src="getFree.svg" alt="" className="" />

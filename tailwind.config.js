@@ -6,9 +6,6 @@ export default {
       borderWidth: {
         12: "12px",
       },
-      backgroundImage: {
-        NavBar: "url('/Navbar_REct.svg')",
-      },
     },
   },
   plugins: [],

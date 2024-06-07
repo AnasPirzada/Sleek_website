@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-
+import { useNavigate } from "react-router";
 const index = () => {
   const [PICKUPSTAIRS, setSelectedValue] = useState("PICKUPSTAIRS");
   const [selectedStairsValue, setSelectedStairsValue] = useState("");
@@ -8,7 +8,7 @@ const index = () => {
   const [selectedVehicle, setSelectedVehicle] = useState("");
   const [selectedHelp, setSelectedHelp] = useState("");
   const [deliveryValues, setDeliveryValues] = useState("");
-
+  const navigate = useNavigate();
   useEffect(() => {
     const storedSelectedValue = sessionStorage.getItem("PICKUPSTAIRS");
     const storedSelectedStairsValue = sessionStorage.getItem(
@@ -57,7 +57,10 @@ const index = () => {
           <button className="border-[#E97B08] border  radius-[8px] w-[220px] h-[54px] bg-white text-[#E97B08] py-[16px] px-[40px]">
             Edit
           </button>
-          <button className=" bg-[#E97B08] text-white border    w-[220px] h-[54px] px-[40px] radius-[8px]">
+          <button
+            onClick={() => navigate("/price")}
+            className=" bg-[#E97B08] text-white border    w-[220px] h-[54px] px-[40px] radius-[8px]"
+          >
             Book Now
           </button>
         </div>

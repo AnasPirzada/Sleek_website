@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { navLinks } from "../../../utils/data";
 export const Index = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -10,25 +10,25 @@ export const Index = () => {
 
   const getActiveClass = (isActive) => {
     return isActive
-      ? "text-[#E97B08] text-[15px] font-bold"
-      : "text-[#FFFF] font-medium text-[15px]";
+      ? "text-[#E97B08] md:text-xs lg:text-sm text-sm font-bold "
+      : "text-[#FFFF] font-medium md:text-xs lg:text-sm text-sm ";
   };
   return (
     <>
       <div className="flex justify-between items-center relative w-full">
-        <div className="hidden md:flex justify-between items-center w-full">
-          <div class="ms-24 lg:ms-7 xl:ms-24">
+        <div className="hidden md:flex justify-between items-center w-full h-full border-b-8 border-[#E97B08] ">
+          <div class="mx-auto md:mx-0 lg:mx-2">
             <img
               src="/Sleek_Logo.svg"
               alt="Sleek Logo"
-              className="w-50 lg:w-40"
+              className="w-40 md:w-48 lg:w-40 xl:w-48 2xl:w-56"
             />
           </div>
 
-          <div className="w-[1021px]   h-[140px] bg-NavBar flex justify-start items-center relative">
-            <div className="absolute w-11/12 md:5/6 lg:5/6 2xl:w-4/6 top-0 left-0 right-0 mx-auto -mt-18 flex justify-between items-center">
+          <div className="w-full h-[140px] bg-NavBar flex justify-start items-center relative">
+            <div className="absolute w-11/12 md:w-5/6 lg:w-5/6 2xl:w-4/6 top-0 left-0 right-0 mx-auto -mt-18 flex justify-between items-center">
               <div className="w-50"></div>
-              <div className="flex justify-between items-center me-10 mt-5">
+              <div className="flex justify-between items-center  me-10 mt-5">
                 <img src="/bxs_phone-call.svg" alt="Phone Icon" />
                 <div className="flex justify-between items-center">
                   <p className="mx-10 text-white">074-6287-7455</p>
@@ -38,8 +38,8 @@ export const Index = () => {
               </div>
             </div>
 
-            <div className="ps-20 mt-12 uppercase ">
-              <div className="flex gap-5  justify-between  items-center">
+            <div className="ps-20 md:ps-12 mt-12 uppercase ">
+              <div className="flex md:gap-3 lg:gap-4 gap-5 justify-between items-center">
                 {/* Your desktop navigation code */}
                 {navLinks.map((link, index) => (
                   <NavLink
@@ -50,11 +50,27 @@ export const Index = () => {
                     {link.text}
                   </NavLink>
                 ))}
-                <button className="rounded-[8px] bg-[#E97B08] text-[#FFFFFF] text-[16px] py-[12px] px-[40px]">
-                  Contact
-                </button>
-                <img src="/ri_facebook-fill.svg" alt="" />
-                <img src="/Layer_1.svg" alt="" />
+                <Link to="/contactus">
+                  <button className="rounded-[8px] bg-[#E97B08] text-[#FFFFFF] text-[16px] py-[12px] px-[40px]">
+                    Contact
+                  </button>
+                </Link>
+
+                <a
+                  href="https://www.facebook.com/sleekassuredremovals"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <img src="/ri_facebook-fill.svg" alt="" />
+                </a>
+                <a
+                  href="https://www.instagram.com/sleekassuredremovals/?igsh=bzNkZWVqM2Jyd3kz&utm_source=qr"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {" "}
+                  <img src="/Layer_1.svg" alt="" />
+                </a>
               </div>
             </div>
           </div>
@@ -102,16 +118,28 @@ export const Index = () => {
                 </ul>
                 {/* Social icons */}
                 <div className="flex gap-4 mt-4">
-                  <img
-                    src="/facebookIcon.svg"
-                    alt="Facebook"
-                    className="w-[40px] h-[40px]"
-                  />
-                  <img
-                    src="/InstaIcon.svg"
-                    alt="Instagram"
-                    className="w-[40px] h-[40px]"
-                  />
+                  <a
+                    href="https://www.facebook.com/sleekassuredremovals"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <img
+                      src="/facebookIcon.svg"
+                      alt="Facebook"
+                      className="w-[40px] h-[40px]"
+                    />
+                  </a>
+                  <a
+                    href="https://www.instagram.com/sleekassuredremovals/?igsh=bzNkZWVqM2Jyd3kz&utm_source=qr"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <img
+                      src="/InstaIcon.svg"
+                      alt="Instagram"
+                      className="w-[40px] h-[40px]"
+                    />
+                  </a>
                 </div>
               </div>
 
