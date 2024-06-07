@@ -1,7 +1,5 @@
-
-
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from "react-router";
+import { useNavigate } from 'react-router';
 const Index = () => {
   const navigate = useNavigate();
   const [selectedValue, setSelectedValue] = useState('');
@@ -68,7 +66,7 @@ const Index = () => {
             <span className='font-semibold	'>{selectedValue}</span> to &nbsp;
             <span className='font-semibold	'>{DeliverySTAIRS} (no stairs).</span>
           </p>
-          <p className='text-base	 '>
+          <p className='text-base	 py-3'>
             On <span className='font-semibold	'> {selectedDate} </span>at
             <span className='font-semibold	'> {selectedTime}</span> we will send
             a <span className='font-semibold	'>{selectedVehicle}</span> for{' '}
@@ -80,18 +78,17 @@ const Index = () => {
             Pay the payment below by pressing the Book Now button.
           </p>
         </div>
-        <div className="flex flex-row justify-center gap-5 my-20 mx-2">
-          <button className="border-[#E97B08] border  radius-[8px] w-[220px] h-[54px] bg-white text-[#E97B08] py-[16px] px-[40px]">
-            Edit
-          </button>
-          <button
-            onClick={() => navigate("/price")}
-            className=" bg-[#E97B08] text-white border    w-[220px] h-[54px] px-[40px] radius-[8px]"
-          >
-            Book Now
-          </button>
-        </div>
-
+      </div>
+      <div className='flex flex-row justify-center gap-5 my-20 mx-2'>
+        <button className='border-[#E97B08] border  rounded-lg w-[220px] h-[54px] bg-white text-[#E97B08] py-[16px] px-[40px]'>
+          Edit
+        </button>
+        <button
+          onClick={() => navigate('/price')}
+          className=' bg-[#E97B08] text-white border    w-[220px] h-[54px] px-[40px] rounded-lg'
+        >
+          Book Now
+        </button>
       </div>
     </div>
   );
