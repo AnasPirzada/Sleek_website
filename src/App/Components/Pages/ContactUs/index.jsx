@@ -9,8 +9,8 @@ const index = () => {
     window.scrollTo(0, 0);
   }, []);
   return (
-    <div className="p-4 sm:p-10">
-      <div className="sm:p-20 p-0">
+    <div className="p-4 sm:p-3">
+      <div className="sm:p-10 p-0">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-10 border border-white shadow-lg p-0  sm:p-10">
           <div>
             <h1 className="uppercase text-[#E97B08] text-[24px] sm:text-[32px] font-[700] mb-10">

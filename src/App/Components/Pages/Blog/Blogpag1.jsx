@@ -6,19 +6,17 @@ const Blogpag1 = () => {
   }, []);
   return (
     <>
-      <section className="px-4 sm:px-6 md:px-8 lg:px-16 xl:px-24 2xl:px-32">
-        <div className=" backgroundimg h-64 sm:h-80 md:h-96 lg:h-[30rem] xl:h-[35rem] 2xl:h-[40rem] w-full">
+      <section className="px-10 ">
+        <div className="backgroundimg h-64 sm:h-80 md:h-96 lg:h-[30rem] xl:h-[35rem] 2xl:h-[40rem] w-full justify-center items-center">
           <div className="bg-[#E97B08] flex justify-center items-center h-20 w-20 sm:h-20 sm:w-20 md:h-20 md:w-20 lg:h-20 lg:w-20 xl:h-20 xl:w-20 2xl:h-40 2xl:w-40 text-center mt-10 ml-6 sm:ml-5">
             <p className="text-white text-center font-bold text-2xl">05 MAR</p>
           </div>
         </div>
 
-        <div className=" py-10 px-6">
-          <h1 className=" text-[#313437] sm:text-3xl text-xl font-semibold text1 cursor-default">
+        <div className=" flex flex-col justify-start gap-6">
+          <h1 className="my-5 text-[#313437] sm:text-3xl text-xl font-semibold text1 cursor-default">
             London House Removals: What to Look for in a Removal Company
           </h1>
-        </div>
-        <div className=" flex flex-col justify-start gap-6 px-6">
           <h1 className="text-[#1B2024] text-xl sm:text-2xl  font-semibold text1 cursor-default">
             The Importance of Choosing a Reliable Removal Company
           </h1>
@@ -257,9 +255,9 @@ const Blogpag1 = () => {
             and follow our top tips for an enjoyable moving experience. Happy
             moving!
           </p>
-          <h1 className=" font-extrabold text-[#7A7A7A]  text-base leading-6">
+          {/* <h1 className=" font-extrabold text-[#7A7A7A]  text-base leading-6">
             Read another post
-          </h1>
+          </h1> */}
           <h1 className="text-base font-semibold tracking-wide pt-4">
             How a Man and Van Service in London Can Simplify Your Life​
           </h1>

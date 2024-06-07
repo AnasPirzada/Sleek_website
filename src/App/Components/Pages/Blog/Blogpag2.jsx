@@ -6,19 +6,17 @@ const Blogpag2 = () => {
   }, []);
   return (
     <>
-      <section className="px-4 sm:px-6 md:px-8 lg:px-16 xl:px-24 2xl:px-32">
-        <div className="backgroundimg h-64 sm:h-80 md:h-96 lg:h-[30rem] xl:h-[35rem] 2xl:h-[40rem] w-full">
+      <section className="px-10">
+        <div className="backgroundimg h-64 sm:h-80 md:h-96 lg:h-[30rem] xl:h-[35rem] 2xl:h-[40rem] w-full justify-center items-center">
           <div className="bg-[#E97B08] flex justify-center items-center h-20 w-20 sm:h-20 sm:w-20 md:h-20 md:w-20 lg:h-20 lg:w-20 xl:h-20 xl:w-20 2xl:h-40 2xl:w-40 text-center mt-10 ml-6 sm:ml-5">
             <p className="text-white text-center font-bold text-2xl">05 MAR</p>
           </div>
         </div>
 
-        <div className=" py-6 px-6">
-          <h1 className=" text-[#313437] text-xl sm:text-3xl font-semibold text1 cursor-default">
+        <div className=" flex flex-col justify-start gap-6 ">
+          <h1 className="my-5 text-[#313437] text-xl sm:text-3xl font-semibold text1 cursor-default">
             How a Man and Van Service in London Can Simplify Your Life​
           </h1>
-        </div>
-        <div className=" flex flex-col justify-start gap-6 px-6">
           <p className=" text-[#7A7A7A] text-base leading-6 ">
             A man and van. Sounds simple, doesn’t it? Yet, this basic phrase
             embodies a service that goes far beyond the simplicity of its title.
@@ -203,7 +201,7 @@ const Blogpag2 = () => {
             hassle of a self-drive hire when a professional service is available
             at a competitive rate?
           </p>
-          <h1 className=" text-xl font-semibold tracking-wide text-[#314337]">
+          <h1 className="text-lg sm:text-xl font-semibold tracking-wide text-[#314337]">
             TIPS FOR HIRING A MAN AND VAN LONDON SERVICE
           </h1>
           <p className=" text-[#7A7A7A] text-base leading-6">
@@ -273,10 +271,10 @@ const Blogpag2 = () => {
             today?
           </p>
 
-          <p className="text-[#7A7A7A]  text-base font-bold pt-10 leading-6">
+          {/* <p className="text-[#7A7A7A]  text-base font-bold pt-10 leading-6">
             Read another post:
-          </p>
-          <h1 className=" text-2xl py-10 font-semibold tracking-wide text1 text-[#314337]">
+          </p> */}
+          <h1 className="text-lg sm:text-2xl py-10 font-semibold tracking-wide text1 text-[#314337]">
             What to Look for in a Removal Company in London UK
           </h1>
         </div>
