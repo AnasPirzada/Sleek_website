@@ -1,6 +1,9 @@
-import React, { useEffect, useState } from 'react';
 
+
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from "react-router";
 const Index = () => {
+  const navigate = useNavigate();
   const [selectedValue, setSelectedValue] = useState('');
   const [selectedStairsValue, setSelectedStairsValue] = useState('');
   const [selectedDate, setSelectedDate] = useState('');
@@ -77,15 +80,18 @@ const Index = () => {
             Pay the payment below by pressing the Book Now button.
           </p>
         </div>
-      </div>
-      <div className='flex flex-row justify-center items-center gap-5 my-20 mx-auto'>
-        <button className='border-[#E97B08] border  rounded-lg px-8 py-3 bg-white text-[#E97B08] '>
-          Edit
-        </button>
-        
-        <button className=' bg-[#E97B08] border rounded-lg px-8 py-3  text-white'>
-          Book Now
-        </button>
+        <div className="flex flex-row justify-center gap-5 my-20 mx-2">
+          <button className="border-[#E97B08] border  radius-[8px] w-[220px] h-[54px] bg-white text-[#E97B08] py-[16px] px-[40px]">
+            Edit
+          </button>
+          <button
+            onClick={() => navigate("/price")}
+            className=" bg-[#E97B08] text-white border    w-[220px] h-[54px] px-[40px] radius-[8px]"
+          >
+            Book Now
+          </button>
+        </div>
+
       </div>
     </div>
   );

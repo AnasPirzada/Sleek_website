@@ -54,7 +54,7 @@ const Blog = () => {
 
   return (
     <section className="my-10 px-4 md:px-12 lg:px-[135px] xl:px-[135px] 2xl:px-[135px]  flex flex-col items-center justify-center">
-      <div className="text-center pt-[108px]">
+      <div className="text-center pt-16">
         <h1 className="text-[#E97B08] text-4xl font-bold leading-[48.41px]">
           Blog’s
         </h1>

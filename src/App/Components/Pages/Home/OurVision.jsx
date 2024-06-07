@@ -3,7 +3,7 @@ import React from "react";
 const OurVision = () => {
   return (
     <div className="container mx-auto  sm:mt-24  sm:my-0 my-10">
-      <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 items-center gap-4">
         <div className="px-4 sm:px-0">
           <h2 className="text-base sm:text-3xl font-bold sm:mb-8 mb-4 text-[#010066]">
             OUR VISION

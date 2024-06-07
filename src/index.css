@@ -37,4 +37,9 @@ input[type="date"]:valid:before {
 } */
 
 
-
+.bg-NavBar{
+    background-image:url('/Navbar_REct.svg') ;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}

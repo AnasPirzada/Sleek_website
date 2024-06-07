@@ -12,8 +12,8 @@ const Carousel = () => {
   };
 
   return (
-    <div className="flex flex-wrap flex-col  justify-center w-full h-full mt-16">
-      <div className="flex flex-wrap sm:flex-nowrap  w-full items-center ">
+    <div className="flex flex-wrap flex-row  justify-center w-full h-full mt-16">
+      <div className="grid md:grid-cols-2 lg:grid-cols-2 sm:grid-cols-1  gap-5   w-full items-center ">
         <img
           src={testimonials[current].image}
           alt="Client"
