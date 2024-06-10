@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
+
 const Index = () => {
   const navigate = useNavigate();
+
   const [selectedValue, setSelectedValue] = useState('');
   const [selectedStairsValue, setSelectedStairsValue] = useState('');
   const [selectedDate, setSelectedDate] = useState('');
