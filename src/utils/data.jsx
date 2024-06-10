@@ -187,51 +187,51 @@ export const navLinks = [
 
 export const CardData = [
   {
-    icon: mailIon,
+    icon: "Man&Vanhire.svg",
     heading: "Man & Van Hire",
     paragraph:
       "Flexible and convenient, our Man & Van hire service allows you to transport items at your own pace. Ideal for small moves or single item pickups and deliveries.",
   },
   {
-    icon: mailIon,
+    icon: "houseFlat.svg",
     heading: "House/Flat Removals",
     paragraph:
       "We specialize in house and flat removals, offering a seamless and stress-free moving experience. Our team handles everything from packing to transport with utmost care.",
   },
   {
-    icon: mailIon,
+    icon: "OfficeRemoval.svg",
     heading: "Office Removals",
     paragraph:
       "Our office removals service ensures a smooth transition to your new workspace. We minimize downtime and handle all your office equipment and furniture with precision.",
   },
   {
-    icon: mailIon,
+    icon: "StorageRemoval.svg",
     heading: "Storage Removals",
     paragraph:
       "Our storage removals service helps you move items in and out of storage facilities with ease. We handle the logistics, so you don’t have to worry about a thing.",
   },
   {
-    icon: mailIon,
+    icon: "FurnitureRemoval.svg",
     heading: "Furniture Removals",
     paragraph:
       "Our furniture removals service takes the hassle out of moving bulky items. We ensure your furniture is safely transported and delivered to its new location without damage",
   },
   {
-    icon: mailIon,
+    icon: "Pallet&Picket.svg",
     heading: "Store pickups/drops",
     paragraph:
       "We offer pallet pickup and drop services, providing efficient and reliable transport for your palletized goods, ensuring timely and secure delivery.",
   },
 
   {
-    icon: mailIon,
+    icon: "Pallet&Picket.svg",
     heading: "Pallet Pickup/Drops",
     paragraph:
       "We offer pallet pickup and drop services, providing efficient and reliable transport for your palletized goods, ensuring timely and secure delivery.",
   },
 
   {
-    icon: mailIon,
+    icon: "SingleItem.svg",
     heading: "Single Items Pickup/Drops",
     paragraph:
       "Need to move a single item? Our pickup and drop service is perfect for transporting individual items quickly and safely to their new locat",
