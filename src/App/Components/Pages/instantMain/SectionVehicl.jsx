@@ -10,12 +10,10 @@ const SectionVehicl = () => {
     sessionStorage.clear();
   }, []);
   const vehicleOptions = [
-
-    { label: "Small Van", value: "small-van", imgSrc: "smallVan.svg" },
-    { label: "Medium Van", value: "medium-van", imgSrc: "mediumVan.svg" },
-    { label: "Large Van", value: "large-van", imgSrc: "largeVan.svg" },
-    { label: "Luton Van", value: "giant-van", imgSrc: "GiantVan.svg" },
-
+    { label: 'Small Van', value: 'small-van', imgSrc: 'smallVan.svg' },
+    { label: 'Medium Van', value: 'medium-van', imgSrc: 'mediumVan.svg' },
+    { label: 'Large Van', value: 'large-van', imgSrc: 'largeVan.svg' },
+    { label: 'Luton Van', value: 'giant-van', imgSrc: 'GiantVan.svg' },
   ];
 
   const stairsOptions = [
@@ -208,6 +206,7 @@ const SectionVehicl = () => {
     console.log('Email:', email);
     console.log('Phone:', phone);
     console.log('Email&Text Need:', EmailTextNeedactiveOption);
+    console.log('Distance in Miles:', distanceInMiles);
 
     // Store data in session storage
     sessionStorage.setItem('selectedVehicle', JSON.stringify(selectedVehicle));
@@ -245,7 +244,9 @@ const SectionVehicl = () => {
       'EmailTextNeed',
       JSON.stringify(EmailTextNeedactiveOption)
     );
-    navigate('/instantmain');
+    sessionStorage.setItem('distanceInMiles', JSON.stringify(distanceInMiles));
+
+    navigate('/instantmain', { state: { distanceInMiles } });
   };
 
   const handleHealthChange = (index, e) => {
@@ -259,7 +260,71 @@ const SectionVehicl = () => {
     updatedDeliveryValues[index] = e.target.value;
     setDeliveryValues(updatedDeliveryValues);
   };
+  // const location = useLocation();
+  // const { distanceInMiles, pickupLocation, deliveryLocation } =
+  //   location.state || {
+  //     distanceInMiles: 0,
+  //     pickupLocation: '',
+  //     deliveryLocation: '',
+  //   };
 
+  // console.log('pickupLocation', pickupLocation);
+  // console.log('deliveryLocation', deliveryLocation);
+  const { distanceInMiles, pickupLocation, deliveryLocation } =
+    location.state || {
+      distanceInMiles: 0,
+      pickupLocation: {},
+      deliveryLocation: {},
+    };
+
+  // Update inputFieldsData with pickupLocation data
+  const updatedInputFieldsData = inputFieldsData.map(field => {
+    switch (field.key) {
+      case 'Postcode':
+        return { ...field, value: pickupLocation.postcode };
+      case 'Street_Address':
+        return { ...field, value: pickupLocation.street_address };
+      case 'City':
+        return { ...field, value: pickupLocation.city };
+      default:
+        return field;
+    }
+  });
+
+  // Update inputFieldsDeliveryData with deliveryLocation data
+  const updatedInputFieldsDeliveryData = inputFieldsDeliveryData.map(field => {
+    switch (field.key) {
+      case 'Postcode':
+        return { ...field, value: deliveryLocation.postcode };
+      case 'Street_Address':
+        return { ...field, value: deliveryLocation.street_address };
+      case 'City':
+        return { ...field, value: deliveryLocation.city };
+      default:
+        return field;
+    }
+  });
+
+  // State variables to hold the updated input field data
+  // const [inputFieldsData, setInputFieldsData] = useState(
+  //   updatedInputFieldsData
+  // );
+  // const [inputFieldsDeliveryData, setInputFieldsDeliveryData] = useState(
+  //   updatedInputFieldsDeliveryData
+  // );
+
+  // // Store data in session storage
+  // const handleGetQuotes = () => {
+  //   // Log and store data as before...
+
+  //   sessionStorage.setItem('pickupLocation', JSON.stringify(pickupLocation));
+  //   sessionStorage.setItem(
+  //     'deliveryLocation',
+  //     JSON.stringify(deliveryLocation)
+  //   );
+
+  //   navigate('/instantmain', { state: { distanceInMiles } });
+  // };
   return (
     <>
       <section className='px-4 md:px-8 lg:px-16 xl:px-32 2xl:px-[135px]  overflow-x-hidden '>
@@ -279,24 +344,23 @@ const SectionVehicl = () => {
             Which size of van do you need?
           </h1>
 
-          <p className="font-normal text-sm md:text-base leading-4 md:leading-5 xl:leading-[19px] text-[#444545] pt-2 md:pt-4 xl:pt-[8px]">
+          <p className='font-normal text-sm md:text-base leading-4 md:leading-5 xl:leading-[19px] text-[#444545] pt-2 md:pt-4 xl:pt-[8px]'>
             The Small Van is mostly used for luggage and boxes. Small vans can
             take up to 8 full suitcases and few boxes.
           </p>
-          <p className="font-normal text-sm md:text-base leading-4 md:leading-5 xl:leading-[19px] text-[#444545] pt-2 md:pt-4 xl:pt-[8px]">
+          <p className='font-normal text-sm md:text-base leading-4 md:leading-5 xl:leading-[19px] text-[#444545] pt-2 md:pt-4 xl:pt-[8px]'>
             Medium Van is suitable for one room move with few boxes, luggage,
             and small furniture. It is also good for single items
             pickups/delivery.
           </p>
-          <p className="font-normal text-sm md:text-base leading-4 md:leading-5 xl:leading-[19px] text-[#444545] pt-2 md:pt-4 xl:pt-[8px]">
+          <p className='font-normal text-sm md:text-base leading-4 md:leading-5 xl:leading-[19px] text-[#444545] pt-2 md:pt-4 xl:pt-[8px]'>
             Large Van is perfect for 1 or 2 bedroom flat/house moves with no
             white goods and heavy furniture.
           </p>
-          <p className="font-normal text-sm md:text-base leading-4 md:leading-5 xl:leading-[19px] text-[#444545] pt-2 md:pt-4 xl:pt-[8px]">
+          <p className='font-normal text-sm md:text-base leading-4 md:leading-5 xl:leading-[19px] text-[#444545] pt-2 md:pt-4 xl:pt-[8px]'>
             Luton Van suitable for 3 bedroom flat/house with white goods. It’s
             perfect for heavy items move because it has a tail lift for heavy
             lifting.
-
           </p>
         </div>
 
@@ -431,6 +495,7 @@ const SectionVehicl = () => {
             </div>
           </div>
         </div>
+
         <div>
           <div className='mt-8'>
             <p className='text-[#181919] text-xl	'>

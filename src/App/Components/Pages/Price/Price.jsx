@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import Navbar from '../../Narbar/index';
+import { useLocation } from 'react-router-dom';
+import Navbar from '../../Narbar/index.jsx';
 
 const Price = () => {
   const [activeDiv, setActiveDiv] = useState(null);
-
   const handleClick = id => {
     setActiveDiv(id === activeDiv ? null : id);
   };
-  React.useEffect(() => {
+
+  useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
@@ -15,29 +16,67 @@ const Price = () => {
   const [deliveryValues, setSelecteddeliveryValues] = useState('');
   const [selectedVehicleDuration, setSelectedVehicleDurationValue] =
     useState('');
+  const [distanceInMiles, setSelecteddistanceInMilesValue] = useState('');
+  const [deliveryStairsValue, setDeliveryStairsValue] = useState(0);
+  const [pickupStairsValue, setPickupStairsValue] = useState(0);
+  const [selectedVehicleValue, setVehicle] = useState(0);
+  const [selecteddeliveryValues, setdeliveryValues] = useState(0);
+
+  const location = useLocation();
+  // const { distanceInMiles } = location.state || { distanceInMiles: 0 };
+  const roundedDistance = Math.round(distanceInMiles);
 
   useEffect(() => {
-    const activeOptionYouHaveLIFTS = JSON.parse(
+    const savedActiveOptionYouHaveLIFTS = JSON.parse(
       sessionStorage.getItem('YouHaveLIFTS')
     );
-    const deliveryValues = JSON.parse(sessionStorage.getItem('deliveryValues'));
-    const selectedVehicleDuration = JSON.parse(
+    const savedDeliveryValues = JSON.parse(
+      sessionStorage.getItem('deliveryValues')
+    );
+    const savedSelectedVehicleDuration = JSON.parse(
       sessionStorage.getItem('selectedVehicleDuration')
     );
+    const savedSelecteddistanceInMiles = JSON.parse(
+      sessionStorage.getItem('distanceInMiles')
+    );
+    const savedSelectedStairsValue = JSON.parse(
+      sessionStorage.getItem('DeliverySTAIRS')
+    );
+    const savedPickupStairsValue = JSON.parse(
+      sessionStorage.getItem('PICKUPSTAIRS')
+    );
+    const savedSelectedVehicle = JSON.parse(
+      sessionStorage.getItem('selectedVehicle')
+    );
+    const saveddeliveryValues = JSON.parse(
+      sessionStorage.getItem('deliveryValues')
+    );
 
-    setSelectedValue(activeOptionYouHaveLIFTS);
-    setSelecteddeliveryValues(deliveryValues);
-    setSelectedVehicleDurationValue(selectedVehicleDuration);
+    setSelectedValue(savedActiveOptionYouHaveLIFTS);
+    setSelecteddeliveryValues(savedDeliveryValues);
+    setSelectedVehicleDurationValue(savedSelectedVehicleDuration);
+    setSelecteddistanceInMilesValue(savedSelecteddistanceInMiles);
+    setDeliveryStairsValue(savedSelectedStairsValue);
+    setPickupStairsValue(savedPickupStairsValue);
+    setVehicle(savedSelectedVehicle);
+    setdeliveryValues(saveddeliveryValues);
   }, []);
-  // calculate distance
-  const collectionAddressDistance = 180;
-  const deliveryAddressDistance = 150;
-  const totalDistance = collectionAddressDistance + deliveryAddressDistance;
+  console.log('Pick Up Stairs', pickupStairsValue);
+  console.log('Devlivery Stairs', deliveryStairsValue);
+  console.log('deliveryValues', selecteddeliveryValues);
+  console.log('car', selectedVehicleValue);
+  const stairCostPerFlightPerPerson = 5.75;
+  const numberOfPeople = 2;
+  const totalFlights = pickupStairsValue + deliveryStairsValue;
+  const stairCost =
+    activeOptionYouHaveLIFTS === 'No'
+      ? totalFlights * stairCostPerFlightPerPerson * numberOfPeople
+      : 0;
 
-  // Other Totole Amount on totalDistance
-  const permileprie = 1.15;
-  const totalAmount = totalDistance * permileprie;
-  const roundedTotalAmount = Math.round(totalAmount);
+  const totalCost = 428.0 + stairCost;
+  const depositAmount = roundedDistance * 1.15;
+
+  const totalMileCost = roundedDistance * 1.15;
 
   return (
     <>
@@ -77,7 +116,7 @@ const Price = () => {
                 Total Distance
               </p>
               <p className='text-base sm:text-lg md:text-xl lg:text-2xl text-[#181919] font-medium'>
-                {totalDistance} mile's{' '}
+                {roundedDistance} mile's
               </p>
             </div>
             <hr className='border-black w-full mt-6 sm:mt-8 md:mt-10' />
@@ -88,7 +127,7 @@ const Price = () => {
                 Mileage Charges
               </p>
               <p className='text-base sm:text-lg md:text-xl lg:text-2xl text-[#181919] font-medium'>
-                £ {roundedTotalAmount}
+                £{totalMileCost.toFixed(2)}{' '}
               </p>
             </div>
             <hr className='border-black w-full mt-6 sm:mt-8 md:mt-10' />
@@ -96,56 +135,19 @@ const Price = () => {
           <div className='rounded-xl py-6 sm:py-8 md:py-10'>
             <div className='justify-between flex'>
               <p className='text-base sm:text-lg md:text-xl lg:text-2xl font-normal text-[#272828]'>
-                Drop-off-stairs
+                Stair Charges
               </p>
               <p className='text-base sm:text-lg md:text-xl lg:text-2xl text-[#181919] font-medium'>
-                £30
+                £{stairCost.toFixed(2)}
               </p>
             </div>
             <hr className='border-black w-full mt-6 sm:mt-8 md:mt-10' />
           </div>
-          <div className='rounded-xl'>
-            <div className='justify-between flex'>
-              <p className='text-base sm:text-lg md:text-xl lg:text-2xl font-normal text-[#272828]'>
-                Pickup-stairs
-              </p>
-              <p className='text-base sm:text-lg md:text-xl lg:text-2xl text-[#181919] font-medium'>
-                £20
-              </p>
-            </div>
-            <hr className='border-black w-full mt-6 sm:mt-8 md:mt-10' />
-          </div>
-          <div className='rounded-xl py-6 sm:py-8 md:py-10'>
-            <div className='justify-between flex'>
-              <p className='text-base sm:text-lg md:text-xl lg:text-2xl font-normal text-[#272828]'>
-                Helping Loading & Unloading
-              </p>
-              <p className='text-base sm:text-lg md:text-xl lg:text-2xl text-[#181919] font-medium'>
-                {deliveryValues}
-              </p>
-            </div>
-            <hr className='border-black w-full mt-6 sm:mt-8 md:mt-10' />
-          </div>
-          <div className='rounded-xl sm:mb-8 md:mb-10 xl:mb-10 2xl:mb-10 lg:mb-10'>
-            <div className='justify-between flex'>
-              <p className='text-base sm:text-lg md:text-xl lg:text-2xl font-normal text-[#272828]'>
-                Driver Time Charges
-              </p>
-              <p className='text-base sm:text-lg md:text-xl lg:text-2xl text-[#181919] font-medium'>
-                £136.00
-              </p>
-            </div>
-          </div>
-        </div>
-        <div className=' px-5 sm:px-12 py-4 '>
-          <p className=' text-normal text-base leading-[24px] text-[#E97B08]'>
-            ANY ADDITIONAL TIME WILL BE CHARGED AT Hour £42.50 Per Half
-          </p>
-        </div>
-        <div className='px-5 sm:px-12 pt-[18px]'>
           <div className=' flex justify-between'>
             <h2 className=' font-semibold text-lg sm:text-2xl'>Total Cost</h2>
-            <p className=' font-medium text-lg sm:text-2xl'>£428.00</p>
+            <p className=' font-medium text-lg sm:text-2xl'>
+              £{totalCost.toFixed(2)}
+            </p>
           </div>
           <div className=' flex justify-between py-4'>
             <h2 className='font-semibold text-lg sm:text-2xl'>
@@ -154,70 +156,9 @@ const Price = () => {
                 (10% deposit)
               </span>
             </h2>
-            <p className=' font-medium text-lg sm:text-2xl'>£42.80</p>
-          </div>
-        </div>
-        <div className=' pt-6 px-5 sm:px-12'>
-          <h1 className='font-semibold text-lg sm:text-2xl text-[#181919] leading-[29.5px]'>
-            Choose the payment method
-          </h1>
-          <div className=' flex flex-col md:flex-row gap-6 pt-5'>
-            <div className='flex gap-2 items-center'>
-              <div
-                id='div1'
-                className={`h-[26px] w-[26px] border-2 flex justify-center items-center text-center rounded-full ${
-                  activeDiv === 'div1' ? 'active' : ''
-                }`}
-                onClick={() => handleClick('div1')}
-                style={{
-                  borderColor: activeDiv === 'div1' ? '#E97B08' : 'black',
-                  backgroundColor: activeDiv === 'div1' ? '' : 'white',
-                  height: activeDiv === 'div1' ? '26px' : '26px',
-                  width: activeDiv === 'div1' ? '26px' : '26px',
-                }}
-              >
-                <div
-                  className={`h-[15px] w-[15px] rounded-full ${
-                    activeDiv === 'div1' ? 'active' : ''
-                  }`}
-                  style={{
-                    backgroundColor: activeDiv === 'div1' ? '#E97B08' : '',
-                  }}
-                ></div>
-              </div>
-              <img src='logos_stripe.svg' alt='' />
-            </div>
-
-            <div className='flex gap-2 items-center'>
-              <div
-                id='div2'
-                className={`h-[26px] w-[26px] border-2 flex justify-center items-center text-center rounded-full ${
-                  activeDiv === 'div2' ? 'active' : ''
-                }`}
-                onClick={() => handleClick('div2')}
-                style={{
-                  borderColor: activeDiv === 'div2' ? '#E97B08' : 'black',
-                  backgroundColor: activeDiv === 'div2' ? '' : 'white',
-                  height: activeDiv === 'div2' ? '26px' : '26px',
-                  width: activeDiv === 'div2' ? '26px' : '26px',
-                }}
-              >
-                <div
-                  className={`h-[15px] w-[15px] rounded-full ${
-                    activeDiv === 'div2' ? 'active' : ''
-                  }`}
-                  style={{
-                    backgroundColor: activeDiv === 'div2' ? '#E97B08' : '',
-                  }}
-                ></div>
-              </div>
-              <img src='paypallogo.svg' alt='' />
-            </div>
-          </div>
-          <div className='flex justify-center text-center items-center py-20'>
-            <button className='bg-[#E97B08] h-[54px] w-[220px] text-[#FFFFFF] shadow-md rounded-lg'>
-              Pay Now
-            </button>
+            <p className=' font-medium text-lg sm:text-2xl'>
+              £{depositAmount.toFixed(2)}
+            </p>
           </div>
         </div>
       </section>
