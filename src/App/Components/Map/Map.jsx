@@ -73,8 +73,12 @@ const Map = () => {
       },
       (response, status) => {
         if (status === "OK") {
-          const distance = response.rows[0].elements[0].distance.text;
-          console.log("Total Distance:", distance);
+          const distanceInKm = parseFloat(
+            response.rows[0].elements[0].distance.text.replace(" km", "")
+          );
+          const distanceInMiles = distanceInKm * 0.621371;
+
+          console.log("Total Distance:", distanceInMiles);
         } else {
           console.error("Error calculating distance:", status);
         }
@@ -86,49 +90,51 @@ const Map = () => {
 
   return (
     <>
-      <div className="flex flex-col items-center md:justify-start mt-12 space-y-8 md:space-y-0 md:flex-row md:space-x-5">
-        <div>
-          <p className="text-lg font-normal mb-2 text-white">
-            Collection Address
-          </p>
-          <input
-            ref={pickupInputRef}
-            id="pickup-location"
-            type="text"
-            className="rounded-[8px] sm:w-[350px] w-full h-[40px] py-2 px-2"
-            placeholder="Enter pickup location"
-          />
-        </div>
-        <div className="hidden md:block md:mt-10">
-          <img src="/carImg.svg" alt="Car image" />
-        </div>
-        <div>
-          <p className="text-lg font-normal mb-2 text-white mt-8 md:mt-0">
-            Delivery Address
-          </p>
-          <input
-            ref={deliveryInputRef}
-            id="delivery-location"
-            type="text"
-            className="rounded-[8px] sm:w-[350px] w-full h-[40px] py-2 px-2"
-            placeholder="Enter delivery location"
-          />
-        </div>
-      </div>
-      <div
-        className="flex justify-center sm:justify-start w-full"
-        onClick={handleShowQuotes}
-      >
-        <button className="bg-[#E97B08] text-white flex sm:w-auto w-full mt-8 justify-center py-2 px-28 sm:px-8 rounded-[8px]">
-          Show quote
-          <span>
-            <img
-              src="/leftArrow.svg"
-              alt="left Arrow"
-              className="w-[24px] h-[24px]"
+      <div className="w-full h-full">
+        <div className="flex flex-col md:flex-row  md:justify-start sm:items-center items-left md:space-x-5 mt-12">
+          <div>
+            <p className="text-lg font-normal mb-2 text-white">
+              Collection Address
+            </p>
+            <input
+              ref={pickupInputRef}
+              id="pickup-location"
+              type="text"
+              className="rounded-[8px] sm:w-[350px] w-full h-[40px] py-2 px-2"
+              placeholder="Enter pickup location"
             />
-          </span>
-        </button>
+          </div>
+          <div className="hidden md:block md:mt-10">
+            <img src="/carImg.svg" alt="Car image" />
+          </div>
+          <div>
+            <p className="text-lg font-normal mb-2 text-white mt-0 md:mt-0">
+              Delivery Address
+            </p>
+            <input
+              ref={deliveryInputRef}
+              id="delivery-location"
+              type="text"
+              className="rounded-[8px] sm:w-[350px] w-full h-[40px] py-2 px-2"
+              placeholder="Enter delivery location"
+            />
+          </div>
+        </div>
+        <div
+          className="flex justify-center sm:justify-start w-full"
+          onClick={handleShowQuotes}
+        >
+          <button className="bg-[#E97B08] text-white flex sm:w-auto w-full mt-8 justify-center py-2 px-28 sm:px-8 rounded-[8px]">
+            Show quote
+            <span>
+              <img
+                src="/leftArrow.svg"
+                alt="left Arrow"
+                className="w-[24px] h-[24px]"
+              />
+            </span>
+          </button>
+        </div>
       </div>
     </>
   );
