@@ -1,11 +1,8 @@
 import React, { useEffect, useRef } from "react";
-import { useNavigate, useParams } from "react-router";
-import { useState } from "react";
+import { useNavigate } from "react-router";
 
 const Map = () => {
   const navigate = useNavigate();
-  const params = useParams();
-  const [distance, setDistance] = useState(null);
   const pickupInputRef = useRef(null);
   const deliveryInputRef = useRef(null);
   const pickupAutocompleteRef = useRef(null);
@@ -73,21 +70,18 @@ const Map = () => {
         origins: [pickupLocation],
         destinations: [deliveryLocation],
         travelMode: "DRIVING",
-        unitSystem: window.google.maps.UnitSystem.IMPERIAL,
       },
       (response, status) => {
         if (status === "OK") {
-          const distanceInKm =
-            response.rows[0].elements[0].distance.value / 1000;
-          const distanceInMiles = distanceInKm * 0.621371; // Convert distance from kilometers to miles
-          setDistance(distanceInMiles); // Set the distance state
-          console.log("Total Distance:", distanceInMiles, "miles");
-          navigate(`/instantQuotes/${distanceInMiles}`); // Navigate to the next route with distance as a URL parameter
+          const distance = response.rows[0].elements[0].distance.text;
+          console.log("Total Distance:", distance);
         } else {
           console.error("Error calculating distance:", status);
         }
       }
     );
+
+    navigate("/instantQuotes");
   };
 
   return (
