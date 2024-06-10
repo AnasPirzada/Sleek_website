@@ -148,6 +148,7 @@ const Map = () => {
       return;
     }
 
+
     // Log pickup and delivery locations
     console.log('Pickup Location:', pickupPlace.formatted_address);
     console.log('Delivery Location:', deliveryPlace.formatted_address);
@@ -242,6 +243,52 @@ const Map = () => {
   //     navigate('/instantQuotes', { state: { distanceInMiles } });
   //   }
   // }, [distanceInMiles, navigate]);
+
+    const pickupStreetAddress = pickupPlace.formatted_address;
+    const pickupAddressComponents = pickupPlace.address_components;
+    const pickupCity = getAddressComponent(pickupAddressComponents, "locality");
+    const pickupPostalCode = getAddressComponent(
+      pickupAddressComponents,
+      "postal_code"
+    ); // Retrieve postal code
+
+    const deliveryStreetAddress = deliveryPlace.formatted_address;
+    const deliveryAddressComponents = deliveryPlace.address_components;
+    const deliveryCity = getAddressComponent(
+      deliveryAddressComponents,
+      "locality"
+    );
+    const deliveryPostalCode = getAddressComponent(
+      deliveryAddressComponents,
+      "postal_code"
+    ); // Retrieve postal code
+
+    // Print pickup address details to console
+    console.log("Pickup Street Address:", pickupStreetAddress);
+    console.log("Pickup City:", pickupCity);
+    console.log("Pickup Postal Code:", pickupPostalCode);
+
+    // Print delivery address details to console
+    console.log("Delivery Street Address:", deliveryStreetAddress);
+    console.log("Delivery City:", deliveryCity);
+    console.log("Delivery Postal Code:", deliveryPostalCode);
+
+    navigate("/instantQuotes");
+  };
+
+  // Function to extract address component by type
+  const getAddressComponent = (addressComponents, type) => {
+    for (let component of addressComponents) {
+      for (let componentType of component.types) {
+        if (componentType === type) {
+          return component.long_name;
+        }
+      }
+    }
+    return "";
+  };
+
+
   return (
     <>
       <div className='w-full h-full'>
