@@ -7,6 +7,7 @@ import OurVision from "./OurVision";
 import Carousel from "./Carousel";
 import ContactUs from "./ContactUs";
 import { useNavigate } from "react-router";
+import Map from "../../Map/Map";
 const Index = () => {
   React.useEffect(() => {
     window.scrollTo(0, 0);
@@ -29,7 +30,7 @@ const Index = () => {
             </p>
           </div>
 
-          <div className="flex flex-col md:flex-row  md:justify-start sm:items-center items-left md:space-x-5 mt-12 ">
+          {/* <div className="flex flex-col md:flex-row  md:justify-start sm:items-center items-left md:space-x-5 mt-12 ">
             <div>
               <p className="text-lg font-normal mb-2 text-white">
                 Collection Address
@@ -51,22 +52,8 @@ const Index = () => {
                 className="rounded-[8px] sm:w-[350px]    w-full h-[40px] py-2"
               />
             </div>
-          </div>
-          <div
-            className="flex justify-center sm:justify-start w-full"
-            onClick={() => navigate("/instantQuotes")}
-          >
-            <button className="bg-[#E97B08] text-white flex sm:w-auto w-full mt-8 justify-center py-2 px-28 sm:px-8 rounded-[8px]">
-              Show quote
-              <span>
-                <img
-                  src="/leftArrow.svg"
-                  alt="left Arrow"
-                  className="w-[24px] h-[24px]"
-                />
-              </span>
-            </button>
-          </div>
+          </div> */}
+          <Map />
         </div>
       </div>
       <div className="sm:w-[80%]  m-auto">
