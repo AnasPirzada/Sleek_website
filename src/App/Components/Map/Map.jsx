@@ -60,32 +60,48 @@ const Map = () => {
       return;
     }
 
-    const pickupLocation = pickupPlace.geometry.location;
-    const deliveryLocation = deliveryPlace.geometry.location;
+    const pickupStreetAddress = pickupPlace.formatted_address;
+    const pickupAddressComponents = pickupPlace.address_components;
+    const pickupCity = getAddressComponent(pickupAddressComponents, "locality");
+    const pickupPostalCode = getAddressComponent(
+      pickupAddressComponents,
+      "postal_code"
+    ); // Retrieve postal code
 
-    const distanceMatrixService =
-      new window.google.maps.DistanceMatrixService();
-    distanceMatrixService.getDistanceMatrix(
-      {
-        origins: [pickupLocation],
-        destinations: [deliveryLocation],
-        travelMode: "DRIVING",
-      },
-      (response, status) => {
-        if (status === "OK") {
-          const distanceInKm = parseFloat(
-            response.rows[0].elements[0].distance.text.replace(" km", "")
-          );
-          const distanceInMiles = distanceInKm * 0.621371;
-
-          console.log("Total Distance:", distanceInMiles);
-        } else {
-          console.error("Error calculating distance:", status);
-        }
-      }
+    const deliveryStreetAddress = deliveryPlace.formatted_address;
+    const deliveryAddressComponents = deliveryPlace.address_components;
+    const deliveryCity = getAddressComponent(
+      deliveryAddressComponents,
+      "locality"
     );
+    const deliveryPostalCode = getAddressComponent(
+      deliveryAddressComponents,
+      "postal_code"
+    ); // Retrieve postal code
+
+    // Print pickup address details to console
+    console.log("Pickup Street Address:", pickupStreetAddress);
+    console.log("Pickup City:", pickupCity);
+    console.log("Pickup Postal Code:", pickupPostalCode);
+
+    // Print delivery address details to console
+    console.log("Delivery Street Address:", deliveryStreetAddress);
+    console.log("Delivery City:", deliveryCity);
+    console.log("Delivery Postal Code:", deliveryPostalCode);
 
     navigate("/instantQuotes");
+  };
+
+  // Function to extract address component by type
+  const getAddressComponent = (addressComponents, type) => {
+    for (let component of addressComponents) {
+      for (let componentType of component.types) {
+        if (componentType === type) {
+          return component.long_name;
+        }
+      }
+    }
+    return "";
   };
 
   return (
