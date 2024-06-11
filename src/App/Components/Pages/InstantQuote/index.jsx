@@ -9,50 +9,106 @@ const Index = () => {
   const [selectedDate, setSelectedDate] = useState('');
   const [selectedTime, setSelectedTime] = useState('');
   const [selectedVehicle, setSelectedVehicle] = useState('');
-  const [selectedHelp, setSelectedHelp] = useState('');
-  const [DeliverySTAIRS, setDeliveryValues] = useState('');
+  const [deliveryValues, setDeliveryValues] = useState('');
   const [selectedVehicleDuration, setSelectedVehicleDuration] = useState('');
-  const [deliveryValues, setdeliveryValues] = useState('');
+  const [totalDistance, setTotalDistance] = useState(0);
+  const [selectedHelp, setselectedHelp] = useState('');
+
+  const mileCharge = 1.15;
+  const stairChargePerMan = 5.75;
+
+  const vehicleRates = {
+    'small-van': {
+      'No Help': 30,
+      'Driver Help': 30,
+      'Driver + Helper': 60,
+      'Driver + 2 Helpers': 130,
+    },
+    'medium-van': {
+      'No Help': 33,
+      'Driver Help': 33,
+      'Driver + Helper': 60,
+      'Driver + 2 Helpers': 150,
+    },
+    'large-van': {
+      'No Help': 35,
+      'Driver Help': 35,
+      'Driver + Helper': 60,
+      'Driver + 2 Helpers': 180,
+    },
+    'giant-van': {
+      'No Help': 65,
+      'Driver Help': 70,
+      'Driver + Helper': 75,
+      'Driver + 2 Helpers': 220,
+    },
+  };
 
   useEffect(() => {
-    const storedSelectedValue = JSON.parse(
-      sessionStorage.getItem('PICKUPSTAIRS')
-    );
-    const DeliverySTAIRS = JSON.parse(sessionStorage.getItem('DeliverySTAIRS'));
-    const storedSelectedDate = JSON.parse(
-      sessionStorage.getItem('selectedDate')
-    );
-    const storedSelectedTime = JSON.parse(
-      sessionStorage.getItem('selectedTime')
-    );
-    const storedSelectedVehicle = JSON.parse(
-      sessionStorage.getItem('selectedVehicle')
-    );
-    const storedSelectedHelp = JSON.parse(
-      sessionStorage.getItem('DeliverySTAIRS')
-    );
-    const storedDeliveryValues = JSON.parse(
-      sessionStorage.getItem('Delivery Address :')
-    );
-    const storedSelectedVehicleDuration = JSON.parse(
-      sessionStorage.getItem('selectedVehicleDuration')
-    );
-    const storeddeliveryValues = JSON.parse(
-      sessionStorage.getItem('deliveryValues')
-    );
+    // Parse session storage values
+    const storedSelectedValue =
+      JSON.parse(sessionStorage.getItem('PICKUPSTAIRS')) || '';
+    const DeliverySTAIRS =
+      JSON.parse(sessionStorage.getItem('DeliverySTAIRS')) || '';
+    const storedSelectedDate =
+      JSON.parse(sessionStorage.getItem('selectedDate')) || '';
+    const storedSelectedTime =
+      JSON.parse(sessionStorage.getItem('selectedTime')) || '';
+    const storedSelectedVehicle =
+      JSON.parse(sessionStorage.getItem('selectedVehicle')) || '';
+    const storedDeliveryValues =
+      JSON.parse(sessionStorage.getItem('Delivery Address :')) || '';
+    const storedSelectedVehicleDuration =
+      JSON.parse(sessionStorage.getItem('selectedVehicleDuration')) || '';
 
     setSelectedValue(storedSelectedValue);
     setSelectedStairsValue(DeliverySTAIRS);
     setSelectedDate(storedSelectedDate);
     setSelectedTime(storedSelectedTime);
     setSelectedVehicle(storedSelectedVehicle);
-    setSelectedHelp(storedSelectedHelp);
-    setDeliveryValues(DeliverySTAIRS);
+    setDeliveryValues(storedDeliveryValues);
     setSelectedVehicleDuration(storedSelectedVehicleDuration);
-    setdeliveryValues(storeddeliveryValues);
+    setTotalDistance(parseFloat(sessionStorage.getItem('totalDistance')) || 0);
   }, []);
 
-  React.useEffect(() => {
+  const vehicle = selectedVehicle;
+  const deliveryHelp = deliveryValues;
+  const perHour = selectedVehicleDuration;
+  const distance = totalDistance;
+  const DropOffStairs = selectedStairsValue;
+  const PickupStairs = selectedValue;
+
+  // Calculate the total amount
+  const calculateTotalAmount = (
+    vehicle,
+    deliveryHelp,
+    perHour,
+    distance,
+    DropOffStairs,
+    PickupStairs
+  ) => {
+    const perHourRate = vehicleRates[vehicle][deliveryHelp];
+    const totalHourlyCharge = perHour * perHourRate;
+    const totalMileCharge = distance * mileCharge;
+    const totalPickUpCharge = PickupStairs * stairChargePerMan;
+    const totalDropOffCharge = DropOffStairs * stairChargePerMan;
+    const totalStairCharge = totalPickUpCharge + totalDropOffCharge;
+    return totalHourlyCharge + totalMileCharge + totalStairCharge;
+  };
+
+  // Calculate total amount
+  const totalAmount = calculateTotalAmount(
+    selectedVehicle,
+    deliveryValues, // Corrected parameter here
+    selectedVehicleDuration,
+    totalDistance,
+    selectedStairsValue,
+    selectedValue
+  );
+
+  console.log('Total Amount:', totalAmount);
+
+  useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
@@ -66,7 +122,9 @@ const Index = () => {
           <p className='text-base	font-[400]'>
             You are moving from &nbsp;
             <span className='font-semibold	'>{selectedValue}</span> to &nbsp;
-            <span className='font-semibold	'>{DeliverySTAIRS} (no stairs).</span>
+            <span className='font-semibold	'>
+              {selectedStairsValue} (no stairs).
+            </span>
           </p>
           <p className='text-base	 py-3'>
             On <span className='font-semibold	'> {selectedDate} </span>at

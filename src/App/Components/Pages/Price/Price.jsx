@@ -23,6 +23,7 @@ const Price = () => {
   const [selecteddeliveryValues, setdeliveryValues] = useState(0);
 
   const location = useLocation();
+  console.log('Totoal Distance', distanceInMiles);
   // const { distanceInMiles } = location.state || { distanceInMiles: 0 };
   const roundedDistance = Math.round(distanceInMiles);
 
