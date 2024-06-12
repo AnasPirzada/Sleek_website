@@ -13,13 +13,19 @@ const Price = () => {
   }, []);
 
   const [activeOptionYouHaveLIFTS, setSelectedValue] = useState('');
-  const [deliveryValues, setSelecteddeliveryValues] = useState('');
   const [selectedVehicleDuration, setSelectedVehicleDurationValue] =
     useState('');
+  const [totalDistance, setSelectedSelectedtotalDistance] = useState('');
   const [distanceInMiles, setSelecteddistanceInMilesValue] = useState('');
+  const [totalRatepermile, setSelectedSelectedtotalRatepermile] = useState('');
+  const [PickupAmount, setSelectedPickupAmount] = useState('');
+  const [deliveryValues, setSelecteddeliveryValues] = useState('');
+  const [DropOffAmount, setSelectedDropOffAmount] = useState('');
+
   const [deliveryStairsValue, setDeliveryStairsValue] = useState(0);
   const [pickupStairsValue, setPickupStairsValue] = useState(0);
   const [selectedVehicleValue, setVehicle] = useState(0);
+  const [TotalAmount, setsTotalAmount] = useState(0);
   const [selecteddeliveryValues, setdeliveryValues] = useState(0);
 
   const location = useLocation();
@@ -37,6 +43,22 @@ const Price = () => {
     const savedSelectedVehicleDuration = JSON.parse(
       sessionStorage.getItem('selectedVehicleDuration')
     );
+    const savedSelectedtotalDistance = JSON.parse(
+      sessionStorage.getItem('totalDistance')
+    );
+    const savedSelectedtotalRatepermile = JSON.parse(
+      sessionStorage.getItem('totalRatepermile')
+    );
+    const savedSelectedPickupAmount = JSON.parse(
+      sessionStorage.getItem('PickupAmount')
+    );
+    const savedSelecteddeliveryValues = JSON.parse(
+      sessionStorage.getItem('deliveryValues')
+    );
+    const savedSelectedDropOffAmount = JSON.parse(
+      sessionStorage.getItem('DropOffAmount')
+    );
+
     const savedSelecteddistanceInMiles = JSON.parse(
       sessionStorage.getItem('distanceInMiles')
     );
@@ -52,32 +74,43 @@ const Price = () => {
     const saveddeliveryValues = JSON.parse(
       sessionStorage.getItem('deliveryValues')
     );
+    const savedTotalAmount = JSON.parse(sessionStorage.getItem('TotalAmount'));
 
     setSelectedValue(savedActiveOptionYouHaveLIFTS);
     setSelecteddeliveryValues(savedDeliveryValues);
     setSelectedVehicleDurationValue(savedSelectedVehicleDuration);
+    setSelectedSelectedtotalDistance(savedSelectedtotalDistance);
+    setSelectedSelectedtotalRatepermile(savedSelectedtotalRatepermile);
+    setSelectedPickupAmount(savedSelectedPickupAmount);
+    setSelecteddeliveryValues(savedSelecteddeliveryValues);
+    setSelectedDropOffAmount(savedSelectedDropOffAmount);
     setSelecteddistanceInMilesValue(savedSelecteddistanceInMiles);
     setDeliveryStairsValue(savedSelectedStairsValue);
     setPickupStairsValue(savedPickupStairsValue);
     setVehicle(savedSelectedVehicle);
-    setdeliveryValues(saveddeliveryValues);
+    setsTotalAmount(savedTotalAmount);
   }, []);
   console.log('Pick Up Stairs', pickupStairsValue);
   console.log('Devlivery Stairs', deliveryStairsValue);
   console.log('deliveryValues', selecteddeliveryValues);
   console.log('car', selectedVehicleValue);
-  const stairCostPerFlightPerPerson = 5.75;
-  const numberOfPeople = 2;
-  const totalFlights = pickupStairsValue + deliveryStairsValue;
-  const stairCost =
-    activeOptionYouHaveLIFTS === 'No'
-      ? totalFlights * stairCostPerFlightPerPerson * numberOfPeople
-      : 0;
+  // const stairCostPerFlightPerPerson = 5.75;
+  // const numberOfPeople = 2;
+  // const totalFlights = pickupStairsValue + deliveryStairsValue;
+  // const stairCost =
+  //   activeOptionYouHaveLIFTS === 'No'
+  //     ? totalFlights * stairCostPerFlightPerPerson * numberOfPeople
+  //     : 0;
 
-  const totalCost = 428.0 + stairCost;
-  const depositAmount = roundedDistance * 1.15;
+  // const totalCost = 428.0 + stairCost;
+  // const depositAmount = roundedDistance * 1.15;
 
-  const totalMileCost = roundedDistance * 1.15;
+  // const totalMileCost = roundedDistance * 1.15;
+  let depositAmount;
+  let TotalDespositedAmount;
+  depositAmount = 0.1 * TotalAmount;
+
+  // TotalDespositedAmount=TotalAmount-depositAmount
 
   return (
     <>
@@ -117,7 +150,7 @@ const Price = () => {
                 Total Distance
               </p>
               <p className='text-base sm:text-lg md:text-xl lg:text-2xl text-[#181919] font-medium'>
-                {roundedDistance} mile's
+                {totalDistance} mile's
               </p>
             </div>
             <hr className='border-black w-full mt-6 sm:mt-8 md:mt-10' />
@@ -128,7 +161,7 @@ const Price = () => {
                 Mileage Charges
               </p>
               <p className='text-base sm:text-lg md:text-xl lg:text-2xl text-[#181919] font-medium'>
-                £{totalMileCost.toFixed(2)}{' '}
+                £{totalRatepermile}{' '}
               </p>
             </div>
             <hr className='border-black w-full mt-6 sm:mt-8 md:mt-10' />
@@ -136,30 +169,56 @@ const Price = () => {
           <div className='rounded-xl py-6 sm:py-8 md:py-10'>
             <div className='justify-between flex'>
               <p className='text-base sm:text-lg md:text-xl lg:text-2xl font-normal text-[#272828]'>
-                Stair Charges
+                Drop-off-stairs{' '}
               </p>
               <p className='text-base sm:text-lg md:text-xl lg:text-2xl text-[#181919] font-medium'>
-                £{stairCost.toFixed(2)}
+                £{DropOffAmount}
               </p>
             </div>
             <hr className='border-black w-full mt-6 sm:mt-8 md:mt-10' />
           </div>
-          <div className=' flex justify-between'>
-            <h2 className=' font-semibold text-lg sm:text-2xl'>Total Cost</h2>
-            <p className=' font-medium text-lg sm:text-2xl'>
-              £{totalCost.toFixed(2)}
-            </p>
+
+          <div className='rounded-xl'>
+            <div className='justify-between flex'>
+              <p className='text-base sm:text-lg md:text-xl lg:text-2xl font-normal text-[#272828]'>
+                Pickup-stairs
+              </p>
+              <p className='text-base sm:text-lg md:text-xl lg:text-2xl text-[#181919] font-medium'>
+                £{PickupAmount}
+              </p>
+            </div>
+            <hr className='border-black w-full mt-6 sm:mt-8 md:mt-10' />
           </div>
-          <div className=' flex justify-between py-4'>
+
+          <div className='rounded-xl'>
+            <div className='justify-between flex pt-10'>
+              <p className='text-base sm:text-lg md:text-xl lg:text-2xl font-normal text-[#272828]'>
+                Helping Loading & Unloading{' '}
+              </p>
+              <p className='text-base sm:text-lg md:text-xl lg:text-2xl text-[#181919] font-medium'>
+                {deliveryValues}
+              </p>
+            </div>
+            <hr className='border-black w-full mt-6 sm:mt-8 md:mt-10' />
+          </div>
+
+          <p className='my-10 text-[#E97B08] text-base'>
+            ANY ADDITIONAL TIME WILL BE CHARGED AT Hour £42.50 Per Half
+          </p>
+
+          <div className=' flex justify-between pt-10'>
+            <h2 className=' font-semibold text-lg sm:text-2xl'>Total Cost</h2>
+            <p className=' font-medium text-lg sm:text-2xl'>£{TotalAmount}</p>
+          </div>
+          <div className=' flex justify-between py-6'>
             <h2 className='font-semibold text-lg sm:text-2xl'>
               To Pay now{' '}
               <span className=' text-base font-normal leading-[24px]'>
                 (10% deposit)
               </span>
             </h2>
-            <p className=' font-medium text-lg sm:text-2xl'>
-              £{depositAmount.toFixed(2)}
-            </p>
+            <p className=' font-medium text-lg sm:text-2xl '>£{depositAmount}</p>
+            {/* <p className=' font-medium text-lg sm:text-2xl'>£{TotalDespositedAmount}</p> */}
           </div>
         </div>
       </section>
