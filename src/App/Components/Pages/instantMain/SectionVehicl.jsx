@@ -22,13 +22,13 @@ const SectionVehicl = () => {
       label: 'There are no flights of stairs',
       value: 'There are no flights of stairs0',
     },
-    { label: 'is 1 flight of stairs', value: ' is 1 flight of stairs' },
-    { label: 'are 2 flight of stairs', value: ' are 2 flight of stairs' },
-    { label: 'are 3 flight of stairs', value: ' are 3 flight of stairs' },
-    { label: 'are 4 flight of stairs', value: ' are 4 flight of stairs' },
-    { label: 'are 5 flight of stairs', value: ' are 5 flight of stairs' },
-    { label: 'are 6 flight of stairs', value: ' are 6 flight of stairs' },
-    { label: 'are 7+ flight of stairs', value: ' are 7+ flight of stairs' },
+    { label: ' 1 flight of stair', value: '  1 flight of stair' },
+    { label: ' 2 flight of stairs', value: '  2 flight of stairs' },
+    { label: ' 3 flight of stairs', value: '  3 flight of stairs' },
+    { label: ' 4 flight of stairs', value: '  4 flight of stairs' },
+    { label: ' 5 flight of stairs', value: '  5 flight of stairs' },
+    { label: ' 6 flight of stairs', value: '  6 flight of stairs' },
+    { label: ' 7+ flight of stairs', value: '  7+ flight of stairs' },
   ];
 
   const helpOptions = [
@@ -45,7 +45,7 @@ const SectionVehicl = () => {
     },
     {
       label: 'Driver helping + 2 helper',
-      value: 'Driver helping + 2 helper',
+      value: 'Driver helping + 2 helpers',
       imgSrc: 'driverhelp2.svg',
     },
   ];
@@ -262,7 +262,6 @@ const SectionVehicl = () => {
       'EmailTextNeed',
       JSON.stringify(EmailTextNeedactiveOption)
     );
-    sessionStorage.setItem('distanceInMiles', JSON.stringify(distanceInMiles));
 
     navigate('/instantmain', { state: { distanceInMiles } });
   };
@@ -303,73 +302,6 @@ const SectionVehicl = () => {
       sessionStorage.setItem(key, updatedDeliveryValues[i]);
     });
   };
-  // // Calculate the total amount count
-  // const totalDistance = parseFloat(sessionStorage.getItem('totalDistance')); // Parse to float since sessionStorage returns string
-
-  // console.log('Total Distance in Miles:', totalDistance);
-  // console.log('Vechicle:', selectedVehicle);
-  // console.log('Drop Off Stairs:', selectedStairsValue);
-  // console.log('Pick Up Stairs:', selectedValue);
-  // console.log('Delivery Help:', selectedDeliveryHelp);
-  // console.log('Time Per Hour:', selectedVehicleDuration);
-
-  // // Rates per mile and per stair
-  // const mileCharge = 1.15;
-  // const stairChargePerMan = 5.75;
-
-  // // Rates per hour for each vehicle and delivery help combination
-  // const vehicleRates = {
-  //   'small-van': {
-  //     'No Help': 30,
-  //     'Driver Help': 30,
-  //     'Driver + Helper': 60,
-  //     'Driver + 2 Helpers': 130,
-  //   },
-  //   'medium-van': {
-  //     'No Help': 33,
-  //     'Driver Help': 33,
-  //     'Driver + Helper': 60,
-  //     'Driver + 2 Helpers': 150,
-  //   },
-  //   'large-van': {
-  //     'No Help': 35,
-  //     'Driver Help': 35,
-  //     'Driver + Helper': 60,
-  //     'Driver + 2 Helpers': 180,
-  //   },
-  //   'giant-van': {
-  //     'No Help': 65,
-  //     'Driver Help': 70,
-  //     'Driver + Helper': 75,
-  //     'Driver + 2 Helpers': 220,
-  //   },
-  // };
-
-  // // Calculate the total amount
-  // function calculateTotalAmount(
-  //   vehicle,
-  //   deliveryHelp,
-  //   perHour,
-  //   distance,
-  //   stairs
-  // ) {
-  //   const perHourRate = vehicleRates[vehicle][deliveryHelp];
-  //   const totalHourlyCharge = perHour * perHourRate;
-  //   const totalMileCharge = distance * mileCharge;
-  //   const totalStairCharge = stairs * stairChargePerMan;
-  //   return totalHourlyCharge + totalMileCharge + totalStairCharge;
-  // }
-
-  // const totalAmount = calculateTotalAmount(
-  //   selectedVehicle,
-  //   selectedDeliveryHelp,
-  //   selectedVehicleDuration,
-  //   totalDistance,
-  //   selectedStairsValue
-  // );
-  // console.log('Total Amount:', totalAmount);
-
-  // // Total Amount Count ENd
 
   const { distanceInMiles, pickupLocation, deliveryLocation } =
     location.state || {
@@ -379,12 +311,6 @@ const SectionVehicl = () => {
     };
   console.log('Totoal Distance', distanceInMiles);
 
-  // Define other options and states here
-
-  // Rates per mile and per stair
-  
-
-  // Update inputFieldsData with pickupLocation data
   const updatedInputFieldsData = inputFieldsData.map(field => {
     switch (field.key) {
       case 'Postcode':
@@ -398,7 +324,6 @@ const SectionVehicl = () => {
     }
   });
 
-  // Update inputFieldsDeliveryData with deliveryLocation data
   const updatedInputFieldsDeliveryData = inputFieldsDeliveryData.map(field => {
     switch (field.key) {
       case 'Postcode':
@@ -412,14 +337,11 @@ const SectionVehicl = () => {
     }
   });
 
-  // edit Button Function
   const [isEditMode, setIsEditMode] = useState(false);
 
   const toggleEditMode = () => {
     setIsEditMode(!isEditMode);
   };
-
-  // Second Edit button
 
   const [issecondEditMode, setIssecondEditMode] = useState(false);
 
@@ -427,6 +349,9 @@ const SectionVehicl = () => {
     setIssecondEditMode(!issecondEditMode);
   };
 
+
+
+  // Calculating week end days
   return (
     <>
       <section className='px-4 md:px-8 lg:px-16 xl:px-32 2xl:px-[135px]  overflow-x-hidden '>
@@ -596,7 +521,7 @@ const SectionVehicl = () => {
               >
                 {stairsOptions.map(option => (
                   <option key={option.value} value={option.value}>
-                    {option.label}
+                    are {option.label}
                   </option>
                 ))}
               </select>
@@ -647,7 +572,7 @@ const SectionVehicl = () => {
               >
                 {stairsOptions.map(option => (
                   <option key={option.value} value={option.value}>
-                    {option.label}
+                    are {option.label}
                   </option>
                 ))}
               </select>
@@ -801,6 +726,7 @@ const SectionVehicl = () => {
               onChange={handleDateChange}
             />
           </div>
+
           <div className='bg-[#ECECEC] flex justify-around items-center text-center px-3 py-2 rounded-lg'>
             <input
               type='time'
