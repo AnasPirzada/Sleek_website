@@ -187,13 +187,13 @@ const SectionVehicl = () => {
     }
   };
 
-  const handleDateChange = event => {
-    setSelectedDate(event.target.value);
-  };
+  // const handleDateChange = event => {
+  //   setSelectedDate(event.target.value);
+  // };
 
-  const handleTimeChange = event => {
-    setSelectedTime(event.target.value);
-  };
+  // const handleTimeChange = event => {
+  //   setSelectedTime(event.target.value);
+  // };
 
   const handleStairsChange = event => {
     setSelectedStairsValue(event.target.value);
@@ -252,6 +252,10 @@ const SectionVehicl = () => {
       JSON.stringify(selectedVehicleDuration)
     );
     sessionStorage.setItem('selectedDate', JSON.stringify(selectedDate));
+    sessionStorage.setItem(
+      'SelectedWeekDate',
+      JSON.stringify(SelectedWeekDate)
+    );
     sessionStorage.setItem('selectedTime', JSON.stringify(selectedTime));
     sessionStorage.setItem('Description', JSON.stringify(Description));
 
@@ -349,9 +353,28 @@ const SectionVehicl = () => {
     setIssecondEditMode(!issecondEditMode);
   };
 
+  const handleTimeChange = event => {
+    setSelectedTime(event.target.value);
+  };
+  const [dayType, setDayType] = useState('');
 
 
-  // Calculating week end days
+  const handleDateChange = event => {
+    const date = new Date(event.target.value);
+    setSelectedDate(event.target.value);
+
+    const day = date.getDay();
+    if (day === 0 || day === 6) {
+      setDayType('Weekend');
+    } else {
+      setDayType('Weekday');
+    }
+  };
+
+  let SelectedWeekDate;
+  SelectedWeekDate = `${dayType}: ${new Date(selectedDate).toLocaleDateString()}`;
+  console.log('SelectedWeekDate', SelectedWeekDate);
+
   return (
     <>
       <section className='px-4 md:px-8 lg:px-16 xl:px-32 2xl:px-[135px]  overflow-x-hidden '>
@@ -717,6 +740,7 @@ const SectionVehicl = () => {
         <div className='pt-5 text-[16px] font-[500]'>
           I'm planning to move on
         </div>
+
         <div className='pt-5 flex gap-3'>
           <div className='bg-[#ECECEC] flex justify-around items-center text-center px-3 py-2 rounded-lg'>
             <input
@@ -725,6 +749,12 @@ const SectionVehicl = () => {
               className='bg-transparent'
               onChange={handleDateChange}
             />
+            {selectedDate && (
+              <h1 className='hidden'>
+                {dayType === 'Weekday' ? 'Weekday' : 'Weekend'}{' '}
+                {new Date(selectedDate).toLocaleDateString()}
+              </h1>
+            )}
           </div>
 
           <div className='bg-[#ECECEC] flex justify-around items-center text-center px-3 py-2 rounded-lg'>
