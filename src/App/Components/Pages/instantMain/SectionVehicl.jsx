@@ -127,9 +127,9 @@ const SectionVehicl = () => {
     getAllSessionStorageValues()
   );
   console.log('health calues', healthValues);
-  const [deliveryValues, setDeliveryValues] = useState(
-    getAllSessionStorageValues()
-  );
+  // const [deliveryValues, setDeliveryValues] = useState(
+  //   getAllSessionStorageValues()
+  // );
 
   const hoursOptions = Array.from({ length: 23 }, (_, i) => ({
     label: `${i + 2} hour(s)`,
@@ -290,22 +290,22 @@ const SectionVehicl = () => {
     });
   };
 
-  const handleDeliveryChange = (index, e) => {
-    const updatedDeliveryValues = [...deliveryValues];
-    updatedDeliveryValues[index] = e.target.value;
-    setDeliveryValues(updatedDeliveryValues);
+  // const handleDeliveryChange = (index, e) => {
+  //   const updatedDeliveryValues = [...deliveryValues];
+  //   updatedDeliveryValues[index] = e.target.value;
+  //   setDeliveryValues(updatedDeliveryValues);
 
-    // Store data in session storage whenever it changes
-    const sessionStorageKeys = [
-      'deliveryPostalCode',
-      'deliveryCity',
-      'deliveryStreetAddress',
-    ];
+  //   // // Store data in session storage whenever it changes
+  //   // const sessionStorageKeys = [
+  //   //   'deliveryPostalCode',
+  //   //   'deliveryCity',
+  //   //   'deliveryStreetAddress',
+  //   // ];
 
-    sessionStorageKeys.forEach((key, i) => {
-      sessionStorage.setItem(key, updatedDeliveryValues[i]);
-    });
-  };
+  //   sessionStorageKeys.forEach((key, i) => {
+  //     sessionStorage.setItem(key, updatedDeliveryValues[i]);
+  //   });
+  // };
 
   const { distanceInMiles, pickupLocation, deliveryLocation } =
     location.state || {
@@ -347,7 +347,7 @@ const SectionVehicl = () => {
     setIsEditMode(!isEditMode);
   };
 
-  const [issecondEditMode, setIssecondEditMode] = useState(false);
+  // const [issecondEditMode, setIssecondEditMode] = useState(false);
 
   const togglesecondEditMode = () => {
     setIssecondEditMode(!issecondEditMode);
@@ -357,7 +357,6 @@ const SectionVehicl = () => {
     setSelectedTime(event.target.value);
   };
   const [dayType, setDayType] = useState('');
-
 
   const handleDateChange = event => {
     const date = new Date(event.target.value);
@@ -372,9 +371,58 @@ const SectionVehicl = () => {
   };
 
   let SelectedWeekDate;
-  SelectedWeekDate = `${dayType}: ${new Date(selectedDate).toLocaleDateString()}`;
+  SelectedWeekDate = `${dayType}: ${new Date(
+    selectedDate
+  ).toLocaleDateString()}`;
   console.log('SelectedWeekDate', SelectedWeekDate);
 
+  const [deliveryValues, setDeliveryValues] = useState([]);
+  const [issecondEditMode, setIsSecondEditMode] = useState(false);
+
+  // Initialize delivery values from session storage
+  useEffect(() => {
+    const storedDeliveryStreetAddress = sessionStorage.getItem(
+      'deliveryStreetAddress'
+    );
+    const storedDeliveryPostalCode =
+      sessionStorage.getItem('deliveryPostalCode');
+    const storedDeliveryCity = sessionStorage.getItem('deliveryCity');
+
+    // Set initial delivery values from session storage
+    setDeliveryValues([
+      storedDeliveryPostalCode || '',
+      storedDeliveryStreetAddress || '',
+      storedDeliveryCity || '',
+    ]);
+  }, []);
+
+  // Function to handle delivery input changes
+  const handleDeliveryChange = (index, e) => {
+    const newDeliveryValues = [...deliveryValues];
+    newDeliveryValues[index] = e.target.value;
+    setDeliveryValues(newDeliveryValues);
+  };
+
+  // Function to handle changes (if needed)
+
+  // Toggle edit mode
+  const toggleSecondEditMode = () => {
+    setIsSecondEditMode(!issecondEditMode);
+  };
+
+  const [estimatedTime, setEstimatedTime] = useState('');
+
+  useEffect(() => {
+    const storedEstimatedTime = sessionStorage.getItem('estimatedTime');
+    console.log('storedEstimatedTime', storedEstimatedTime);
+    if (storedEstimatedTime) {
+      setEstimatedTime(storedEstimatedTime);
+    }
+  }, []);
+
+  console.log('selectedVehicleDuration', selectedVehicleDuration);
+  let TotalTime;
+  TotalTime = estimatedTime + selectedVehicleDuration;
   return (
     <>
       <section className='px-4 md:px-8 lg:px-16 xl:px-32 2xl:px-[135px]  overflow-x-hidden '>
@@ -413,7 +461,6 @@ const SectionVehicl = () => {
             lifting.
           </p>
         </div>
-
         <div className=' pt-4 md:pt-6 lg:pt-8 xl:pt-[34px] grid gap-2 sm:gap-6 md:gap-6 lg:gap-6 xl:gap-6 2xl:gap-6 grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-center'>
           {vehicleOptions.map((option, index) => (
             <div
@@ -574,7 +621,8 @@ const SectionVehicl = () => {
                   disabled={!issecondEditMode}
                   name={inputh.key}
                   placeholder={inputh.placeholder}
-                  value={deliveryValues[index]} // Corrected variable name here
+                  // value={deliveryValues[index]} // Corrected variable name here
+                  value={deliveryValues[index]}
                   onChange={e => {
                     handleDeliveryChange(index, e);
                     handleChange(e);
@@ -666,7 +714,7 @@ const SectionVehicl = () => {
               className='shrink-0 max-w-[24px]'
             />
             <p className='font-medium text-sm leading-[19px] whitespace-nowrap'>
-              Travel time: 9 hours, 5 minutes
+              Travel time: {estimatedTime}
             </p>
           </div>
           <div className='flex items-center gap-2 p-2 flex-wrap md:flex-nowrap '>
@@ -686,7 +734,7 @@ const SectionVehicl = () => {
               className='shrink-0 max-w-[24px]'
             />
             <p className='font-medium text-sm leading-[19px] whitespace-nowrap'>
-              10 hours, 35 minutes
+              {TotalTime}
             </p>
           </div>
         </div>
