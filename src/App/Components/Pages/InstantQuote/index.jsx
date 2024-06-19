@@ -227,6 +227,7 @@ import { useNavigate } from 'react-router';
 const Index = () => {
   const navigate = useNavigate();
 
+  const [SelectedWeekDateValue, setSelectedWeekDate] = useState('');
   const [selectedValue, setSelectedValue] = useState('');
   const [selectedStairsValue, setSelectedStairsValue] = useState('');
   const [selectedDate, setSelectedDate] = useState('');
@@ -266,6 +267,8 @@ const Index = () => {
 
   useEffect(() => {
     // Parse session storage values
+    const SelectedWeekDate =
+      JSON.parse(sessionStorage.getItem('SelectedWeekDate')) || '';
     const storedSelectedValue =
       JSON.parse(sessionStorage.getItem('PICKUPSTAIRS')) || '';
     const DeliverySTAIRS =
@@ -281,6 +284,7 @@ const Index = () => {
     const storedSelectedVehicleDuration =
       JSON.parse(sessionStorage.getItem('selectedVehicleDuration')) || '';
 
+    setSelectedWeekDate(SelectedWeekDate);
     setSelectedValue(storedSelectedValue);
     setSelectedStairsValue(DeliverySTAIRS);
     setSelectedDate(storedSelectedDate);
@@ -336,8 +340,7 @@ const Index = () => {
   const DropOffAmount = DropOff * 5.75;
   const PickupAmount = Pickup * 5.75;
 
-
-  console.log("abcs",DropOffAmount,PickupAmount);
+  console.log('abcs', DropOffAmount, PickupAmount);
   sessionStorage.setItem('PickupAmount', PickupAmount);
   sessionStorage.setItem('DropOffAmount', DropOffAmount);
 
@@ -375,9 +378,8 @@ const Index = () => {
     console.log('Driver', helpersvalue);
   }
 
-  const totalFlightsOfStairs = DropOff + Pickup;
-
-
+  const totalFlightsOfStairs = PickupAmount + DropOffAmount;
+  console.log('totalFlightsOfStairs', totalFlightsOfStairs);
   // console.log("totoal stairs",totalFlightsOfStairs);
   // const stairChargePerFlight = 5.75;
   // const costPerPerson =
@@ -390,31 +392,108 @@ const Index = () => {
   console.log('Vehicle:', Allvehicle);
   console.log('Per Hour', perHourRate);
 
+  let DayValue;
+  let finalResult;
+
+  DayValue = SelectedWeekDateValue.split(' ');
+  console.log('dfa', DayValue);
+
+  if (DayValue[0] === 'Weekday') {
+    finalResult = true;
+    console.log('46889489:', finalResult);
+  } else if (DayValue[0] === 'Weekend') {
+    finalResult = false;
+    console.log('46889489:', finalResult);
+  } else {
+    finalResult = DayValue[0];
+    console.log('46889489:', finalResult);
+  }
+
+  // Final log statement outside the condition
+  console.log('FinalResult=', finalResult);
+
+  // To verify the value of DayValue after the condition checks
+  console.log('SelectedWeekDateValue:', SelectedWeekDateValue);
+
+  // let Men = 0;
+  // if (Allvehicle === 'small-van') {
+  //   NOvalue = 0;
+  //   Drivervalue = 30 * perHourRate;
+  //   helpervalue = 60 * perHourRate;
+  //   helpersvalue = 130 * perHourRate;
+  //   Men = Drivervalue;
+  // } else if (Allvehicle === 'medium-van') {
+  //   NOvalue = 0;
+  //   Drivervalue = 33 * perHourRate;
+  //   helpervalue = 60 * perHourRate;
+  //   helpersvalue = 150 * perHourRate;
+  //   Men = Drivervalue;
+  // } else if (Allvehicle === 'large-van') {
+  //   NOvalue = 0;
+  //   Drivervalue = 35 * perHourRate;
+  //   helpervalue = 60 * perHourRate;
+  //   helpersvalue = 180 * perHourRate;
+  //   Men = Drivervalue;
+  // } else if (Allvehicle === 'giant-van') {
+  //   NOvalue = 0;
+  //   Drivervalue = 70 * perHourRate;
+  //   helpervalue = 75 * perHourRate;
+  //   helpersvalue = 220 * perHourRate;
+  //   Men = Drivervalue;
+  // }
+
+  // console.log('smalDrivervalue:', Drivervalue);
+  // console.log('smalhelpervalue:', helpervalue);
+  // console.log('smalhelpersvalue:', helpersvalue);
+
+  // let TotalAmount;
+  // const menValues = {
+  //   NOvalue: NOvalue,
+  //   Drivervalue: Drivervalue,
+  //   helpervalue: helpervalue,
+  //   helpersvalue: helpersvalue,
+  // };
+  // const vehicleTypes = ['small-van', 'medium-van', 'large-van', 'giant-van'];
+  // const menKey = Object.keys(menValues).find(key => menValues[key] === Men);
+
+  // if (vehicleTypes.includes(Allvehicle) && menKey) {
+  //   TotalAmount = menValues[menKey] + 5.75 + totalFlightsOfStairs + totalRate;
+  // } else {
+  //   console.log('Hello');
+  // }
+
+  // Final log statement outside the condition
+  console.log('FinalResult=', finalResult);
+
+  // To verify the value of DayValue after the condition checks
+
   let Men = 0;
+  let weekendMultiplier = 1.5; // Example multiplier for weekend rates
+
   if (Allvehicle === 'small-van') {
     NOvalue = 0;
     Drivervalue = 30 * perHourRate;
     helpervalue = 60 * perHourRate;
     helpersvalue = 130 * perHourRate;
-    Men = Drivervalue; // Setting Men to Drivervalue for the example
+    Men = Drivervalue;
   } else if (Allvehicle === 'medium-van') {
     NOvalue = 0;
     Drivervalue = 33 * perHourRate;
     helpervalue = 60 * perHourRate;
     helpersvalue = 150 * perHourRate;
-    Men = Drivervalue; // Setting Men to Drivervalue for the example
+    Men = Drivervalue;
   } else if (Allvehicle === 'large-van') {
     NOvalue = 0;
     Drivervalue = 35 * perHourRate;
     helpervalue = 60 * perHourRate;
     helpersvalue = 180 * perHourRate;
-    Men = Drivervalue; // Setting Men to Drivervalue for the example
+    Men = Drivervalue;
   } else if (Allvehicle === 'giant-van') {
     NOvalue = 0;
     Drivervalue = 70 * perHourRate;
     helpervalue = 75 * perHourRate;
     helpersvalue = 220 * perHourRate;
-    Men = Drivervalue; // Setting Men to Drivervalue for the example
+    Men = Drivervalue;
   }
 
   console.log('smalDrivervalue:', Drivervalue);
@@ -428,17 +507,26 @@ const Index = () => {
     helpervalue: helpervalue,
     helpersvalue: helpersvalue,
   };
-
   const vehicleTypes = ['small-van', 'medium-van', 'large-van', 'giant-van'];
-
-  // Find the key that matches the value of Men
   const menKey = Object.keys(menValues).find(key => menValues[key] === Men);
 
+  const isWeekend = day => ['Saturday', 'Sunday'].includes(day);
+
   if (vehicleTypes.includes(Allvehicle) && menKey) {
-    TotalAmount = menValues[menKey] + 5.75 + totalFlightsOfStairs;
+    if (isWeekend(finalResult)) {
+      TotalAmount =
+        menValues[menKey] * weekendMultiplier +
+        5.75 +
+        totalFlightsOfStairs +
+        totalRate;
+    } else {
+      TotalAmount = menValues[menKey] + 5.75 + totalFlightsOfStairs + totalRate;
+    }
   } else {
     console.log('Hello');
   }
+
+  console.log('TotalAmount:', TotalAmount);
 
   // For debugging
   console.log('Allvehicle:', Allvehicle);
@@ -446,6 +534,7 @@ const Index = () => {
   console.log('TotalAmount:', TotalAmount);
   sessionStorage.setItem('TotalAmount', TotalAmount);
   sessionStorage.setItem('totalRate', totalRate);
+  sessionStorage.setItem('DrivervalueCharges', Drivervalue);
 
   useEffect(() => {
     window.scrollTo(0, 0);
