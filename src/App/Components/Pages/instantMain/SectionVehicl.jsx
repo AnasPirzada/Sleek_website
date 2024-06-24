@@ -11,10 +11,10 @@ const SectionVehicl = () => {
   }, []);
 
   const vehicleOptions = [
-    { label: 'Small Van', value: 'small-van', imgSrc: 'smallVan.svg' },
-    { label: 'Medium Van', value: 'medium-van', imgSrc: 'mediumVan.svg' },
-    { label: 'Large Van', value: 'large-van', imgSrc: 'largeVan.svg' },
-    { label: 'Luton Van', value: 'giant-van', imgSrc: 'GiantVan.svg' },
+    { label: 'Small Van', value: 'small-van', imgSrc: 'SMALL.png' },
+    { label: 'Medium Van', value: 'medium-van', imgSrc: 'MEDIUM.png' },
+    { label: 'Large Van', value: 'large-van', imgSrc: 'LARGE VAN.png' },
+    { label: 'Luton Van', value: 'giant-van', imgSrc: 'LUTON.png' },
   ];
 
   const stairsOptions = [
@@ -466,7 +466,7 @@ const SectionVehicl = () => {
             <div
               key={index}
               onClick={() => handleVehicleClick(option.value)}
-              className={`cursor-pointer border flex flex-col md:h-full xl:h-[200px] lg:h-full sm:h-full 2xl:h-[200px] justify-center text-center items-center rounded-xl ${
+              className={`cursor-pointer border flex flex-col md:h-full xl:h-[250px] lg:h-full sm:h-full 2xl:h-[250px] justify-center text-center items-center rounded-xl ${
                 selectedVehicle === option.value
                   ? 'border-[#E97B08] bg-white'
                   : 'bg-[#ECECEC]'
@@ -570,7 +570,7 @@ const SectionVehicl = () => {
                   disabled={!isEditMode}
                   name={inputh.key}
                   placeholder={inputh.placeholder}
-                  value={healthValues[index]}
+                  value={healthValueshealthValues[index]}
                   onChange={e => {
                     handleHealthChange(index, e);
                     handleChange(e);
@@ -717,7 +717,7 @@ const SectionVehicl = () => {
               Travel time: {estimatedTime}
             </p>
           </div>
-          <div className='flex items-center gap-2 p-2 flex-wrap md:flex-nowrap '>
+          {/* <div className='flex items-center gap-2 p-2 flex-wrap md:flex-nowrap '>
             <p className='text-sm whitespace-nowrap'>
               Loading and unloading time:
             </p>
@@ -736,7 +736,7 @@ const SectionVehicl = () => {
             <p className='font-medium text-sm leading-[19px] whitespace-nowrap'>
               {TotalTime}
             </p>
-          </div>
+          </div> */}
         </div>
 
         <div className='pt-[16px]'>

@@ -2,6 +2,7 @@ import emailjs from 'emailjs-com';
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import Navbar from '../../Narbar/index.jsx';
+
 const Price = () => {
   const [activeDiv, setActiveDiv] = useState(null);
   const handleClick = id => {
@@ -13,14 +14,22 @@ const Price = () => {
   }, []);
 
   const [activeOptionYouHaveLIFTS, setSelectedValue] = useState('');
+  const [Name, setSelectedName] = useState('');
+  const [Phone, setSelectedPhone] = useState('');
+  const [Emailofuser, setSelectedEmailofuser] = useState('');
   const [selectedVehicleDuration, setSelectedVehicleDurationValue] =
     useState('');
   const [totalDistance, setSelectedSelectedtotalDistance] = useState('');
   const [distanceInMiles, setSelecteddistanceInMilesValue] = useState('');
   const [totalRatepermile, setSelectedSelectedtotalRatepermile] = useState('');
+  const [Description, setSelectedSelectedDescription] = useState('');
   const [PickupAmount, setSelectedPickupAmount] = useState('');
   const [deliveryValues, setSelecteddeliveryValues] = useState('');
   const [DropOffAmount, setSelectedDropOffAmount] = useState('');
+  const [pickupStreetAddress, setssavedpickupStreetAddress] = useState('');
+  const [deliveryStreetAddress, setssaveddeliveryStreetAddress] = useState('');
+  const [selectedDate, setssavedselectedDate] = useState('');
+  const [VehicleDuration, setssavedselectedVehicleDuration] = useState('');
 
   const [deliveryStairsValue, setDeliveryStairsValue] = useState(0);
   const [pickupStairsValue, setPickupStairsValue] = useState(0);
@@ -49,6 +58,9 @@ const Price = () => {
     );
     const savedSelectedtotalRatepermile = JSON.parse(
       sessionStorage.getItem('totalRatepermile')
+    );
+    const savedSelectedDescription = JSON.parse(
+      sessionStorage.getItem('Description')
     );
     const savedSelectedPickupAmount = JSON.parse(
       sessionStorage.getItem('PickupAmount')
@@ -79,12 +91,44 @@ const Price = () => {
     const savedDrivervalueCharges = JSON.parse(
       sessionStorage.getItem('DrivervalueCharges')
     );
+    const savedEmailofuser = JSON.parse(sessionStorage.getItem('Email'));
+    const savedName = JSON.parse(sessionStorage.getItem('Name'));
+    const savedPhone = JSON.parse(sessionStorage.getItem('Phone'));
+    const savedselectedDate = JSON.parse(
+      sessionStorage.getItem('selectedDate')
+    );
+    const savedselectedVehicleDuration = JSON.parse(
+      sessionStorage.getItem('selectedVehicleDuration')
+    );
+    const pickupStreetAddressItem = sessionStorage.getItem(
+      'pickupStreetAddress'
+    );
 
+    const deliveryStreetAddressItem = sessionStorage.getItem(
+      'deliveryStreetAddress'
+    );
+    const saveddeliveryStreetAddress =
+      deliveryStreetAddressItem &&
+      (deliveryStreetAddressItem.trim().startsWith('{') ||
+        deliveryStreetAddressItem.trim().startsWith('['))
+        ? JSON.parse(deliveryStreetAddressItem)
+        : deliveryStreetAddressItem;
+    const savedpickupStreetAddress =
+      pickupStreetAddressItem &&
+      (pickupStreetAddressItem.trim().startsWith('{') ||
+        pickupStreetAddressItem.trim().startsWith('['))
+        ? JSON.parse(pickupStreetAddressItem)
+        : pickupStreetAddressItem;
+
+    setSelectedEmailofuser(savedEmailofuser);
+    setSelectedName(savedName);
+    setSelectedPhone(savedPhone);
     setSelectedValue(savedActiveOptionYouHaveLIFTS);
     setSelecteddeliveryValues(savedDeliveryValues);
     setSelectedVehicleDurationValue(savedSelectedVehicleDuration);
     setSelectedSelectedtotalDistance(savedSelectedtotalDistance);
     setSelectedSelectedtotalRatepermile(savedSelectedtotalRatepermile);
+    setSelectedSelectedDescription(savedSelectedDescription);
     setSelectedPickupAmount(savedSelectedPickupAmount);
     setSelecteddeliveryValues(savedSelecteddeliveryValues);
     setSelectedDropOffAmount(savedSelectedDropOffAmount);
@@ -94,7 +138,12 @@ const Price = () => {
     setVehicle(savedSelectedVehicle);
     setsTotalAmount(savedTotalAmount);
     setssavedDrivervalueCharges(savedDrivervalueCharges);
+    setssavedpickupStreetAddress(savedpickupStreetAddress);
+    setssaveddeliveryStreetAddress(saveddeliveryStreetAddress);
+    setssavedselectedDate(savedselectedDate);
+    setssavedselectedVehicleDuration(savedselectedVehicleDuration);
   }, []);
+  console.log('Pick Up Stairs', pickupStreetAddress);
   console.log('Pick Up Stairs', pickupStairsValue);
   console.log('Devlivery Stairs', deliveryStairsValue);
   console.log('deliveryValues', selecteddeliveryValues);
@@ -104,17 +153,12 @@ const Price = () => {
   depositAmount = 0.1 * TotalAmount;
 
   // TotalDespositedAmount=TotalAmount-depositAmount
-  const [activeOptionPaymentMethod, setActivePaymentMethod] = useState(null);
 
-  const handleOptionPaymentMethod = method => {
-    setActivePaymentMethod(method);
-    console.log(`Selected payment method: ${method}`);
-  };
   // Getting Click result
   // Seeting Email Sending
   const [recipientEmail, setRecipientEmail] = useState('');
 
-  emailjs.init('yx1PsFh4noFbGOEmj');
+  emailjs.init('XmwW73jGOAYMy6mu8');
 
   useEffect(() => {
     // Fetch email from sessionStorage and update state if necessary
@@ -131,7 +175,7 @@ const Price = () => {
       message: emailContent,
     };
 
-    emailjs.send('service_cm4t99h', 'template_5y4f81g', templateParams).then(
+    emailjs.send('service_yae4ill', 'template_qf31tb8', templateParams).then(
       response => {
         console.log('SUCCESS!', response.status, response.text);
         alert('Email sent successfully!');
@@ -143,11 +187,72 @@ const Price = () => {
     );
   };
   const formatEmailContent = () => {
+    let vanDetails = '';
+
+    switch (selectedVehicleValue) {
+      case 'small-van':
+        vanDetails = `
+        Small van NOTE Any additional minutes after the booked hours will be charged at £22.50 per half an hour and should be paid by the customer directly to the driver. Any unused minutes are non-refundable
+  
+        Collections and deliveries inside the congestion zone will be charged at £15.00
+        If parking fees are involved, you must pay them yourself or pay their value in cash or by bank transfer at the conclusion of the assignment.
+        If you have any questions or issues, please feel free to contact us on any of the numbers on our website or through the contact form.
+        You can also contact our support line at 07462 877455 , 07455 911888 , 0203 4176141`;
+        break;
+      case 'medium-van':
+        vanDetails = `
+        Medium van NOTE Any additional minutes after the booked hours will be charged at £25.50 per half an hour and should be paid by the customer directly to the driver. Any unused minutes are non-refundable
+  
+        Collections and deliveries inside the congestion zone will be charged at £15.00
+        If parking fees are involved, you must pay them yourself or pay their value in cash or by bank transfer at the conclusion of the assignment.
+        If you have any questions or issues, please feel free to contact us on any of the numbers on our website or through the contact form.
+        You can also contact our support line at 07462 877455 , 07455 911888 , 0203 4176141`;
+        break;
+      case 'large-van':
+        vanDetails = `
+        Large van NOTE Any additional minutes after the booked hours will be charged at £40.50 per half an hour and should be paid by the customer directly to the driver. Any unused minutes are non-refundable
+  
+        Collections and deliveries inside the congestion zone will be charged at £15.00
+        If parking fees are involved, you must pay them yourself or pay their value in cash or by bank transfer at the conclusion of the assignment.
+        If you have any questions or issues, please feel free to contact us on any of the numbers on our website or through the contact form.
+        You can also contact our support line at 07462 877455 , 07455 911888 , 0203 4176141`;
+        break;
+      case 'giant-van':
+        vanDetails = `
+        Luton van NOTE Any additional minutes after the booked hours will be charged at £42.50 per half an hour and should be paid by the customer directly to the driver. Any unused minutes are non-refundable
+  
+        Collections and deliveries inside the congestion zone will be charged at £15.00
+        If parking fees are involved, you must pay them yourself or pay their value in cash or by bank transfer at the conclusion of the assignment.
+        If you have any questions or issues, please feel free to contact us on any of the numbers on our website or through the contact form.
+        You can also contact our support line at 07462 877455 , 07455 911888 , 0203 4176141`;
+        break;
+      default:
+        vanDetails = '';
+        break;
+    }
     return `
     Hello,
   
     You got a new message from the Createex team:
   
+    **Contact & Billing Info:**
+    - Name: ${Name}
+    - Email: ${Emailofuser}
+    - Phone: ${Phone}
+
+    **--------------------------------------------------**
+
+
+    **Moving details**
+    - PICKUP LOCATION: ${pickupStreetAddress}
+    - DROP-OFF LOCATION: ${deliveryStreetAddress}
+    - PICKUP DATE, TIME: ${selectedDate} ${VehicleDuration}
+    - PICKUP STAIRS: ${pickupStairsValue}
+    - DROP-OFF STAIRS: ${deliveryStairsValue}
+    - SELECTED VAN: ${selectedVehicleValue}
+    - Van Details :  ${vanDetails}
+    **--------------------------------------------------**
+
     **Price Breakdown:**
     - Lift Availability: ${activeOptionYouHaveLIFTS}
     - Booking Time: ${selectedVehicleDuration}
@@ -160,6 +265,7 @@ const Price = () => {
     - Drop-off-stairs: £${DropOffAmount}
     - Pickup-stairs: £${PickupAmount}
     - Helping Loading & Unloading: ${deliveryValues}
+    - Additional Note ${Description}
   
     **ANY ADDITIONAL TIME WILL BE CHARGED AT £42.50 Per Half Hour**
   
@@ -170,192 +276,336 @@ const Price = () => {
     Createex team
   `;
   };
+  const [activeOptionPaymentMethod, setActivePaymentMethod] = useState(null);
+
+  const handleOptionPaymentMethod = method => {
+    setActivePaymentMethod(method);
+    console.log(`Selected payment method: ${method}`);
+  };
+  // // Stripe payment
+  // if (method == 'Stripe') {
+  //   const handlePayment = () => {
+  //     axios
+  //       .post('http://localhost:3000/stripe/charge', {
+  //         amount: TotalAmount * 100, // Stripe expects the amount in cents
+  //         currency: 'usd',
+  //         source: 'tok_visa',
+  //       })
+  //       .then(response => {
+  //         console.log('Payment successful:', response.data);
+  //         alert('Payment successful!');
+  //         sendEmail();
+  //       })
+  //       .catch(error => {
+  //         console.error('Payment failed:', error);
+  //         alert('Payment failed. Please try again.');
+  //       });
+  //   };
+  // }
 
   return (
     <>
       <Navbar />
 
-      <section className='px-5 sm:px-8 md:px-16 lg:px-24 xl:px-40 2xl:px-[280px] border border-red-500'>
-        <div className='pt-10 sm:pt-12 md:pt-16 lg:pt-20 xl:pt-24 2xl:pt-[120px]'>
-          <h1 className='font-semibold text-2xl sm:text-3xl md:text-4xl lg:text-[36px] xl:text-[40px] leading-tight text-[#E97B08] text-center'>
-            Price Breakdown
-          </h1>
-        </div>
-        <div className='mt-5 sm:mt-12 md:mt-16 lg:mt-20 xl:mt-24 2xl:mt-[80px] bg-[#F5F5F5] rounded-xl px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 flex flex-col justify-between'>
-          <div className='rounded-xl py-6 sm:py-8 md:py-10'>
-            <div className='justify-between flex'>
-              <p className='text-base sm:text-lg md:text-xl lg:text-2xl font-normal text-[#272828]'>
-                Lift Availability
-              </p>
-              <p className='text-base sm:text-lg md:text-xl lg:text-2xl text-[#181919] font-medium'>
-                {activeOptionYouHaveLIFTS}
-              </p>
+      <section className='px-5 '>
+        <div className=''>
+          <div className='flex flex-col'>
+            <div>
+              <div className='pt-10 sm:pt-12 md:pt-16 lg:pt-20 xl:pt-24 2xl:pt-[120px]'>
+                <h1 className='font-semibold text-2xl sm:text-3xl md:text-4xl lg:text-[36px] xl:text-[40px] leading-tight text-[#E97B08] text-center'>
+                  Contact & Billing Info
+                </h1>
+              </div>
+              <div className='mt-5 sm:mt-12 md:mt-16 lg:mt-20 xl:mt-24 2xl:mt-[80px] bg-[#F5F5F5] rounded-xl p-4 sm:p-6 md:p-8 lg:p-10 xl:p-12 flex flex-col justify-between'>
+                <div className='rounded-xl py-6 sm:py-8 md:py-10'>
+                  <div className='flex justify-between'>
+                    <p className='text-base sm:text-lg md:text-xl lg:text-2xl font-normal text-[#272828]'>
+                      Name
+                    </p>
+                    <p className='text-base sm:text-lg md:text-xl lg:text-2xl text-[#181919] font-medium'>
+                      {Name}
+                    </p>
+                  </div>
+                  <hr className='border-black w-full mt-6 sm:mt-8 md:mt-10' />
+                </div>
+                <div className='rounded-xl py-6 sm:py-8 md:py-10'>
+                  <div className='flex justify-between'>
+                    <p className='text-base sm:text-lg md:text-xl lg:text-2xl font-normal text-[#272828]'>
+                      Email
+                    </p>
+                    <p className='text-base sm:text-lg md:text-xl lg:text-2xl text-[#181919] font-medium'>
+                      {Emailofuser}
+                    </p>
+                  </div>
+                  <hr className='border-black w-full mt-6 sm:mt-8 md:mt-10' />
+                </div>
+                <div className='rounded-xl py-6 sm:py-8 md:py-10'>
+                  <div className='flex justify-between'>
+                    <p className='text-base sm:text-lg md:text-xl lg:text-2xl font-normal text-[#272828]'>
+                      Phone
+                    </p>
+                    <p className='text-base sm:text-lg md:text-xl lg:text-2xl text-[#181919] font-medium'>
+                      {Phone}
+                    </p>
+                  </div>
+                  <hr className='border-black w-full mt-6 sm:mt-8 md:mt-10' />
+                </div>
+              </div>
+            </div>{' '}
+            <div>
+              <div className='pt-10 sm:pt-12 md:pt-16 lg:pt-20 xl:pt-24 2xl:pt-[120px]'>
+                <h1 className='font-semibold text-2xl sm:text-3xl md:text-4xl lg:text-[36px] xl:text-[40px] leading-tight text-[#E97B08] text-center'>
+                  Moving details{' '}
+                </h1>
+              </div>
+              <div className='mt-5 sm:mt-12 md:mt-16 lg:mt-20 xl:mt-24 2xl:mt-[80px] bg-[#F5F5F5] rounded-xl p-4 sm:p-6 md:p-8 lg:p-10 xl:p-12 flex flex-col justify-between'>
+                <div className='rounded-xl py-6 sm:py-8 md:py-10'>
+                  <div className='flex flex-col  md:flex-row  justify-between'>
+                    <p className='text-lg  font-normal text-[#272828]'>
+                      PICKUP LOCATION
+                    </p>
+                    <p className='text-base  text-[#181919] font-medium'>
+                      {pickupStreetAddress}
+                    </p>
+                  </div>
+                  <hr className='border-black w-full mt-6 sm:mt-8 md:mt-10' />
+                </div>
+                <div className='rounded-xl py-6 sm:py-8 md:py-10'>
+                  <div className='flex flex-col  md:flex-row  justify-between'>
+                    <p className='text-lg  font-normal text-[#272828]'>
+                      DROP-OFF LOCATION
+                    </p>
+                    <p className='text-base text-[#181919] font-medium'>
+                      {deliveryStreetAddress}
+                    </p>
+                  </div>
+                  <hr className='border-black w-full mt-6 sm:mt-8 md:mt-10' />
+                </div>
+                <div className='rounded-xl py-6 sm:py-8 md:py-10'>
+                  <div className='flex justify-between'>
+                    <p className='text-lg  font-normal text-[#272828]'>
+                      PICKUP DATE, TIME
+                    </p>
+                    <p className='text-base text-[#181919] font-medium'>
+                      {selectedDate} {VehicleDuration}
+                    </p>
+                  </div>
+                  <hr className='border-black w-full mt-6 sm:mt-8 md:mt-10' />
+                </div>{' '}
+                <div className='rounded-xl py-6 sm:py-8 md:py-10'>
+                  <div className='flex justify-between'>
+                    <p className='text-lg  font-norma text-[#272828]'>
+                      PICKUP STAIRS
+                    </p>
+                    <p className='text-base text-[#181919] font-medium'>
+                      {pickupStairsValue}
+                    </p>
+                  </div>
+                  <hr className='border-black w-full mt-6 sm:mt-8 md:mt-10' />
+                </div>
+                <div className='rounded-xl py-6 sm:py-8 md:py-10'>
+                  <div className='flex justify-between'>
+                    <p className='text-lg  font-norma text-[#272828]'>
+                      DROP-OFF STAIRS
+                    </p>
+                    <p className='text-base text-[#181919] font-medium'>
+                      {deliveryStairsValue}
+                    </p>
+                  </div>
+                  <hr className='border-black w-full mt-6 sm:mt-8 md:mt-10' />
+                </div>
+                <div className='rounded-xl py-6 sm:py-8 md:py-10'>
+                  <div className='flex justify-between'>
+                    <p className='text-lg  font-norma text-[#272828]'>
+                      SELECTED VAN
+                    </p>
+                    <p className='text-base text-[#181919] font-medium'>
+                      {selectedVehicleValue}
+                    </p>
+                  </div>
+                  <hr className='border-black w-full mt-6 sm:mt-8 md:mt-10' />
+                </div>
+              </div>
             </div>
-            <hr className='border-black w-full mt-6 sm:mt-8 md:mt-10' />
           </div>
-          <div className='rounded-xl'>
-            <div className='justify-between flex'>
-              <p className='text-base sm:text-lg md:text-xl lg:text-2xl font-normal text-[#272828]'>
-                Booking Time
-              </p>
-              <p className='text-base sm:text-lg md:text-xl lg:text-2xl text-[#181919] font-medium'>
-                {selectedVehicleDuration}
-              </p>
+          <div className='pt-10 sm:pt-12 md:pt-16 lg:pt-20 xl:pt-24 2xl:pt-[120px]'>
+            <h1 className='font-semibold text-2xl sm:text-3xl md:text-4xl lg:text-[36px] xl:text-[40px] leading-tight text-[#E97B08] text-center'>
+              Price Breakdown
+            </h1>
+          </div>
+          <div className='mt-5 sm:mt-12 md:mt-16 lg:mt-20 xl:mt-24 2xl:mt-[80px] bg-[#F5F5F5] rounded-xl p-4 sm:p-6 md:p-8 lg:p-10 xl:p-12 flex flex-col justify-between'>
+            <div className='rounded-xl py-6 sm:py-8 md:py-10'>
+              <div className='flex justify-between'>
+                <p className='text-base sm:text-lg md:text-xl lg:text-2xl font-normal text-[#272828]'>
+                  Lift Availability
+                </p>
+                <p className='text-base sm:text-lg md:text-xl lg:text-2xl text-[#181919] font-medium'>
+                  {activeOptionYouHaveLIFTS}
+                </p>
+              </div>
+              <hr className='border-black w-full mt-6 sm:mt-8 md:mt-10' />
             </div>
-            <hr className='border-black w-full mt-6 sm:mt-8 md:mt-10' />
-          </div>
-          <div className='rounded-xl py-6 sm:py-8 md:py-10'>
-            <div className='justify-between flex'>
-              <p className='text-base sm:text-lg md:text-xl lg:text-2xl font-normal text-[#272828]'>
-                Total Distance
-              </p>
-              <p className='text-base sm:text-lg md:text-xl lg:text-2xl text-[#181919] font-medium'>
-                {totalDistance} mile's
-              </p>
+            <div className='rounded-xl py-6 sm:py-8 md:py-10'>
+              <div className='flex justify-between'>
+                <p className='text-base sm:text-lg md:text-xl lg:text-2xl font-normal text-[#272828]'>
+                  Booking Time
+                </p>
+                <p className='text-base sm:text-lg md:text-xl lg:text-2xl text-[#181919] font-medium'>
+                  {selectedVehicleDuration}
+                </p>
+              </div>
+              <hr className='border-black w-full mt-6 sm:mt-8 md:mt-10' />
             </div>
-            <hr className='border-black w-full mt-6 sm:mt-8 md:mt-10' />
-          </div>
-          <div className='rounded-xl'>
-            <div className='justify-between flex'>
-              <p className='text-base sm:text-lg md:text-xl lg:text-2xl font-normal text-[#272828]'>
-                Mileage Charges
-              </p>
-              <p className='text-base sm:text-lg md:text-xl lg:text-2xl text-[#181919] font-medium'>
-                £
-                {!isNaN(parseFloat(totalRatepermile))
-                  ? parseFloat(totalRatepermile).toFixed(1)
-                  : 'Invalid amount'}
-              </p>
+            <div className='rounded-xl py-6 sm:py-8 md:py-10'>
+              <div className='flex justify-between'>
+                <p className='text-base sm:text-lg md:text-xl lg:text-2xl font-normal text-[#272828]'>
+                  Total Distance
+                </p>
+                <p className='text-base sm:text-lg md:text-xl lg:text-2xl text-[#181919] font-medium'>
+                  {totalDistance} miles
+                </p>
+              </div>
+              <hr className='border-black w-full mt-6 sm:mt-8 md:mt-10' />
             </div>
-            <hr className='border-black w-full mt-6 sm:mt-8 md:mt-10' />
-          </div>
-          <div className='rounded-xl py-6 sm:py-8 md:py-10'>
-            <div className='justify-between flex'>
-              <p className='text-base sm:text-lg md:text-xl lg:text-2xl font-normal text-[#272828]'>
-                Drop-off-stairs{' '}
-              </p>
-              <p className='text-base sm:text-lg md:text-xl lg:text-2xl text-[#181919] font-medium'>
-                £{DropOffAmount}
-              </p>
+            <div className='rounded-xl py-6 sm:py-8 md:py-10'>
+              <div className='flex justify-between'>
+                <p className='text-base sm:text-lg md:text-xl lg:text-2xl font-normal text-[#272828]'>
+                  Mileage Charges
+                </p>
+                <p className='text-base sm:text-lg md:text-xl lg:text-2xl text-[#181919] font-medium'>
+                  £
+                  {!isNaN(parseFloat(totalRatepermile))
+                    ? parseFloat(totalRatepermile).toFixed(1)
+                    : 'Invalid amount'}
+                </p>
+              </div>
+              <hr className='border-black w-full mt-6 sm:mt-8 md:mt-10' />
             </div>
-            <hr className='border-black w-full mt-6 sm:mt-8 md:mt-10' />
-          </div>
-          <div className='rounded-xl'>
-            <div className='justify-between flex'>
-              <p className='text-base sm:text-lg md:text-xl lg:text-2xl font-normal text-[#272828]'>
-                Pickup-stairs
-              </p>
-              <p className='text-base sm:text-lg md:text-xl lg:text-2xl text-[#181919] font-medium'>
-                £{PickupAmount}
-              </p>
+            <div className='rounded-xl py-6 sm:py-8 md:py-10'>
+              <div className='flex justify-between'>
+                <p className='text-base sm:text-lg md:text-xl lg:text-2xl font-normal text-[#272828]'>
+                  Drop-off-stairs
+                </p>
+                <p className='text-base sm:text-lg md:text-xl lg:text-2xl text-[#181919] font-medium'>
+                  £{DropOffAmount}
+                </p>
+              </div>
+              <hr className='border-black w-full mt-6 sm:mt-8 md:mt-10' />
             </div>
-            <hr className='border-black w-full mt-6 sm:mt-8 md:mt-10' />
-          </div>
-          <div className='rounded-xl'>
-            <div className='justify-between flex pt-10'>
-              <p className='text-base sm:text-lg md:text-xl lg:text-2xl font-normal text-[#272828]'>
-                Helping Loading & Unloading{' '}
-              </p>
-              <p className='text-base sm:text-lg md:text-xl lg:text-2xl text-[#181919] font-medium'>
-                {deliveryValues}
-              </p>
+            <div className='rounded-xl py-6 sm:py-8 md:py-10'>
+              <div className='flex justify-between'>
+                <p className='text-base sm:text-lg md:text-xl lg:text-2xl font-normal text-[#272828]'>
+                  Pickup-stairs
+                </p>
+                <p className='text-base sm:text-lg md:text-xl lg:text-2xl text-[#181919] font-medium'>
+                  £{PickupAmount}
+                </p>
+              </div>
+              <hr className='border-black w-full mt-6 sm:mt-8 md:mt-10' />
             </div>
-            <hr className='border-black w-full mt-6 sm:mt-8 md:mt-10' />
-          </div>
-          <div className='rounded-xl'>
-            <div className='justify-between flex pt-10'>
-              <p className='text-base sm:text-lg md:text-xl lg:text-2xl font-normal text-[#272828]'>
-                Driver Time Charges
-              </p>
-              <p className='text-base sm:text-lg md:text-xl lg:text-2xl text-[#181919] font-medium'>
-                £{DrivervalueCharges}
-              </p>
+            <div className='rounded-xl py-6 sm:py-8 md:py-10'>
+              <div className='flex justify-between'>
+                <p className='text-base sm:text-lg md:text-xl lg:text-2xl font-normal text-[#272828]'>
+                  Helping Loading & Unloading
+                </p>
+                <p className='text-base sm:text-lg md:text-xl lg:text-2xl text-[#181919] font-medium'>
+                  {deliveryValues}
+                </p>
+              </div>
+              <hr className='border-black w-full mt-6 sm:mt-8 md:mt-10' />
             </div>
-            <hr className='border-black w-full mt-6 sm:mt-8 md:mt-10' />
-          </div>{' '}
-          <div className='rounded-xl'>
-            <div className='justify-between flex pt-10'>
-              <p className='text-base sm:text-lg md:text-xl lg:text-2xl font-normal text-[#272828]'>
-                For Extra Time
-              </p>
-              <p className='text-base sm:text-lg md:text-xl lg:text-2xl text-[#181919] font-medium'>
-                £42.50 Per Half Hour
-              </p>
+            <div className='rounded-xl py-6 sm:py-8 md:py-10'>
+              <div className='flex justify-between'>
+                <p className='text-base sm:text-lg md:text-xl lg:text-2xl font-normal text-[#272828]'>
+                  Driver Time Charges
+                </p>
+                <p className='text-base sm:text-lg md:text-xl lg:text-2xl text-[#181919] font-medium'>
+                  £{DrivervalueCharges}
+                </p>
+              </div>
+              <hr className='border-black w-full mt-6 sm:mt-8 md:mt-10' />
             </div>
-            <hr className='border-black w-full mt-6 sm:mt-8 md:mt-10' />
-          </div>
-          <p className='my-10 text-[#E97B08] text-base'>
-            ANY ADDITIONAL TIME WILL BE CHARGED AT Hour £42.50 Per Half
-          </p>
-          <div className=' flex justify-between pt-10'>
-            <h2 className=' font-semibold text-lg sm:text-2xl'>Total Cost</h2>
-            <p className=' font-medium text-lg sm:text-2xl'>£{TotalAmount}</p>
-          </div>
-          <div className=' flex justify-between py-6'>
-            <h2 className='font-semibold text-lg sm:text-2xl'>
-              To Pay now{' '}
-              <span className=' text-base font-normal leading-[24px]'>
-                (10% deposit)
-              </span>
-            </h2>
-            <p className=' font-medium text-lg sm:text-2xl '>
-              £{depositAmount.toFixed(1)}
+            <div className='rounded-xl py-6 sm:py-8 md:py-10'>
+              <div className='flex justify-between'>
+                <p className='text-base sm:text-lg md:text-xl lg:text-2xl font-normal text-[#272828]'>
+                  Extra Time Charges
+                </p>
+                <p className='text-base sm:text-lg md:text-xl lg:text-2xl text-[#181919] font-medium'>
+                  £42.50 Per Half Hour
+                </p>
+              </div>
+              <hr className='border-black w-full mt-6 sm:mt-8 md:mt-10' />
+            </div>
+            <p className='my-10 text-[#E97B08] text-base'>
+              ANY ADDITIONAL TIME WILL BE CHARGED AT £42.50 Per Half Hour
             </p>
-            {/* <p className=' font-medium text-lg sm:text-2xl'>£{TotalDespositedAmount}</p> */}
-          </div>
-          <div className='my-10'>
-            <p className='text-[#181919] text-[24px] '>
-              Choose the payment method{' '}
-            </p>
-
-            <div className='flex gap-5 pt-6'>
-              <div className='flex gap-3 items-center'>
-                <div
-                  className={`h-[24px] w-[24px] border-2 rounded-full flex justify-center items-center text-center cursor-pointer ${
-                    activeOptionPaymentMethod === 'Stripe'
-                      ? 'border-[#E97B08]'
-                      : 'border-black'
-                  }`}
-                  onClick={() => handleOptionPaymentMethod('Stripe')}
-                >
+            <div className='flex justify-between pt-10'>
+              <h2 className='font-semibold text-lg sm:text-2xl'>Total Cost</h2>
+              <p className='font-medium text-lg sm:text-2xl'>£{TotalAmount}</p>
+            </div>
+            <div className='flex justify-between py-6'>
+              <h2 className='font-semibold text-lg sm:text-2xl'>
+                To Pay Now{' '}
+                <span className='text-base font-normal leading-[24px]'>
+                  (10% deposit)
+                </span>
+              </h2>
+              <p className='font-medium text-lg sm:text-2xl'>
+                £{depositAmount.toFixed(1)}
+              </p>
+            </div>
+            <div className='my-10'>
+              <p className='text-[#181919] text-[24px]'>
+                Choose the payment method
+              </p>
+              <div className='flex gap-5 pt-6'>
+                <div className='flex gap-3 items-center'>
                   <div
-                    className={`h-[16px] w-[16px] rounded-full ${
+                    className={`h-[24px] w-[24px] border-2 rounded-full flex justify-center items-center text-center cursor-pointer ${
                       activeOptionPaymentMethod === 'Stripe'
-                        ? 'bg-[#E97B08]'
-                        : 'bg-white'
+                        ? 'border-[#E97B08]'
+                        : 'border-black'
                     }`}
-                  ></div>
+                    onClick={() => handleOptionPaymentMethod('Stripe')}
+                  >
+                    <div
+                      className={`h-[16px] w-[16px] rounded-full ${
+                        activeOptionPaymentMethod === 'Stripe'
+                          ? 'bg-[#E97B08]'
+                          : 'bg-white'
+                      }`}
+                    ></div>
+                  </div>
+                  <img src='/Strip.svg' alt='Stripe' />
                 </div>
-                <img src='/Strip.svg' alt='Stripe' />
-              </div>
-              <div className='flex gap-3 items-center'>
-                <div
-                  className={`h-[24px] w-[24px] border-2 rounded-full flex justify-center items-center text-center cursor-pointer ${
-                    activeOptionPaymentMethod === 'Paypal'
-                      ? 'border-[#E97B08]'
-                      : 'border-black'
-                  }`}
-                  onClick={() => handleOptionPaymentMethod('Paypal')}
-                >
+                <div className='flex gap-3 items-center'>
                   <div
-                    className={`h-[16px] w-[16px] rounded-full ${
+                    className={`h-[24px] w-[24px] border-2 rounded-full flex justify-center items-center text-center cursor-pointer ${
                       activeOptionPaymentMethod === 'Paypal'
-                        ? 'bg-[#E97B08]'
-                        : 'bg-white'
+                        ? 'border-[#E97B08]'
+                        : 'border-black'
                     }`}
-                  ></div>
+                    onClick={() => handleOptionPaymentMethod('Paypal')}
+                  >
+                    <div
+                      className={`h-[16px] w-[16px] rounded-full ${
+                        activeOptionPaymentMethod === 'Paypal'
+                          ? 'bg-[#E97B08]'
+                          : 'bg-white'
+                      }`}
+                    ></div>
+                  </div>
+                  <img src='/Frame 109.png' alt='Paypal' />
                 </div>
-                <img src='/Frame 109.png' alt='Paypal' />
               </div>
-            </div>
-
-            <div className='text-center my-5'>
-              <button
-                onClick={sendEmail}
-                className='py-2 px-5 rounded-md text-[#FFFFFF] bg-[#E97B08] shadow-lg'
-              >
-                Pay Now
-              </button>
+              <div className='text-center my-5'>
+                <button
+                  onClick={sendEmail}
+                  className='py-2 px-5 rounded-md text-[#FFFFFF] bg-[#E97B08] shadow-lg'
+                >
+                  Pay Now
+                </button>
+              </div>
             </div>
           </div>
         </div>
