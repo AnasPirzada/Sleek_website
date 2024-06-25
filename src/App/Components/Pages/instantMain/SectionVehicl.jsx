@@ -570,7 +570,7 @@ const SectionVehicl = () => {
                   disabled={!isEditMode}
                   name={inputh.key}
                   placeholder={inputh.placeholder}
-                  value={healthValueshealthValues[index]}
+                  value={healthValues[index]}
                   onChange={e => {
                     handleHealthChange(index, e);
                     handleChange(e);

@@ -1,8 +1,8 @@
+import axios from 'axios';
 import emailjs from 'emailjs-com';
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import Navbar from '../../Narbar/index.jsx';
-
 const Price = () => {
   const [activeDiv, setActiveDiv] = useState(null);
   const handleClick = id => {
@@ -158,7 +158,54 @@ const Price = () => {
   // Seeting Email Sending
   const [recipientEmail, setRecipientEmail] = useState('');
 
-  emailjs.init('XmwW73jGOAYMy6mu8');
+  const [activeOptionPaymentMethod, setActivePaymentMethod] = useState(null);
+
+  const handleOptionPaymentMethod = method => {
+    setActivePaymentMethod(method);
+    console.log(`Selected payment method: ${method}`);
+  };
+
+
+
+
+
+  
+  // // Stripe payment
+  const handlePayment = () => {
+    if (activeOptionPaymentMethod === 'Stripe') {
+      const amountInCents = Math.floor(depositAmount * 100);
+
+      axios
+        .post('https://gstaxi.azurewebsites.net/stripe/charge', {
+          amount: amountInCents, // Stripe expects the amount in cents
+          currency: 'usd',
+          source: 'tok_visa', // Replace this with the actual token or source from Stripe
+        })
+        .then(response => {
+          console.log('Payment successful:', response.data);
+          alert('Payment successful!');
+          sendEmail();
+        })
+        .catch(error => {
+          console.error('Payment failed:', error);
+          if (error.response) {
+            console.error('Response data:', error.response.data);
+            console.error('Response status:', error.response.status);
+            console.error('Response headers:', error.response.headers);
+          } else if (error.request) {
+            console.error('Request data:', error.request);
+          } else {
+            console.error('Error message:', error.message);
+          }
+          alert('Payment failed. Please try again.');
+        });
+    } else {
+      alert('Please select a payment method.');
+    }
+  };
+  
+
+  emailjs.init('JwUujF9phxQDsfVdP');
 
   useEffect(() => {
     // Fetch email from sessionStorage and update state if necessary
@@ -167,7 +214,6 @@ const Price = () => {
       setRecipientEmail(savedEmail);
     }
   }, []);
-
   const sendEmail = () => {
     const emailContent = formatEmailContent();
     const templateParams = {
@@ -175,7 +221,7 @@ const Price = () => {
       message: emailContent,
     };
 
-    emailjs.send('service_yae4ill', 'template_qf31tb8', templateParams).then(
+    emailjs.send('service_4qpjihj', 'template_bvn2q5j', templateParams).then(
       response => {
         console.log('SUCCESS!', response.status, response.text);
         alert('Email sent successfully!');
@@ -186,6 +232,7 @@ const Price = () => {
       }
     );
   };
+
   const formatEmailContent = () => {
     let vanDetails = '';
 
@@ -276,32 +323,6 @@ const Price = () => {
     Createex team
   `;
   };
-  const [activeOptionPaymentMethod, setActivePaymentMethod] = useState(null);
-
-  const handleOptionPaymentMethod = method => {
-    setActivePaymentMethod(method);
-    console.log(`Selected payment method: ${method}`);
-  };
-  // // Stripe payment
-  // if (method == 'Stripe') {
-  //   const handlePayment = () => {
-  //     axios
-  //       .post('http://localhost:3000/stripe/charge', {
-  //         amount: TotalAmount * 100, // Stripe expects the amount in cents
-  //         currency: 'usd',
-  //         source: 'tok_visa',
-  //       })
-  //       .then(response => {
-  //         console.log('Payment successful:', response.data);
-  //         alert('Payment successful!');
-  //         sendEmail();
-  //       })
-  //       .catch(error => {
-  //         console.error('Payment failed:', error);
-  //         alert('Payment failed. Please try again.');
-  //       });
-  //   };
-  // }
 
   return (
     <>
@@ -361,10 +382,10 @@ const Price = () => {
               <div className='mt-5 sm:mt-12 md:mt-16 lg:mt-20 xl:mt-24 2xl:mt-[80px] bg-[#F5F5F5] rounded-xl p-4 sm:p-6 md:p-8 lg:p-10 xl:p-12 flex flex-col justify-between'>
                 <div className='rounded-xl py-6 sm:py-8 md:py-10'>
                   <div className='flex flex-col  md:flex-row  justify-between'>
-                    <p className='text-lg  font-normal text-[#272828]'>
+                    <p className='text-base sm:text-lg md:text-xl lg:text-2xl font-normal text-[#272828]'>
                       PICKUP LOCATION
                     </p>
-                    <p className='text-base  text-[#181919] font-medium'>
+                    <p className='text-base sm:text-lg md:text-xl lg:text-xl  text-[#181919] font-medium'>
                       {pickupStreetAddress}
                     </p>
                   </div>
@@ -372,10 +393,10 @@ const Price = () => {
                 </div>
                 <div className='rounded-xl py-6 sm:py-8 md:py-10'>
                   <div className='flex flex-col  md:flex-row  justify-between'>
-                    <p className='text-lg  font-normal text-[#272828]'>
+                    <p className='text-base sm:text-lg md:text-xl lg:text-xl font-normal text-[#272828]'>
                       DROP-OFF LOCATION
                     </p>
-                    <p className='text-base text-[#181919] font-medium'>
+                    <p className='text-base sm:text-lg md:text-xl lg:text-xl text-[#181919] font-medium'>
                       {deliveryStreetAddress}
                     </p>
                   </div>
@@ -383,10 +404,10 @@ const Price = () => {
                 </div>
                 <div className='rounded-xl py-6 sm:py-8 md:py-10'>
                   <div className='flex justify-between'>
-                    <p className='text-lg  font-normal text-[#272828]'>
+                    <p className='text-base sm:text-lg md:text-xl lg:text-2xl font-normal text-[#272828]'>
                       PICKUP DATE, TIME
                     </p>
-                    <p className='text-base text-[#181919] font-medium'>
+                    <p className='text-base sm:text-lg md:text-xl lg:text-xl text-[#181919] font-medium'>
                       {selectedDate} {VehicleDuration}
                     </p>
                   </div>
@@ -394,10 +415,10 @@ const Price = () => {
                 </div>{' '}
                 <div className='rounded-xl py-6 sm:py-8 md:py-10'>
                   <div className='flex justify-between'>
-                    <p className='text-lg  font-norma text-[#272828]'>
+                    <p className='text-base sm:text-lg md:text-xl lg:text-2xl font-normal text-[#272828]'>
                       PICKUP STAIRS
                     </p>
-                    <p className='text-base text-[#181919] font-medium'>
+                    <p className='text-base sm:text-lg md:text-xl lg:text-xl text-[#181919] font-medium'>
                       {pickupStairsValue}
                     </p>
                   </div>
@@ -405,10 +426,10 @@ const Price = () => {
                 </div>
                 <div className='rounded-xl py-6 sm:py-8 md:py-10'>
                   <div className='flex justify-between'>
-                    <p className='text-lg  font-norma text-[#272828]'>
+                    <p className='text-base sm:text-lg md:text-xl lg:text-2xl font-normal text-[#272828]'>
                       DROP-OFF STAIRS
                     </p>
-                    <p className='text-base text-[#181919] font-medium'>
+                    <p className='text-base sm:text-lg md:text-xl lg:text-xl text-[#181919] font-medium'>
                       {deliveryStairsValue}
                     </p>
                   </div>
@@ -416,10 +437,10 @@ const Price = () => {
                 </div>
                 <div className='rounded-xl py-6 sm:py-8 md:py-10'>
                   <div className='flex justify-between'>
-                    <p className='text-lg  font-norma text-[#272828]'>
+                    <p className='text-base sm:text-lg md:text-xl lg:text-2xl font-normal text-[#272828]'>
                       SELECTED VAN
                     </p>
-                    <p className='text-base text-[#181919] font-medium'>
+                    <p className='text-base sm:text-lg md:text-xl lg:text-xl text-[#181919] font-medium'>
                       {selectedVehicleValue}
                     </p>
                   </div>
@@ -600,7 +621,7 @@ const Price = () => {
               </div>
               <div className='text-center my-5'>
                 <button
-                  onClick={sendEmail}
+                  onClick={handlePayment}
                   className='py-2 px-5 rounded-md text-[#FFFFFF] bg-[#E97B08] shadow-lg'
                 >
                   Pay Now
