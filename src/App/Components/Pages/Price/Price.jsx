@@ -165,11 +165,6 @@ const Price = () => {
     console.log(`Selected payment method: ${method}`);
   };
 
-
-
-
-
-  
   // // Stripe payment
   const handlePayment = () => {
     if (activeOptionPaymentMethod === 'Stripe') {
@@ -203,9 +198,8 @@ const Price = () => {
       alert('Please select a payment method.');
     }
   };
-  
 
-  emailjs.init('JwUujF9phxQDsfVdP');
+  emailjs.init('ZIx7xdSk-EHLqBZOd');
 
   useEffect(() => {
     // Fetch email from sessionStorage and update state if necessary
@@ -221,7 +215,7 @@ const Price = () => {
       message: emailContent,
     };
 
-    emailjs.send('service_4qpjihj', 'template_bvn2q5j', templateParams).then(
+    emailjs.send('service_bqv49wd', 'template_owfy6ml', templateParams).then(
       response => {
         console.log('SUCCESS!', response.status, response.text);
         alert('Email sent successfully!');
@@ -314,7 +308,6 @@ const Price = () => {
     - Helping Loading & Unloading: ${deliveryValues}
     - Additional Note ${Description}
   
-    **ANY ADDITIONAL TIME WILL BE CHARGED AT £42.50 Per Half Hour**
   
     **Total Cost: £${TotalAmount}**
     **To Pay now (10% deposit): £${depositAmount.toFixed(1)}**
