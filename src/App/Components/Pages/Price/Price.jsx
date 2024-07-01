@@ -527,7 +527,7 @@ const Price = () => {
             <div className='rounded-xl py-6 sm:py-8 md:py-10'>
               <div className='flex justify-between'>
                 <p className='text-base sm:text-lg md:text-xl lg:text-2xl font-normal text-[#272828]'>
-                  Extra Time Charges
+                any additional Charges
                 </p>
                 <p className='text-base sm:text-lg md:text-xl lg:text-2xl text-[#181919] font-medium'>
                   £42.50 Per Half Hour

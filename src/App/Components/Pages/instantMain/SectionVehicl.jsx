@@ -1,6 +1,6 @@
+import 'flatpickr/dist/themes/material_green.css';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
-
 const SectionVehicl = () => {
   const navigate = useNavigate();
   React.useEffect(() => {
@@ -356,6 +356,8 @@ const SectionVehicl = () => {
   const handleTimeChange = event => {
     setSelectedTime(event.target.value);
   };
+
+  const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
   const [dayType, setDayType] = useState('');
 
   const handleDateChange = event => {
@@ -785,33 +787,41 @@ const SectionVehicl = () => {
           </p>
         </div>
 
-        <div className='pt-5 text-[16px] font-[500]'>
-          I'm planning to move on
-        </div>
-
-        <div className='pt-5 flex gap-3'>
-          <div className='bg-[#ECECEC] flex justify-around items-center text-center px-3 py-2 rounded-lg'>
-            <input
-              type='date'
-              placeholder='Date_Time'
-              className='bg-transparent'
-              onChange={handleDateChange}
-            />
-            {selectedDate && (
-              <h1 className='hidden'>
-                {dayType === 'Weekday' ? 'Weekday' : 'Weekend'}{' '}
-                {new Date(selectedDate).toLocaleDateString()}
-              </h1>
-            )}
+        <div>
+          <div className='pt-5 text-[16px] font-[500]'>
+            moving date and time
           </div>
-
-          <div className='bg-[#ECECEC] flex justify-around items-center text-center px-3 py-2 rounded-lg'>
-            <input
-              type='time'
-              placeholder='Time'
-              onChange={handleTimeChange}
-              className='bg-transparent'
-            />
+          <div className='pt-5 flex gap-3'>
+            <div className='bg-[#ECECEC] flex justify-around items-center text-center px-3 py-2 rounded-lg'>
+              {isSafari ? (
+                <input type='date' placeholder='yyyy-mm-dd' />
+              ) : (
+                <input
+                  type='date'
+                  placeholder='Date_Time'
+                  className='bg-transparent'
+                  onChange={handleDateChange}
+                />
+              )}
+              {selectedDate && (
+                <h1 className='hidden'>
+                  {dayType === 'Weekday' ? 'Weekday' : 'Weekend'}{' '}
+                  {new Date(selectedDate).toLocaleDateString()}
+                </h1>
+              )}
+            </div>
+            <div className='bg-[#ECECEC] flex justify-around items-center text-center px-3 py-2 rounded-lg'>
+              {isSafari ? (
+                <input type='time' placeholder='HH:mm' />
+              ) : (
+                <input
+                  type='time'
+                  placeholder='Time'
+                  className='bg-transparent'
+                  onChange={handleTimeChange}
+                />
+              )}
+            </div>
           </div>
         </div>
 
@@ -854,7 +864,6 @@ const SectionVehicl = () => {
                   id='name'
                   name='name'
                   required
-
                   value={name}
                   onChange={e => handleNameChange(e.target.value)}
                   className='mt-1 p-2 block w-full bg-[#ECECEC] rounded-md shadow-sm focus:outline-none focus:ring-[#E97B08] focus:border-[#E97B08] sm:text-sm'
@@ -863,7 +872,6 @@ const SectionVehicl = () => {
               <div>
                 <label
                   htmlFor='email'
-
                   className='block text-sm font-medium text-gray-700'
                 >
                   Email
@@ -887,7 +895,6 @@ const SectionVehicl = () => {
                 <input
                   type='tel'
                   required
-
                   id='phone'
                   value={phone}
                   onChange={e => handlePhoneChange(e.target.value)}
@@ -946,7 +953,7 @@ const SectionVehicl = () => {
           </div>
         </div>
 
-        <div className='flex text-center justify-center items-center '>
+        <div className='flex text-center justify-center items-center md:my-0 my-5'>
           <button
             onClick={handleGetQuotes}
             className=' rounded-lg bg-[#E97B08] py-3 px-5 text-white font-semibold flex text-center justify-center items-center gap-4'
