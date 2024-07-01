@@ -65,7 +65,7 @@ const SectionVehicl = () => {
     },
     {
       placeholder: '',
-      label: 'City',
+      label: 'DOOR/FLAT NUMBER',
       type: 'text',
       key: 'City',
     },
@@ -85,7 +85,7 @@ const SectionVehicl = () => {
     },
     {
       placeholder: '',
-      label: 'City',
+      label: 'DOOR/FLAT NUMBER',
       type: 'text',
       key: 'City',
     },
@@ -452,8 +452,8 @@ const SectionVehicl = () => {
             pickups/delivery.
           </p>
           <p className='font-normal text-sm md:text-base leading-4 md:leading-5 xl:leading-[19px] text-[#444545] pt-2 md:pt-4 xl:pt-[8px]'>
-            Large Van is perfect for 1 or 2 bedroom flat/house moves with no
-            white goods and heavy furniture.
+            Large Van is perfect for 1 bedroom flat/house moves with no white
+            goods and heavy furniture.
           </p>
           <p className='font-normal text-sm md:text-base leading-4 md:leading-5 xl:leading-[19px] text-[#444545] pt-2 md:pt-4 xl:pt-[8px]'>
             Luton Van suitable for 3 bedroom flat/house with white goods. It’s
@@ -570,7 +570,7 @@ const SectionVehicl = () => {
                   disabled={!isEditMode}
                   name={inputh.key}
                   placeholder={inputh.placeholder}
-                  value={healthValueshealthValues[index]}
+                  value={healthValues[index]}
                   onChange={e => {
                     handleHealthChange(index, e);
                     handleChange(e);
@@ -742,11 +742,11 @@ const SectionVehicl = () => {
         <div className='pt-[16px]'>
           <p className=' font-medium text-base leading-[19px] text-[#444545]'>
             <span className='text-[#E97B08] font-bold text-base'>Note:</span>{' '}
-            the hours you will book the van for will include loading, unloading
-            and travel. So, estimate correctly how much time you need. Even
-            though the driver will stay to finish your job, once you have used
-            up your booked time, you will pay a higher price for the extra time
-            each half hour.
+            The hours you will book the van for will include loading, unloading
+            and travel. So, estimate correctly how much time you will need the
+            van. Even though the driver will stay to finish your job, once you
+            have used up your booked time, you will be charged extra time each
+            half hour.
           </p>
         </div>
 
@@ -853,6 +853,8 @@ const SectionVehicl = () => {
                   type='text'
                   id='name'
                   name='name'
+                  required
+
                   value={name}
                   onChange={e => handleNameChange(e.target.value)}
                   className='mt-1 p-2 block w-full bg-[#ECECEC] rounded-md shadow-sm focus:outline-none focus:ring-[#E97B08] focus:border-[#E97B08] sm:text-sm'
@@ -861,6 +863,7 @@ const SectionVehicl = () => {
               <div>
                 <label
                   htmlFor='email'
+
                   className='block text-sm font-medium text-gray-700'
                 >
                   Email
@@ -869,6 +872,7 @@ const SectionVehicl = () => {
                   type='email'
                   id='email'
                   value={email}
+                  required
                   onChange={e => handleEmailChange(e.target.value)}
                   className='mt-1 p-2 block w-full bg-[#ECECEC] rounded-md shadow-sm focus:outline-none focus:ring-[#E97B08] focus:border-[#E97B08] sm:text-sm'
                 />
@@ -882,6 +886,8 @@ const SectionVehicl = () => {
                 </label>
                 <input
                   type='tel'
+                  required
+
                   id='phone'
                   value={phone}
                   onChange={e => handlePhoneChange(e.target.value)}
