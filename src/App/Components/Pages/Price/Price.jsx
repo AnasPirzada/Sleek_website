@@ -253,7 +253,6 @@ const Price = () => {
     - DROP-OFF STAIRS: ${deliveryStairsValue}
     - SELECTED VAN: ${selectedVehicleValue}
     - Van Details :  ${vanDetails}
-    - Driver Time Charges :  ${DriverCharges}
     **--------------------------------------------------**
 
     **Price Breakdown:**
@@ -268,6 +267,8 @@ const Price = () => {
     - Drop-off-stairs: £${DropOffAmount}
     - Pickup-stairs: £${PickupAmount}
     - Helping Loading & Unloading: ${deliveryValues}
+    - Driver Time Charges :  ${DriverChargesValue}
+
     - Additional Note ${Description}
   
   
