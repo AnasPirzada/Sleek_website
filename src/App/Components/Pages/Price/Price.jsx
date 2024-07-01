@@ -1,10 +1,17 @@
-import axios from 'axios';
-import emailjs from 'emailjs-com';
+import { loadStripe } from '@stripe/stripe-js';
 import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import Navbar from '../../Narbar/index.jsx';
+
+const stripePromise = loadStripe(
+  'pk_live_51Mb6LjIRO7fBL2MraUu95NWA921zNBpCMbU7IHg9IjiIPZD2KpvKzZArOiKOisG9iuSIpadP1QwWOtaYuV1QXWyF00U62mzcFj'
+);
+
 const Price = () => {
+  const navigate = useNavigate();
+  let { depositAmount } = useParams();
   const [activeDiv, setActiveDiv] = useState(null);
+  const [clientSecret, setClientSecret] = useState('');
   const handleClick = id => {
     setActiveDiv(id === activeDiv ? null : id);
   };
@@ -148,7 +155,6 @@ const Price = () => {
   console.log('Devlivery Stairs', deliveryStairsValue);
   console.log('deliveryValues', selecteddeliveryValues);
   console.log('car', selectedVehicleValue);
-  let depositAmount;
   let TotalDespositedAmount;
   depositAmount = 0.1 * TotalAmount;
 
@@ -165,66 +171,21 @@ const Price = () => {
     console.log(`Selected payment method: ${method}`);
   };
 
-  // // Stripe payment
-  const handlePayment = () => {
+  const SelectedPaymentMethod = () => {
     if (activeOptionPaymentMethod === 'Stripe') {
-      const amountInCents = Math.floor(depositAmount * 100);
-
-      axios
-        .post('https://gstaxi.azurewebsites.net/stripe/charge', {
-          amount: amountInCents, // Stripe expects the amount in cents
-          currency: 'usd',
-          source: 'tok_visa', // Replace this with the actual token or source from Stripe
-        })
-        .then(response => {
-          console.log('Payment successful:', response.data);
-          alert('Payment successful!');
-          sendEmail();
-        })
-        .catch(error => {
-          console.error('Payment failed:', error);
-          if (error.response) {
-            console.error('Response data:', error.response.data);
-            console.error('Response status:', error.response.status);
-            console.error('Response headers:', error.response.headers);
-          } else if (error.request) {
-            console.error('Request data:', error.request);
-          } else {
-            console.error('Error message:', error.message);
-          }
-          alert('Payment failed. Please try again.');
-        });
+      const emailContent = formatEmailContent();
+      console.log('Formatted Email Content in Price.jsx:', emailContent);
+      navigate(`/StripeCheckout/${depositAmount}`, {
+        state: {
+          activeOptionPaymentMethod,
+          formatEmailContent: emailContent,
+        },
+      });
+    } else if (activeOptionPaymentMethod === 'PayPal') {
+      alert('PayPal Is Coming Soon');
     } else {
-      alert('Please select a payment method.');
+      alert('Please Select Payment Method');
     }
-  };
-
-  emailjs.init('ZIx7xdSk-EHLqBZOd');
-
-  useEffect(() => {
-    // Fetch email from sessionStorage and update state if necessary
-    const savedEmail = sessionStorage.getItem('Email');
-    if (savedEmail) {
-      setRecipientEmail(savedEmail);
-    }
-  }, []);
-  const sendEmail = () => {
-    const emailContent = formatEmailContent();
-    const templateParams = {
-      to_email: recipientEmail,
-      message: emailContent,
-    };
-
-    emailjs.send('service_bqv49wd', 'template_owfy6ml', templateParams).then(
-      response => {
-        console.log('SUCCESS!', response.status, response.text);
-        alert('Email sent successfully!');
-      },
-      error => {
-        console.error('FAILED...', error);
-        alert('Failed to send email.');
-      }
-    );
   };
 
   const formatEmailContent = () => {
@@ -292,6 +253,7 @@ const Price = () => {
     - DROP-OFF STAIRS: ${deliveryStairsValue}
     - SELECTED VAN: ${selectedVehicleValue}
     - Van Details :  ${vanDetails}
+    - Driver Time Charges :  ${DriverCharges}
     **--------------------------------------------------**
 
     **Price Breakdown:**
@@ -311,11 +273,22 @@ const Price = () => {
   
     **Total Cost: £${TotalAmount}**
     **To Pay now (10% deposit): £${depositAmount.toFixed(1)}**
-  
+
+
+    **------------------------------------------------------**
+    **If you have any questions or issues, please feel free to contact  your driver (Samuel) on  07462877455 or email him at info@sleekassuredremovals.com or any of the numbers on our website or through the contact form.
+    You can also contact our support line at 07462877455, 07455 911888 , 0203 4176141**
+    **-------------------------------------------------------**
+
+
     Best wishes,
     Createex team
   `;
   };
+
+  // Calculated Driver Value Charges
+  let DriverChargesValue;
+  DriverChargesValue = TotalAmount - DropOffAmount - PickupAmount;
 
   return (
     <>
@@ -528,13 +501,24 @@ const Price = () => {
               </div>
               <hr className='border-black w-full mt-6 sm:mt-8 md:mt-10' />
             </div>
-            <div className='rounded-xl py-6 sm:py-8 md:py-10'>
+            {/* <div className='rounded-xl py-6 sm:py-8 md:py-10'>
               <div className='flex justify-between'>
                 <p className='text-base sm:text-lg md:text-xl lg:text-2xl font-normal text-[#272828]'>
                   Driver Time Charges
                 </p>
                 <p className='text-base sm:text-lg md:text-xl lg:text-2xl text-[#181919] font-medium'>
                   £{DrivervalueCharges}
+                </p>
+              </div>
+              <hr className='border-black w-full mt-6 sm:mt-8 md:mt-10' />
+            </div> */}
+            <div className='rounded-xl py-6 sm:py-8 md:py-10'>
+              <div className='flex justify-between'>
+                <p className='text-base sm:text-lg md:text-xl lg:text-2xl font-normal text-[#272828]'>
+                  Driver Time Charges
+                </p>
+                <p className='text-base sm:text-lg md:text-xl lg:text-2xl text-[#181919] font-medium'>
+                  £{DriverChargesValue}
                 </p>
               </div>
               <hr className='border-black w-full mt-6 sm:mt-8 md:mt-10' />
@@ -614,10 +598,10 @@ const Price = () => {
               </div>
               <div className='text-center my-5'>
                 <button
-                  onClick={handlePayment}
+                  onClick={SelectedPaymentMethod}
                   className='py-2 px-5 rounded-md text-[#FFFFFF] bg-[#E97B08] shadow-lg'
                 >
-                  Pay Now
+                  Select Payment Method
                 </button>
               </div>
             </div>

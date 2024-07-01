@@ -1,21 +1,21 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter } from 'react-router-dom';
 
-import Home from "../App/Components/Pages/Home/Index";
-import Navbar from "../../src/App/Components/Narbar/index";
-import Blog from "../App/Components/Pages/Blog/Blog";
-import Price from "../App/Components/Pages/Price/Price";
-import InstantQuotes from "../App/Components/Pages/InstantQuote/index";
-import Faqs from "../App/Components/Pages/Faqs";
-import ContactUS from "../App/Components/Pages/ContactUs/index";
-import InstantMain from "../App/Components/Pages/instantMain/SectionVehicl";
-import Footer from "../App/Components/Footer/index";
-import Input from "../App/Components/Pages/instantMain/Input";
-import Blogpag1 from "../App/Components/Pages/Blog/Blogpag1";
-import Blogpag2 from "../App/Components/Pages/Blog/Blogpag2";
-import Services from "../App/Components/Pages/Services/index";
+import Navbar from '../../src/App/Components/Narbar/index';
+import Footer from '../App/Components/Footer/index';
+import Blog from '../App/Components/Pages/Blog/Blog';
+import Blogpag1 from '../App/Components/Pages/Blog/Blogpag1';
+import Blogpag2 from '../App/Components/Pages/Blog/Blogpag2';
+import ContactUS from '../App/Components/Pages/ContactUs/index';
+import Faqs from '../App/Components/Pages/Faqs';
+import Home from '../App/Components/Pages/Home/Index';
+import InstantQuotes from '../App/Components/Pages/InstantQuote/index';
+import StripeCheckout from '../App/Components/Pages/Price/StripeCheckout.jsx';
+import Price from '../App/Components/Pages/Price/Price';
+import Services from '../App/Components/Pages/Services/index';
+import InstantMain from '../App/Components/Pages/instantMain/SectionVehicl';
 export const router = createBrowserRouter([
   {
-    path: "/",
+    path: '/',
     element: (
       <>
         <Navbar />
@@ -25,7 +25,7 @@ export const router = createBrowserRouter([
     ),
   },
   {
-    path: "/blog",
+    path: '/blog',
     element: (
       <>
         <Navbar />
@@ -35,7 +35,7 @@ export const router = createBrowserRouter([
     ),
     children: [
       {
-        path: "blogpage1",
+        path: 'blogpage1',
         element: (
           <>
             <Navbar />
@@ -45,7 +45,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "blogpage1",
+        path: 'blogpage1',
         element: (
           <>
             <Navbar />
@@ -57,7 +57,7 @@ export const router = createBrowserRouter([
     ],
   },
   {
-    path: "/faq",
+    path: '/faq',
     element: (
       <>
         <Navbar />
@@ -66,8 +66,9 @@ export const router = createBrowserRouter([
       </>
     ),
   },
+
   {
-    path: "/price",
+    path: '/price',
     element: (
       <>
         <Price />
@@ -76,7 +77,17 @@ export const router = createBrowserRouter([
     ),
   },
   {
-    path: "/instantmain",
+    path: '/StripeCheckout/:depositAmount',
+    element: (
+      <>
+        <StripeCheckout />
+        {/* <Footer /> */}
+      </>
+    ),
+  },
+
+  {
+    path: '/instantmain',
     element: (
       <>
         <Navbar />
@@ -86,7 +97,7 @@ export const router = createBrowserRouter([
     ),
   },
   {
-    path: "/faqs",
+    path: '/faqs',
     element: (
       <>
         <Navbar />
@@ -96,7 +107,7 @@ export const router = createBrowserRouter([
     ),
   },
   {
-    path: "/contactus",
+    path: '/contactus',
     element: (
       <>
         <Navbar />
@@ -106,7 +117,7 @@ export const router = createBrowserRouter([
     ),
   },
   {
-    path: "/instantQuotes",
+    path: '/instantQuotes',
     element: (
       <>
         <Navbar />
@@ -116,7 +127,7 @@ export const router = createBrowserRouter([
     ),
   },
   {
-    path: "/blogDetails1",
+    path: '/blogDetails1',
     element: (
       <>
         <Navbar />
@@ -126,7 +137,7 @@ export const router = createBrowserRouter([
     ),
   },
   {
-    path: "/blogDetails2",
+    path: '/blogDetails2',
     element: (
       <>
         <Navbar />
@@ -136,7 +147,7 @@ export const router = createBrowserRouter([
     ),
   },
   {
-    path: "/services",
+    path: '/services',
     element: (
       <>
         <Navbar />

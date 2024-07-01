@@ -13,7 +13,7 @@ const SectionVehicl = () => {
   const vehicleOptions = [
     { label: 'Small Van', value: 'small-van', imgSrc: 'SMALL.png' },
     { label: 'Medium Van', value: 'medium-van', imgSrc: 'MEDIUM.png' },
-    { label: 'Large Van', value: 'large-van', imgSrc: 'LARGE.jpg' },
+    { label: 'Large Van', value: 'large-van', imgSrc: 'LARGE VAN.png' },
     { label: 'Luton Van', value: 'giant-van', imgSrc: 'LUTON.png' },
   ];
 
