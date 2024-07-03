@@ -223,7 +223,7 @@
 //   }, []);
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
-
+import { Link } from 'react-router-dom';
 const Index = () => {
   const navigate = useNavigate();
 
@@ -237,6 +237,8 @@ const Index = () => {
   const [selectedVehicleDuration, setSelectedVehicleDuration] = useState('');
   const [totalDistance, setTotalDistance] = useState(0);
   const [selectedHelp, setselectedHelp] = useState('');
+  const [VehicleDuration, setssavedselectedVehicleDuration] = useState('');
+  const [totalRatepermile, setSelectedSelectedtotalRatepermile] = useState('');
 
   const vehicleRates = {
     'small-van': {
@@ -283,8 +285,17 @@ const Index = () => {
       JSON.parse(sessionStorage.getItem('deliveryValues')) || '';
     const storedSelectedVehicleDuration =
       JSON.parse(sessionStorage.getItem('selectedVehicleDuration')) || '';
+    const savedselectedVehicleDuration = JSON.parse(
+      sessionStorage.getItem('selectedVehicleDuration')
+    );
+    const savedSelectedtotalRatepermile = JSON.parse(
+      sessionStorage.getItem('totalRatepermile')
+    );
 
     setSelectedWeekDate(SelectedWeekDate);
+    setssavedselectedVehicleDuration(savedselectedVehicleDuration);
+    setSelectedSelectedtotalRatepermile(savedSelectedtotalRatepermile);
+
     setSelectedValue(storedSelectedValue);
     setSelectedStairsValue(DeliverySTAIRS);
     setSelectedDate(storedSelectedDate);
@@ -539,13 +550,16 @@ const Index = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+  // Calculated Driver Value Charges
+  let DriverChargesValue;
+  DriverChargesValue = TotalAmount - DropOffAmount - PickupAmount;
   return (
     <div>
       <h1 className='text-center uppercase text-[#E97B08] text-3xl font-bold leading-[48.41px]'>
         Your Quote
       </h1>
       <div className='m-10 bg-[#F5F5F5] rounded-lg flex justify-center items-start flex-col'>
-        <div className=' leading-[50px] px-5 py-5'>
+        <div className=' leading-[50px] px-5 py-5 w-full'>
           <p className='text-base	font-[400]'>
             You are moving from &nbsp;
             <span className='font-semibold	'>{selectedValue}</span> to &nbsp;
@@ -564,12 +578,110 @@ const Index = () => {
           <p className='text-base	font-[400] text-[#E97B08]'>
             Pay the payment below by pressing the Book Now button.
           </p>
+          <div className='text-center py-10'>
+            <p className='font-[700] uppercase text-2xl text-[#E97B08]'>
+              Price Break Down
+            </p>
+          </div>
+          <div className='rounded-xl py-6 sm:py-8 md:py-10'>
+            <div className='flex justify-between'>
+              <p className='text-base sm:text-lg md:text-xl lg:text-2xl font-normal text-[#272828]'>
+                Totoal Amount
+              </p>
+              <p className='text-base sm:text-lg md:text-xl lg:text-xl text-[#181919] font-medium'>
+                {TotalAmount}
+              </p>
+            </div>
+            <hr className='border-black w-full mt-6 sm:mt-8 md:mt-10' />
+          </div>{' '}
+          <div className='rounded-xl py-6 sm:py-8 md:py-10'>
+            <div className='flex justify-between'>
+              <p className='text-base sm:text-lg md:text-xl lg:text-2xl font-normal text-[#272828]'>
+                PICKUP DATE, TIME
+              </p>
+              <p className='text-base sm:text-lg md:text-xl lg:text-xl text-[#181919] font-medium'>
+                {selectedDate} {VehicleDuration}
+              </p>
+            </div>
+            <hr className='border-black w-full mt-6 sm:mt-8 md:mt-10' />
+          </div>{' '}
+          {/* <div className='rounded-xl py-6 sm:py-8 md:py-10'>
+            <div className='flex justify-between'>
+              <p className='text-base sm:text-lg md:text-xl lg:text-2xl font-normal text-[#272828]'>
+                PICKUP STAIRS
+              </p>
+              <p className='text-base sm:text-lg md:text-xl lg:text-xl text-[#181919] font-medium'>
+                {pickupStairsValue}
+              </p>
+            </div>
+            <hr className='border-black w-full mt-6 sm:mt-8 md:mt-10' />
+          </div>
+          <div className='rounded-xl py-6 sm:py-8 md:py-10'>
+            <div className='flex justify-between'>
+              <p className='text-base sm:text-lg md:text-xl lg:text-2xl font-normal text-[#272828]'>
+                DROP-OFF STAIRS
+              </p>
+              <p className='text-base sm:text-lg md:text-xl lg:text-xl text-[#181919] font-medium'>
+                {deliveryStairsValue}
+              </p>
+            </div>
+            <hr className='border-black w-full mt-6 sm:mt-8 md:mt-10' />
+          </div> */}
+          <div className='rounded-xl py-6 sm:py-8 md:py-10'>
+            <div className='flex justify-between'>
+              <p className='text-base sm:text-lg md:text-xl lg:text-2xl font-normal text-[#272828]'>
+                Total Distance
+              </p>
+              <p className='text-base sm:text-lg md:text-xl lg:text-2xl text-[#181919] font-medium'>
+                {totalDistance} miles
+              </p>
+            </div>
+            <hr className='border-black w-full mt-6 sm:mt-8 md:mt-10' />
+          </div>
+          <div className='rounded-xl py-6 sm:py-8 md:py-10'>
+            <div className='flex justify-between'>
+              <p className='text-base sm:text-lg md:text-xl lg:text-2xl font-normal text-[#272828]'>
+                Drop-off-stairs
+              </p>
+              <p className='text-base sm:text-lg md:text-xl lg:text-2xl text-[#181919] font-medium'>
+                £{DropOffAmount}
+              </p>
+            </div>
+            <hr className='border-black w-full mt-6 sm:mt-8 md:mt-10' />
+          </div>
+          <div className='rounded-xl py-6 sm:py-8 md:py-10'>
+            <div className='flex justify-between'>
+              <p className='text-base sm:text-lg md:text-xl lg:text-2xl font-normal text-[#272828]'>
+                Pickup-stairs
+              </p>
+              <p className='text-base sm:text-lg md:text-xl lg:text-2xl text-[#181919] font-medium'>
+                £{PickupAmount}
+              </p>
+            </div>
+            <hr className='border-black w-full mt-6 sm:mt-8 md:mt-10' />
+          </div>
+          <div className='rounded-xl py-6 sm:py-8 md:py-10'>
+            <div className='flex justify-between'>
+              <p className='text-base sm:text-lg md:text-xl lg:text-2xl font-normal text-[#272828]'>
+                Driver Time Charges
+              </p>
+              <p className='text-base sm:text-lg md:text-xl lg:text-2xl text-[#181919] font-medium'>
+                £{DriverChargesValue}
+              </p>
+            </div>
+            <hr className='border-black w-full mt-6 sm:mt-8 md:mt-10' />
+          </div>
         </div>
       </div>
+
       <div className='flex flex-row justify-center gap-5 my-20 mx-2'>
-        <button className='border-[#E97B08] border  rounded-lg w-[220px] h-[54px] bg-white text-[#E97B08] py-[16px] px-[40px]'>
-          Edit
-        </button>
+        <Link to='/instantQuotes'>
+          {' '}
+          <button className='border-[#E97B08] border  rounded-lg w-[220px] h-[54px] bg-white text-[#E97B08] py-[16px] px-[40px]'>
+            Edit
+          </button>
+        </Link>
+
         <button
           onClick={() => navigate('/price')}
           className=' bg-[#E97B08] text-white border    w-[220px] h-[54px] px-[40px] rounded-lg'
