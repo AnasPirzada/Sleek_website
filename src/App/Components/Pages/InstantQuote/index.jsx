@@ -348,8 +348,8 @@ const Index = () => {
   const DropOff =
     dropOffStairsArray.length > 0 ? parseInt(dropOffStairsArray[0], 10) : NaN;
   // DropOff & PickUp Stairs Totoal Values
-  const DropOffAmount = DropOff * 5.75;
-  const PickupAmount = Pickup * 5.75;
+  const DropOffAmount = DropOff * 10;
+  const PickupAmount = Pickup * 10;
 
   console.log('abcs', DropOffAmount, PickupAmount);
   sessionStorage.setItem('PickupAmount', PickupAmount);

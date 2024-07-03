@@ -11,6 +11,7 @@ import Map from "../../Map/Map";
 const Index = () => {
   React.useEffect(() => {
     window.scrollTo(0, 0);
+    sessionStorage.clear();
   }, []);
   const navigate = useNavigate();
   return (

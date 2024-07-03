@@ -1,21 +1,22 @@
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
+import emailjs from 'emailjs-com';
 import React, { useEffect, useState } from 'react';
 
-const CheckoutForm = ({ amountInCents, recipientEmail, formatEmailContent }) => {
+const CheckoutForm = ({ amountInCents, formatEmailContent }) => {
   const stripe = useStripe();
   const elements = useElements();
   const [paymentError, setPaymentError] = useState(null);
-  const [clientSecret, setClientSecret] = useState('');
   const [paymentIntentStatus, setPaymentIntentStatus] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const [clientSecret, setClientSecret] = useState('');
 
   useEffect(() => {
     if (amountInCents > 0) {
       const paymentIntentData = {
         amount: amountInCents,
         currency: 'usd',
-        paymentMethodId: 'pm_card_visa', // Assuming you have a valid payment method id
-        callbackUrl: "https://ecom-gpay.vercel.app/success",
+        paymentMethodId: 'pm_card_visa',
+        callbackUrl: 'https://ecom-gpay.vercel.app/success',
       };
 
       fetch('https://gstaxi.azurewebsites.net/stripe/charge', {
@@ -35,12 +36,12 @@ const CheckoutForm = ({ amountInCents, recipientEmail, formatEmailContent }) => 
         })
         .then(data => {
           console.log('Received data from server:', data);
-          // if (data.clientSecret && data.paymentIntentStatus) {
-          //   setClientSecret(data.clientSecret);
-          //   setPaymentIntentStatus(data.paymentIntentStatus);
-          // } else {
-          //   setPaymentError('Received incomplete data from server');
-          // }
+          if (data.paymentIntent.client_secret && data.paymentIntent.status) {
+            setClientSecret(data.paymentIntent.client_secret);
+            setPaymentIntentStatus(data.paymentIntent.status);
+          } else {
+            setPaymentError('Received incomplete data from server');
+          }
         })
         .catch(error => {
           console.error('Error fetching client secret:', error.message);
@@ -48,47 +49,78 @@ const CheckoutForm = ({ amountInCents, recipientEmail, formatEmailContent }) => 
         });
     }
   }, [amountInCents]);
-
+  // Initialize EmailJS
+  useEffect(() => {
+    emailjs.init('ZIx7xdSk-EHLqBZOd');
+  }, []);
   const handlePayment = async () => {
-    // if (!clientSecret) {
-    //   setPaymentError('Invalid client secret or payment intent status received');
-    //   return;
-    // }
+    if (!clientSecret) {
+      setPaymentError(
+        'Invalid client secret or payment intent status received'
+      );
+      return;
+    }
 
-    // // Check the status of the PaymentIntent before confirming
-    // if (paymentIntentStatus === 'succeeded') {
-    //   setPaymentError('This PaymentIntent has already succeeded.');
-    //   return;
-    // } else if (paymentIntentStatus !== 'requires_confirmation') {
-    //   setPaymentError(`Unexpected payment status: ${paymentIntentStatus}`);
-    //   return;
-    // }
+    if (paymentIntentStatus === 'succeeded') {
+      setPaymentError('Payment Succeeded');
+      return;
+    } else if (
+      paymentIntentStatus !== 'requires_confirmation' &&
+      paymentIntentStatus !== 'requires_action'
+    ) {
+      setPaymentError(`Unexpected payment status: ${paymentIntentStatus}`);
+      return;
+    }
 
     try {
-      const { error, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
-        payment_method: {
-          card: elements.getElement(CardElement),
-        },
-      });
+      const { error, paymentIntent } = await stripe.confirmCardPayment(
+        clientSecret,
+        {
+          payment_method: {
+            card: elements.getElement(CardElement),
+          },
+        }
+      );
 
-    //   if (error) {
-    //     console.error('Stripe payment error:', error);
-    //     setPaymentError(`Payment failed: ${error.message}`);
-    //   } else if (paymentIntent.status === 'succeeded') {
-    //     console.log('Payment succeeded:', paymentIntent);
-    //     sendEmail(formatEmailContent);
-    //   } else {
-    //     console.warn('Unexpected payment status:', paymentIntent.status);
-    //     setPaymentError(`Unexpected payment status: ${paymentIntent.status}`);
-    //   }
+      if (error) {
+        console.error('Stripe payment error:', error);
+        setPaymentError(`Payment failed: ${error.message}`);
+      } else if (paymentIntent.status === 'succeeded') {
+        console.log('Payment succeeded:', paymentIntent);
+        sendEmail();
+      } else {
+        console.warn('Unexpected payment status:', paymentIntent.status);
+        setPaymentError(`Unexpected payment status: ${paymentIntent.status}`);
+      }
     } catch (error) {
       console.error('Payment processing error:', error.message);
       setPaymentError(`Payment processing error: ${error.message}`);
     }
   };
 
-  const sendEmail = emailContent => {
-    // Implement email sending logic here
+  console.log('First start to send email...', formatEmailContent);
+
+  const Emailsend = () => {
+    console.log('Preparing to send email...');
+    const emailContent = formatEmailContent;
+    const templateParams = {
+      message: emailContent,
+    };
+
+    emailjs
+      .send('service_fwnx2ff', 'template_owfy6ml', templateParams)
+      .then(response => {
+        console.log('SUCCESS!', response.status, response.text);
+        alert('Email sent successfully!');
+      })
+      .catch(error => {
+        console.error('FAILED...', error);
+        alert('Failed to send email.');
+      })
+      .catch(err => {
+        console.error('Error during email sending:', err.message);
+        setPaymentError('Error during email sending');
+      });
   };
 
   const handleSubmit = async event => {
@@ -104,19 +136,33 @@ const CheckoutForm = ({ amountInCents, recipientEmail, formatEmailContent }) => 
 
   return (
     <div className='flex justify-center items-center h-screen'>
-      <form onSubmit={handleSubmit} className='max-w-md w-full p-4 bg-white rounded shadow'>
+      <form
+        onSubmit={handleSubmit}
+        className='max-w-md w-full p-4 bg-white rounded shadow'
+      >
         <h2 className='text-xl font-semibold mb-4'>Payment method</h2>
 
         <div className='mb-4'>
           <label className='block mb-2'>Card Details</label>
           <CardElement className='w-full p-2 border rounded' />
         </div>
-        <button type='submit' className='w-full py-2 px-4 bg-blue-600 text-white rounded hover:bg-blue-700' disabled={!stripe || !elements}>
+        <button
+          type='submit'
+          className='w-full py-2 px-4 bg-blue-600 text-white rounded hover:bg-blue-700'
+          disabled={!stripe || !elements}
+          onClick={Emailsend}
+        >
           Pay ${amountInCents / 100}
         </button>
-        {paymentError && <div className='text-red-500 mb-4'>{paymentError}</div>}
-        {errorMessage && <div className='text-red-500 mb-4'>{errorMessage}</div>}
+        {paymentError && (
+          <div className='text-red-500 mb-4'>{paymentError}</div>
+        )}
+        {errorMessage && (
+          <div className='text-red-500 mb-4'>{errorMessage}</div>
+        )}
       </form>
+
+      {/* <button onClick={Emailsend}>Send Email</button> */}
     </div>
   );
 };

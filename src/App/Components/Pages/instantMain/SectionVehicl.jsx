@@ -106,19 +106,35 @@ const SectionVehicl = () => {
 
     return valuesArray;
   };
+
+  // Start Session storge Stored values
+  const [storedEmail, setStoredEmail] = useState(null);
+  const [storedName, setStoredName] = useState(null);
+  const [storedPhone, setStoredPhone] = useState(null);
+  const [storedselectedVehicle, setstoredselectedVehicle] = useState(null);
+  const [storeddeliveryValues, setstoreddeliveryValues] = useState(null);
+  const [storedPICKUPSTAIRS, setstoredPICKUPSTAIRS] = useState(null);
+  // end
+
+  // showing sessionstorage values in state in intial state will empty when value is adeed in session storage it will be added
+  const [email, setEmail] = useState('' || storedEmail);
+  const [name, setName] = useState('');
+  const [phone, setPhone] = useState('');
   const [selectedVehicle, setSelectedVehicle] = useState('');
+
   const [selectedDeliveryHelp, setSelectedHelp] = useState('');
+  // end
+
   const [activeOptionYouHaveLIFTS, setActiveYouHaveLIFTSOption] =
     useState(null);
+
   const [EmailTextNeedactiveOption, setEmailTextNeedactiveOption] =
-    useState(null);
+    useState('');
+
   const [selectedVehicleDuration, setSelectedVehicleDuration] = useState('');
   const [textareaData, setTextareaData] = useState('');
   const [selectedDate, setSelectedDate] = useState('');
   const [selectedTime, setSelectedTime] = useState('');
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [phone, setPhone] = useState('');
   const [selectedValue, setSelectedValue] = useState('');
 
   const [selectedStairsValue, setSelectedStairsValue] = useState('');
@@ -126,18 +142,65 @@ const SectionVehicl = () => {
   const [healthValues, setHealthValues] = useState(
     getAllSessionStorageValues()
   );
-  console.log('health calues', healthValues);
+  console.log('selectedVehicleDuration', selectedVehicleDuration);
+
   // const [deliveryValues, setDeliveryValues] = useState(
   //   getAllSessionStorageValues()
   // );
 
-  const hoursOptions = Array.from({ length: 23 }, (_, i) => ({
-    label: `${i + 2} hour(s)`,
-    value: `${i + 2} hours`,
-  }));
+  const hoursOptions = [
+    {
+      label: '2 hours',
+      value: '2 hours',
+    },
+    {
+      label: '4 hours',
+      value: '4 hours',
+    },
+    {
+      label: '6 hours',
+      value: '6 hours',
+    },
+    {
+      label: '8 hours',
+      value: '8 hours',
+    },
+    {
+      label: '10 hours',
+      value: '10 hours',
+    },
+    {
+      label: '12 hours',
+      value: '12 hours',
+    },
+    {
+      label: '14 hours',
+      value: '14 hours',
+    },
+    {
+      label: '16 hours',
+      value: '16 hours',
+    },
+    {
+      label: '18 hours',
+      value: '18 hours',
+    },
+    {
+      label: '20 hours',
+      value: '20 hours',
+    },
+    {
+      label: '22 hours',
+      value: '22 hours',
+    },
+    {
+      label: '24 hours',
+      value: '24 hours',
+    },
+  ];
+
   const hourhandleChange = event => {
-    const selectedVehicleDuration = event.target.value;
-    setSelectedVehicleDuration(selectedVehicleDuration);
+    setSelectedVehicleDuration(event.target.value);
   };
   const handleNameChange = value => {
     setName(value);
@@ -153,6 +216,7 @@ const SectionVehicl = () => {
 
   const handleVehicleClick = value => {
     setSelectedVehicle(value);
+    console.log('Selected Vehicle', value);
   };
 
   const handleHelpClick = value => {
@@ -175,10 +239,11 @@ const SectionVehicl = () => {
       setTextareaData(value);
     }
   };
-  const handleVehicleDurationChange = event => {
-    const value = event.target.value;
-    setSelectedVehicleDuration(value);
-  };
+
+  // const handleVehicleDurationChange = event => {
+  //   const value = event.target.value;
+  //   setSelectedVehicleDuration(value);
+  // };
 
   const handleTextChange = event => {
     const { name, value } = event.target;
@@ -425,6 +490,93 @@ const SectionVehicl = () => {
   console.log('selectedVehicleDuration', selectedVehicleDuration);
   let TotalTime;
   TotalTime = estimatedTime + selectedVehicleDuration;
+
+  // getting values from localStorage
+
+  useEffect(() => {
+    const storedEmail = sessionStorage.getItem('Email');
+    const storedName = sessionStorage.getItem('Name');
+    const storedPhone = sessionStorage.getItem('Phone');
+    const storedselectedVehicle = sessionStorage.getItem('selectedVehicle');
+    const storeddeliveryValues = sessionStorage.getItem('deliveryValues');
+    const storedPICKUPSTAIRS = sessionStorage.getItem('PICKUPSTAIRS');
+    const storedDeliverySTAIRS = sessionStorage.getItem('DeliverySTAIRS');
+    const storedYouHaveLIFTS = sessionStorage.getItem('YouHaveLIFTS');
+    const storedselectedVehicleDuration = sessionStorage.getItem(
+      'selectedVehicleDuration'
+    ); 
+     const storedselectedstoredDescription = sessionStorage.getItem(
+      'Description'
+    );
+      const storedselectedstoredEmailTextNeed = sessionStorage.getItem(
+      'EmailTextNeed'
+    );
+
+    if (storedEmail) {
+      setStoredEmail(JSON.parse(storedEmail));
+      setEmail(JSON.parse(storedEmail));
+    }
+
+    if (storedName) {
+      setStoredEmail(JSON.parse(storedName));
+      setName(JSON.parse(storedName));
+    }
+
+    if (storedPhone) {
+      setStoredPhone(JSON.parse(storedPhone));
+      setPhone(JSON.parse(storedPhone));
+    }
+
+    if (storedselectedVehicle) {
+      setstoredselectedVehicle(JSON.parse(storedselectedVehicle));
+      setSelectedVehicle(JSON.parse(storedselectedVehicle));
+    }
+    if (storeddeliveryValues) {
+      setstoreddeliveryValues(JSON.parse(storeddeliveryValues));
+      setSelectedHelp(JSON.parse(storeddeliveryValues));
+    }
+    if (storedPICKUPSTAIRS) {
+      setstoredPICKUPSTAIRS(JSON.parse(storedPICKUPSTAIRS));
+      setSelectedValue(JSON.parse(storedPICKUPSTAIRS));
+    }
+    if (storedDeliverySTAIRS) {
+      setSelectedStairsValue(JSON.parse(storedDeliverySTAIRS));
+    }
+
+    if (storedYouHaveLIFTS) {
+      setActiveYouHaveLIFTSOption(JSON.parse(storedYouHaveLIFTS));
+    }
+
+    if (storedselectedVehicleDuration) {
+      console.log(
+        'storedselectedVehicleDuration',
+        storedselectedVehicleDuration
+      );
+      setSelectedVehicleDuration(JSON.parse(storedselectedVehicleDuration));
+    }
+    
+    
+    if (storedselectedstoredDescription) {
+      
+      setSelectedDescription(JSON.parse(storedselectedstoredDescription));
+    }
+
+    
+if (storedselectedstoredEmailTextNeed) {
+      
+  setEmailTextNeedactiveOption(JSON.parse(storedselectedstoredEmailTextNeed));
+    }
+
+
+
+
+
+    
+
+
+  }, []);
+
+  console.log('Stored Email:', storedEmail);
   return (
     <>
       <section className='px-4 md:px-8 lg:px-16 xl:px-32 2xl:px-[135px]  overflow-x-hidden '>
@@ -760,6 +912,7 @@ const SectionVehicl = () => {
               id='vehicle'
               className='w-40 h-[40px]'
               onChange={hourhandleChange}
+              value={selectedVehicleDuration}
             >
               {hoursOptions.map(option => (
                 <option key={option.value} value={option.value}>
@@ -801,6 +954,7 @@ const SectionVehicl = () => {
                   placeholder='Date_Time'
                   className='bg-transparent'
                   onChange={handleDateChange}
+                  // value={StoDateValue}
                 />
               )}
               {selectedDate && (
