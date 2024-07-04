@@ -422,36 +422,49 @@ const SectionVehicl = () => {
     setIssecondEditMode(!issecondEditMode);
   };
 
+  useEffect(() => {
+    const storedselectedDate = sessionStorage.getItem("selectedDate");
+    const storedselectedTime = sessionStorage.getItem("selectedTime");
+    if (storedselectedDate) {
+      setstoredselectedDate(storedselectedDate);
+    }
+    if (storedselectedTime) {
+      setSelectedTime(storedselectedTime);
+    }
+  }, []);
+
   const handleTimeChange = (event) => {
-    setSelectedTime(event.target.value);
+    const time = event.target.value;
+    setSelectedTime(time);
+    sessionStorage.setItem("selectedTime", time);
   };
+
+  console.log("SelectedTime ", selectedTime);
 
   const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
   const [dayType, setDayType] = useState("");
 
+  useEffect(() => {
+    const storedselectedDate = sessionStorage.getItem("selectedDate");
+    if (storedselectedDate) {
+      setstoredselectedDate(storedselectedDate); // No need to JSON.parse if the stored value is a string
+    }
+  }, []);
 
-useEffect(() => {
-  const storedselectedDate = sessionStorage.getItem("selectedDate");
-  if (storedselectedDate) {
-    setstoredselectedDate(storedselectedDate);  // No need to JSON.parse if the stored value is a string
-  }
-}, []);
+  const handleDateChange = (event) => {
+    const date = new Date(event.target.value);
+    setSelectedDate(event.target.value);
 
+    const day = date.getDay();
+    if (day === 0 || day === 6) {
+      setDayType("Weekend");
+    } else {
+      setDayType("Weekday");
+    }
 
-const handleDateChange = (event) => {
-  const date = new Date(event.target.value);
-  setSelectedDate(event.target.value);
-
-  const day = date.getDay();
-  if (day === 0 || day === 6) {
-    setDayType("Weekend");
-  } else {
-    setDayType("Weekday");
-  }
-
-  setstoredselectedDate(event.target.value);  // Also update storedselectedDate when input changes
-  sessionStorage.setItem("selectedDate", event.target.value);  // Update session storage as well
-};
+    setstoredselectedDate(event.target.value); // Also update storedselectedDate when input changes
+    sessionStorage.setItem("selectedDate", event.target.value); // Update session storage as well
+  };
 
   let SelectedWeekDate;
   SelectedWeekDate = `${dayType}: ${new Date(
@@ -955,16 +968,20 @@ const handleDateChange = (event) => {
           <div className="pt-5 flex gap-3">
             <div className="bg-[#ECECEC] flex justify-around items-center text-center px-3 py-2 rounded-lg">
               {isSafari ? (
-                <input type="date" placeholder="yyyy-mm-dd" />
+                <input
+                  type="date"
+                  placeholder="yyyy-mm-dd"
+                  onChange={handleDateChange}
+                  value={storedselectedDate}
+                />
               ) : (
                 <input
-                type="date"
-                placeholder="Date_Time"
-                className="bg-transparent"
-                onChange={handleDateChange}
-                value={storedselectedDate}
-              />
-              
+                  type="date"
+                  placeholder="Date_Time"
+                  className="bg-transparent"
+                  onChange={handleDateChange}
+                  value={storedselectedDate}
+                />
               )}
               {selectedDate && (
                 <h1 className="hidden">
@@ -975,13 +992,19 @@ const handleDateChange = (event) => {
             </div>
             <div className="bg-[#ECECEC] flex justify-around items-center text-center px-3 py-2 rounded-lg">
               {isSafari ? (
-                <input type="time" placeholder="HH:mm" />
+                <input
+                  type="time"
+                  placeholder="HH:mm"
+                  onChange={handleTimeChange}
+                  value={selectedTime}
+                />
               ) : (
                 <input
                   type="time"
                   placeholder="Time"
                   className="bg-transparent"
                   onChange={handleTimeChange}
+                  value={selectedTime}
                 />
               )}
             </div>
