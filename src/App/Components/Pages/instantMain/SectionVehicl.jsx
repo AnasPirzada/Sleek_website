@@ -114,6 +114,7 @@ const SectionVehicl = () => {
   const [storedselectedVehicle, setstoredselectedVehicle] = useState(null);
   const [storeddeliveryValues, setstoreddeliveryValues] = useState(null);
   const [storedPICKUPSTAIRS, setstoredPICKUPSTAIRS] = useState(null);
+  const [afterchangeSelecteddate, setafterchangeSelecteddate] = useState(null);
   // end
 
   // showing sessionstorage values in state in intial state will empty when value is adeed in session storage it will be added
@@ -134,6 +135,8 @@ const SectionVehicl = () => {
   const [selectedVehicleDuration, setSelectedVehicleDuration] = useState('');
   const [textareaData, setTextareaData] = useState('');
   const [selectedDate, setSelectedDate] = useState('');
+  const [placeholderDate, setPlaceholderDate] = useState('Date');
+
   const [selectedTime, setSelectedTime] = useState('');
   const [selectedValue, setSelectedValue] = useState('');
 
@@ -142,7 +145,7 @@ const SectionVehicl = () => {
   const [healthValues, setHealthValues] = useState(
     getAllSessionStorageValues()
   );
-  console.log('selectedVehicleDuration', selectedVehicleDuration);
+  console.log('fhaidfuhaifdankdfjaidfuhaui', selectedDate);
 
   // const [deliveryValues, setDeliveryValues] = useState(
   //   getAllSessionStorageValues()
@@ -150,48 +153,96 @@ const SectionVehicl = () => {
 
   const hoursOptions = [
     {
+      label: '1 hour',
+      value: '1 hour',
+    },
+    {
       label: '2 hours',
       value: '2 hours',
+    },
+    {
+      label: '3 hours',
+      value: '3 hours',
     },
     {
       label: '4 hours',
       value: '4 hours',
     },
     {
+      label: '5 hours',
+      value: '5 hours',
+    },
+    {
       label: '6 hours',
       value: '6 hours',
+    },
+    {
+      label: '7 hours',
+      value: '7 hours',
     },
     {
       label: '8 hours',
       value: '8 hours',
     },
     {
+      label: '9 hours',
+      value: '9 hours',
+    },
+    {
       label: '10 hours',
       value: '10 hours',
+    },
+    {
+      label: '11 hours',
+      value: '11 hours',
     },
     {
       label: '12 hours',
       value: '12 hours',
     },
     {
+      label: '13 hours',
+      value: '13 hours',
+    },
+    {
       label: '14 hours',
       value: '14 hours',
+    },
+    {
+      label: '15 hours',
+      value: '15 hours',
     },
     {
       label: '16 hours',
       value: '16 hours',
     },
     {
+      label: '17 hours',
+      value: '17 hours',
+    },
+    {
       label: '18 hours',
       value: '18 hours',
+    },
+    {
+      label: '19 hours',
+      value: '19 hours',
     },
     {
       label: '20 hours',
       value: '20 hours',
     },
     {
+      label: '21 hours',
+      value: '21 hours',
+    },
+    {
       label: '22 hours',
       value: '22 hours',
+    },
+    {
+      label: '23 hours',
+      value: '23 hours',
     },
     {
       label: '24 hours',
@@ -427,6 +478,8 @@ const SectionVehicl = () => {
 
   const handleDateChange = event => {
     const date = new Date(event.target.value);
+
+    console.log('Selecteddate', date);
     setSelectedDate(event.target.value);
 
     const day = date.getDay();
@@ -502,15 +555,14 @@ const SectionVehicl = () => {
     const storedPICKUPSTAIRS = sessionStorage.getItem('PICKUPSTAIRS');
     const storedDeliverySTAIRS = sessionStorage.getItem('DeliverySTAIRS');
     const storedYouHaveLIFTS = sessionStorage.getItem('YouHaveLIFTS');
+    const storedselectedDate = sessionStorage.getItem('selectedDate');
     const storedselectedVehicleDuration = sessionStorage.getItem(
       'selectedVehicleDuration'
-    ); 
-     const storedselectedstoredDescription = sessionStorage.getItem(
-      'Description'
     );
-      const storedselectedstoredEmailTextNeed = sessionStorage.getItem(
-      'EmailTextNeed'
-    );
+    const storedselectedstoredDescription =
+      sessionStorage.getItem('Description');
+    const storedselectedstoredEmailTextNeed =
+      sessionStorage.getItem('EmailTextNeed');
 
     if (storedEmail) {
       setStoredEmail(JSON.parse(storedEmail));
@@ -554,29 +606,28 @@ const SectionVehicl = () => {
       );
       setSelectedVehicleDuration(JSON.parse(storedselectedVehicleDuration));
     }
-    
-    
+
     if (storedselectedstoredDescription) {
-      
       setSelectedDescription(JSON.parse(storedselectedstoredDescription));
     }
 
-    
-if (storedselectedstoredEmailTextNeed) {
-      
-  setEmailTextNeedactiveOption(JSON.parse(storedselectedstoredEmailTextNeed));
+    if (storedselectedstoredEmailTextNeed) {
+      setEmailTextNeedactiveOption(
+        JSON.parse(storedselectedstoredEmailTextNeed)
+      );
     }
-
-
-
-
-
-    
-
-
+    if (storedselectedDate) {
+      console.log('storedselectedDate', storedselectedDate);
+      setafterchangeSelecteddate(JSON.parse(storedselectedDate));
+    }
   }, []);
 
   console.log('Stored Email:', storedEmail);
+
+  useEffect(() => {
+    console.log('Selected date (placeholder):', selectedDate || 'Date');
+    setPlaceholderDate(selectedDate || 'Date');
+  }, [selectedDate]);
   return (
     <>
       <section className='px-4 md:px-8 lg:px-16 xl:px-32 2xl:px-[135px]  overflow-x-hidden '>
@@ -951,10 +1002,11 @@ if (storedselectedstoredEmailTextNeed) {
               ) : (
                 <input
                   type='date'
-                  placeholder='Date_Time'
+                  // placeholder='Date'4
+                  placeholder={placeholderDate}
                   className='bg-transparent'
                   onChange={handleDateChange}
-                  // value={StoDateValue}
+                  value={afterchangeSelecteddate}
                 />
               )}
               {selectedDate && (

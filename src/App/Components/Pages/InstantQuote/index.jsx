@@ -527,11 +527,11 @@ const Index = () => {
     if (isWeekend(finalResult)) {
       TotalAmount =
         menValues[menKey] * weekendMultiplier +
-        5.75 +
+        10 +
         totalFlightsOfStairs +
         totalRate;
     } else {
-      TotalAmount = menValues[menKey] + 5.75 + totalFlightsOfStairs + totalRate;
+      TotalAmount = menValues[menKey] + 10 + totalFlightsOfStairs + totalRate;
     }
   } else {
     console.log('Hello');
