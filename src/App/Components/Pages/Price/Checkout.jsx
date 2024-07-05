@@ -14,7 +14,7 @@ const CheckoutForm = ({ amountInCents, formatEmailContent }) => {
     if (amountInCents > 0) {
       const paymentIntentData = {
         amount: amountInCents,
-        currency: 'usd',
+        currency: 'gpb',
         paymentMethodId: 'pm_card_visa',
         callbackUrl: 'https://ecom-gpay.vercel.app/success',
       };
@@ -152,7 +152,7 @@ const CheckoutForm = ({ amountInCents, formatEmailContent }) => {
           disabled={!stripe || !elements}
           onClick={Emailsend}
         >
-          Pay ${amountInCents / 100}
+          Pay Amount in Ounce £{amountInCents}
         </button>
         {paymentError && (
           <div className='text-red-500 mb-4'>{paymentError}</div>

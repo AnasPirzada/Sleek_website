@@ -34,7 +34,12 @@ const Price = () => {
   const [deliveryValues, setSelecteddeliveryValues] = useState('');
   const [DropOffAmount, setSelectedDropOffAmount] = useState('');
   const [pickupStreetAddress, setssavedpickupStreetAddress] = useState('');
+  const [pickupCityItem, setSelectedpickupCityItem] = useState('');
+
   const [deliveryStreetAddress, setssaveddeliveryStreetAddress] = useState('');
+
+  const [deliveryCityItem, setSelecteddeliveryCityItem] = useState('');
+
   const [selectedDate, setssavedselectedDate] = useState('');
   const [VehicleDuration, setssavedselectedVehicleDuration] = useState('');
 
@@ -46,7 +51,7 @@ const Price = () => {
   const [selecteddeliveryValues, setdeliveryValues] = useState(0);
 
   const location = useLocation();
-  console.log('Totoal Distance', distanceInMiles);
+  console.log('Totoal Distance', deliveryStreetAddress);
   // const { distanceInMiles } = location.state || { distanceInMiles: 0 };
   const roundedDistance = Math.round(distanceInMiles);
 
@@ -107,19 +112,24 @@ const Price = () => {
     const savedselectedVehicleDuration = JSON.parse(
       sessionStorage.getItem('selectedVehicleDuration')
     );
+
     const pickupStreetAddressItem = sessionStorage.getItem(
       'pickupStreetAddress'
     );
+    const pickupCityItem = sessionStorage.getItem('pickupCity');
 
     const deliveryStreetAddressItem = sessionStorage.getItem(
       'deliveryStreetAddress'
     );
+    const deliveryCityItem = sessionStorage.getItem('deliveryCity');
+
     const saveddeliveryStreetAddress =
       deliveryStreetAddressItem &&
       (deliveryStreetAddressItem.trim().startsWith('{') ||
         deliveryStreetAddressItem.trim().startsWith('['))
         ? JSON.parse(deliveryStreetAddressItem)
         : deliveryStreetAddressItem;
+
     const savedpickupStreetAddress =
       pickupStreetAddressItem &&
       (pickupStreetAddressItem.trim().startsWith('{') ||
@@ -127,11 +137,16 @@ const Price = () => {
         ? JSON.parse(pickupStreetAddressItem)
         : pickupStreetAddressItem;
 
+    setSelectedpickupCityItem(pickupCityItem);
+    setSelecteddeliveryCityItem(deliveryCityItem);
+
     setSelectedEmailofuser(savedEmailofuser);
     setSelectedName(savedName);
     setSelectedPhone(savedPhone);
     setSelectedValue(savedActiveOptionYouHaveLIFTS);
     setSelecteddeliveryValues(savedDeliveryValues);
+    setSelecteddeliveryValues(savedDeliveryValues);
+
     setSelectedVehicleDurationValue(savedSelectedVehicleDuration);
     setSelectedSelectedtotalDistance(savedSelectedtotalDistance);
     setSelectedSelectedtotalRatepermile(savedSelectedtotalRatepermile);
@@ -150,13 +165,19 @@ const Price = () => {
     setssavedselectedDate(savedselectedDate);
     setssavedselectedVehicleDuration(savedselectedVehicleDuration);
   }, []);
-  console.log('Pick Up Stairs', pickupStreetAddress);
-  console.log('Pick Up Stairs', pickupStairsValue);
+  console.log('Pick Up Stairs', deliveryStreetAddress);
+
+  // console.log('Pick Up Stairs', pickupStairsValue);
   console.log('Devlivery Stairs', deliveryStairsValue);
   console.log('deliveryValues', selecteddeliveryValues);
   console.log('car', selectedVehicleValue);
-  let TotalDespositedAmount;
-  depositAmount = 0.1 * TotalAmount;
+  
+  let TotalExtendedAmount;
+
+  TotalExtendedAmount=TotalAmount+totalRatepermile
+
+
+  depositAmount = 0.1 * TotalExtendedAmount;
 
   // TotalDespositedAmount=TotalAmount-depositAmount
 
@@ -187,6 +208,12 @@ const Price = () => {
       alert('Please Select Payment Method');
     }
   };
+
+  let DriverChargesValue;
+  DriverChargesValue = TotalExtendedAmount - DropOffAmount - PickupAmount;
+
+  // let TotalAmount;
+  // TotalAmount = TotalAmount + totalRatepermile;
 
   const formatEmailContent = () => {
     let vanDetails = '';
@@ -246,8 +273,8 @@ const Price = () => {
 
 
     **Moving details**
-    - PICKUP LOCATION: ${pickupStreetAddress}
-    - DROP-OFF LOCATION: ${deliveryStreetAddress}
+    - PICKUP LOCATION: ${pickupStreetAddress} + ${pickupCityItem}
+    - DROP-OFF LOCATION: ${deliveryStreetAddress} + ${deliveryCityItem}
     - PICKUP DATE, TIME: ${selectedDate} ${VehicleDuration}
     - PICKUP STAIRS: ${pickupStairsValue}
     - DROP-OFF STAIRS: ${deliveryStairsValue}
@@ -272,7 +299,7 @@ const Price = () => {
     - Additional Note ${Description}
   
   
-    **Total Cost: £${TotalAmount}**
+    **Total Cost: £${TotalExtendedAmount}**
     **To Pay now (10% deposit): £${depositAmount.toFixed(1)}**
 
 
@@ -288,8 +315,6 @@ const Price = () => {
   };
 
   // Calculated Driver Value Charges
-  let DriverChargesValue;
-  DriverChargesValue = TotalAmount - DropOffAmount - PickupAmount;
 
   return (
     <>
@@ -353,7 +378,7 @@ const Price = () => {
                       PICKUP LOCATION
                     </p>
                     <p className='text-base sm:text-lg md:text-xl lg:text-xl  text-[#181919] font-medium'>
-                      {pickupStreetAddress}
+                      {pickupStreetAddress}, Door Number ({pickupCityItem})
                     </p>
                   </div>
                   <hr className='border-black w-full mt-6 sm:mt-8 md:mt-10' />
@@ -364,7 +389,7 @@ const Price = () => {
                       DROP-OFF LOCATION
                     </p>
                     <p className='text-base sm:text-lg md:text-xl lg:text-xl text-[#181919] font-medium'>
-                      {deliveryStreetAddress}
+                      {deliveryStreetAddress}, Door Number ({deliveryCityItem})
                     </p>
                   </div>
                   <hr className='border-black w-full mt-6 sm:mt-8 md:mt-10' />
@@ -540,7 +565,7 @@ const Price = () => {
             </p>
             <div className='flex justify-between pt-10'>
               <h2 className='font-semibold text-lg sm:text-2xl'>Total Cost</h2>
-              <p className='font-medium text-lg sm:text-2xl'>£{TotalAmount}</p>
+              <p className='font-medium text-lg sm:text-2xl'>£{TotalExtendedAmount}</p>
             </div>
             <div className='flex justify-between py-6'>
               <h2 className='font-semibold text-lg sm:text-2xl'>

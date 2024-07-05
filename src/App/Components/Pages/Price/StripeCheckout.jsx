@@ -16,7 +16,7 @@ const StripeCheckout = () => {
     const pathSegments = location.pathname.split('/');
     const depositAmountFromPath = parseFloat(pathSegments[pathSegments.length - 1]);
     if (!isNaN(depositAmountFromPath)) {
-      const amountInCents = Math.floor(depositAmountFromPath * 100);
+      const amountInCents = Math.floor(depositAmountFromPath * 16);
       setAmountInCents(amountInCents);
     } else {
       alert('Invalid deposit amount in URL.');

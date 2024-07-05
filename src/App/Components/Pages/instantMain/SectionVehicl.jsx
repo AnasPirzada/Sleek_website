@@ -61,13 +61,13 @@ const SectionVehicl = () => {
       placeholder: "",
       label: "Street Address",
       type: "text",
-      key: "Street_Address",
+      key: "City",
     },
     {
       placeholder: "",
-      label: "DOOR/FLAT NUMBER",
+      label: "DOOR/FLAT NUMBER",
       type: "text",
-      key: "City",
+      key: "Street_Address",
     },
   ];
   const inputFieldsDeliveryData = [
@@ -85,7 +85,7 @@ const SectionVehicl = () => {
     },
     {
       placeholder: "",
-      label: "DOOR/FLAT NUMBER",
+      label: "DOOR/FLAT NUMBER",
       type: "text",
       key: "City",
     },
@@ -95,9 +95,9 @@ const SectionVehicl = () => {
       "pickupPostalCode",
       "pickupStreetAddress",
       "pickupCity",
+      "deliveryPostalCode",
       "deliveryStreetAddress",
       "deliveryCity",
-      "deliveryPostalCode",
     ];
 
     const valuesArray = sessionStorageKeys.map((key) => {
@@ -114,7 +114,6 @@ const SectionVehicl = () => {
   const [storedselectedVehicle, setstoredselectedVehicle] = useState(null);
   const [storeddeliveryValues, setstoreddeliveryValues] = useState(null);
   const [storedPICKUPSTAIRS, setstoredPICKUPSTAIRS] = useState(null);
-  const [afterchangeSelecteddate, setafterchangeSelecteddate] = useState(null);
   // end
 
   // showing sessionstorage values in state in intial state will empty when value is adeed in session storage it will be added
@@ -134,9 +133,11 @@ const SectionVehicl = () => {
 
   const [selectedVehicleDuration, setSelectedVehicleDuration] = useState("");
   const [textareaData, setTextareaData] = useState("");
+
   const [selectedDate, setSelectedDate] = useState("");
-  const [storedselectedDate, setstoredselectedDate] = useState("");
+
   const [selectedTime, setSelectedTime] = useState("");
+
   const [selectedValue, setSelectedValue] = useState("");
 
   const [selectedStairsValue, setSelectedStairsValue] = useState("");
@@ -144,7 +145,7 @@ const SectionVehicl = () => {
   const [healthValues, setHealthValues] = useState(
     getAllSessionStorageValues()
   );
-  console.log('selectedVehicleDuration', selectedVehicleDuration);
+  console.log("helonewtime", selectedTime);
 
   // const [deliveryValues, setDeliveryValues] = useState(
   //   getAllSessionStorageValues()
@@ -152,100 +153,96 @@ const SectionVehicl = () => {
 
   const hoursOptions = [
     {
-      label: '1 hour',
-      value: '1 hour',
+      label: "1 hour",
+      value: "1 hour",
     },
     {
       label: "2 hours",
       value: "2 hours",
     },
     {
-      label: '3 hours',
-      value: '3 hours',
+      label: "3 hours",
+      value: "3 hours",
     },
     {
       label: "4 hours",
       value: "4 hours",
     },
     {
-      label: '5 hours',
-      value: '5 hours',
+      label: "5 hours",
+      value: "5 hours",
     },
     {
       label: "6 hours",
       value: "6 hours",
     },
     {
-      label: '7 hours',
-      value: '7 hours',
-    },
-    {
-      label: '7 hours',
-      value: '7 hours',
+      label: "7 hours",
+      value: "7 hours",
     },
     {
       label: "8 hours",
       value: "8 hours",
     },
     {
-      label: '9 hours',
-      value: '9 hours',
+      label: "9 hours",
+      value: "9 hours",
     },
     {
       label: "10 hours",
       value: "10 hours",
     },
     {
-      label: '11 hours',
-      value: '11 hours',
+      label: "11 hours",
+      value: "11 hours",
     },
     {
       label: "12 hours",
       value: "12 hours",
     },
     {
-      label: '13 hours',
-      value: '13 hours',
+      label: "13 hours",
+      value: "13 hours",
     },
     {
       label: "14 hours",
       value: "14 hours",
     },
     {
-      label: '15 hours',
-      value: '15 hours',
+      label: "15 hours",
+      value: "15 hours",
     },
     {
       label: "16 hours",
       value: "16 hours",
     },
     {
-      label: '17 hours',
-      value: '17 hours',
+      label: "17 hours",
+      value: "17 hours",
     },
     {
       label: "18 hours",
       value: "18 hours",
     },
     {
-      label: '19 hours',
-      value: '19 hours',
+      label: "19 hours",
+      value: "19 hours",
     },
     {
       label: "20 hours",
       value: "20 hours",
     },
     {
-      label: '21 hours',
-      value: '21 hours',
+      label: "21 hours",
+      value: "21 hours",
     },
     {
       label: "22 hours",
       value: "22 hours",
     },
     {
-      label: '23 hours',
-      value: '23 hours',
+      label: "23 hours",
+      value: "23 hours",
     },
     {
       label: "24 hours",
@@ -397,11 +394,11 @@ const SectionVehicl = () => {
     // Store data in session storage whenever it changes
     const sessionStorageKeys = [
       "pickupPostalCode",
-      "pickupCity",
       "pickupStreetAddress",
+      "pickupCity",
+      "deliveryPostalCode",
       "deliveryStreetAddress",
       "deliveryCity",
-      "deliveryPostalCode",
     ];
 
     sessionStorageKeys.forEach((key, i) => {
@@ -409,22 +406,22 @@ const SectionVehicl = () => {
     });
   };
 
-  // const handleDeliveryChange = (index, e) => {
-  //   const updatedDeliveryValues = [...deliveryValues];
-  //   updatedDeliveryValues[index] = e.target.value;
-  //   setDeliveryValues(updatedDeliveryValues);
+  const handleDeliveryChange = (index, e) => {
+    const updatedDeliveryValues = [...deliveryValues];
+    updatedDeliveryValues[index] = e.target.value;
+    setDeliveryValues(updatedDeliveryValues);
 
-  //   // // Store data in session storage whenever it changes
-  //   // const sessionStorageKeys = [
-  //   //   'deliveryPostalCode',
-  //   //   'deliveryCity',
-  //   //   'deliveryStreetAddress',
-  //   // ];
+    // Store data in session storage whenever it changes
+    const sessionStorageKeys = [
+      'deliveryPostalCode',
+      'deliveryStreetAddress',
+      'deliveryCity',
+    ];
 
-  //   sessionStorageKeys.forEach((key, i) => {
-  //     sessionStorage.setItem(key, updatedDeliveryValues[i]);
-  //   });
-  // };
+    sessionStorageKeys.forEach((key, i) => {
+      sessionStorage.setItem(key, updatedDeliveryValues[i]);
+    });
+  };
 
   const { distanceInMiles, pickupLocation, deliveryLocation } =
     location.state || {
@@ -468,7 +465,7 @@ const SectionVehicl = () => {
     setIsEditMode(!isEditMode);
   };
 
-  // const [issecondEditMode, setIssecondEditMode] = useState(false);
+  const [issecondEditMode, setIssecondEditMode] = useState(false);
 
   const togglesecondEditMode = () => {
     setIssecondEditMode(!issecondEditMode);
@@ -477,18 +474,30 @@ const SectionVehicl = () => {
   useEffect(() => {
     const storedselectedDate = sessionStorage.getItem("selectedDate");
     const storedselectedTime = sessionStorage.getItem("selectedTime");
+
     if (storedselectedDate) {
-      setstoredselectedDate(storedselectedDate);
+      setSelectedDate(storedselectedDate);
     }
     if (storedselectedTime) {
       setSelectedTime(storedselectedTime);
     }
   }, []);
 
+  useEffect(() => {
+    // Get the value from session storage
+    const storedTime = sessionStorage.getItem("selectedTime");
+    console.log("timeValue", storedTime);
+
+    if (storedTime) {
+      setSelectedTime(JSON.parse(storedTime));
+    }
+  }, []);
+
   const handleTimeChange = (event) => {
-    const time = event.target.value;
-    setSelectedTime(time);
-    sessionStorage.setItem("selectedTime", time);
+    const timeValue = event.target.value;
+    setSelectedTime(timeValue);
+    // Save the value to session storage
+    sessionStorage.setItem("selectedTime", timeValue);
   };
 
   console.log("SelectedTime ", selectedTime);
@@ -497,17 +506,20 @@ const SectionVehicl = () => {
   const [dayType, setDayType] = useState("");
 
   useEffect(() => {
-    const storedselectedDate = sessionStorage.getItem("selectedDate");
-    if (storedselectedDate) {
-      setstoredselectedDate(storedselectedDate); // No need to JSON.parse if the stored value is a string
+    const storedDate = sessionStorage.getItem("selectedDate");
+    console.log("dateValue", storedDate);
+
+    if (storedDate) {
+      setSelectedDate(JSON.parse(storedDate));
     }
   }, []);
 
   const handleDateChange = (event) => {
-    const date = new Date(event.target.value);
+    const dateValue = event.target.value;
 
-    console.log('Selecteddate', date);
-    setSelectedDate(event.target.value);
+    const date = new Date(dateValue);
+
+    setSelectedDate(dateValue);
 
     const day = date.getDay();
     if (day === 0 || day === 6) {
@@ -516,8 +528,7 @@ const SectionVehicl = () => {
       setDayType("Weekday");
     }
 
-    setstoredselectedDate(event.target.value); // Also update storedselectedDate when input changes
-    sessionStorage.setItem("selectedDate", event.target.value); // Update session storage as well
+    sessionStorage.setItem("selectedDate", dateValue);
   };
 
   let SelectedWeekDate;
@@ -527,7 +538,6 @@ const SectionVehicl = () => {
   console.log("SelectedWeekDate", SelectedWeekDate);
 
   const [deliveryValues, setDeliveryValues] = useState([]);
-  const [issecondEditMode, setIsSecondEditMode] = useState(false);
 
   // Initialize delivery values from session storage
   useEffect(() => {
@@ -547,18 +557,15 @@ const SectionVehicl = () => {
   }, []);
 
   // Function to handle delivery input changes
-  const handleDeliveryChange = (index, e) => {
-    const newDeliveryValues = [...deliveryValues];
-    newDeliveryValues[index] = e.target.value;
-    setDeliveryValues(newDeliveryValues);
-  };
+  // const handleDeliveryChange = (index, e) => {
+  //   const newDeliveryValues = [...deliveryValues];
+  //   newDeliveryValues[index] = e.target.value;
+  //   setDeliveryValues(newDeliveryValues);
+  // };
 
   // Function to handle changes (if needed)
 
   // Toggle edit mode
-  const toggleSecondEditMode = () => {
-    setIsSecondEditMode(!issecondEditMode);
-  };
 
   const [estimatedTime, setEstimatedTime] = useState("");
 
@@ -577,23 +584,21 @@ const SectionVehicl = () => {
   // getting values from localStorage
 
   useEffect(() => {
-    const storedEmail = sessionStorage.getItem('Email');
-    const storedName = sessionStorage.getItem('Name');
-    const storedPhone = sessionStorage.getItem('Phone');
-    const storedselectedVehicle = sessionStorage.getItem('selectedVehicle');
-    const storeddeliveryValues = sessionStorage.getItem('deliveryValues');
-    const storedPICKUPSTAIRS = sessionStorage.getItem('PICKUPSTAIRS');
-    const storedDeliverySTAIRS = sessionStorage.getItem('DeliverySTAIRS');
-    const storedYouHaveLIFTS = sessionStorage.getItem('YouHaveLIFTS');
+    const storedEmail = sessionStorage.getItem("Email");
+    const storedName = sessionStorage.getItem("Name");
+    const storedPhone = sessionStorage.getItem("Phone");
+    const storedselectedVehicle = sessionStorage.getItem("selectedVehicle");
+    const storeddeliveryValues = sessionStorage.getItem("deliveryValues");
+    const storedPICKUPSTAIRS = sessionStorage.getItem("PICKUPSTAIRS");
+    const storedDeliverySTAIRS = sessionStorage.getItem("DeliverySTAIRS");
+    const storedYouHaveLIFTS = sessionStorage.getItem("YouHaveLIFTS");
     const storedselectedVehicleDuration = sessionStorage.getItem(
-      'selectedVehicleDuration'
-    ); 
-     const storedselectedstoredDescription = sessionStorage.getItem(
-      'Description'
+      "selectedVehicleDuration"
     );
-      const storedselectedstoredEmailTextNeed = sessionStorage.getItem(
-      'EmailTextNeed'
-    );
+    const storedselectedstoredDescription =
+      sessionStorage.getItem("Description");
+    const storedselectedstoredEmailTextNeed =
+      sessionStorage.getItem("EmailTextNeed");
 
     if (storedEmail) {
       setStoredEmail(JSON.parse(storedEmail));
@@ -647,17 +652,9 @@ const SectionVehicl = () => {
         JSON.parse(storedselectedstoredEmailTextNeed)
       );
     }
-
-
-
-
-
-    
-
-
   }, []);
 
-  console.log('Stored Email:', storedEmail);
+  console.log("Stored Email:", storedEmail);
   return (
     <>
       <section className="px-4 md:px-8 lg:px-16 xl:px-32 2xl:px-[135px]  overflow-x-hidden ">
@@ -709,7 +706,7 @@ const SectionVehicl = () => {
             >
               <img src={option.imgSrc} alt={option.label} />
               <label className="inline-flex items-center cursor-pointer text-center">
-                <div className={`cursor-pointer`}>
+                <div className="cursor-pointer">
                   <div className=" sm:w-[19px] sm:h-[19px] lg:w-[24px] lg:h-[24px] md:w-[24px] md:h-[24px] xl:w-[24px] xl:h-[24px] 2xl:w-[24px] 2xl:h-[24px]  w-[20px] h-[20px] rounded-full flex justify-center items-center border-2 border-[#E97B08] m-1">
                     <div
                       className={`h-[15px] w-[15px]   border rounded-full ${
@@ -734,7 +731,7 @@ const SectionVehicl = () => {
             Will you need help with loading and unloading?
           </h1>
           <p className="font-normal text-base leading-[19.36px] inter text-[#444545] pt-2">
-            If you can load and unload the van, choose   No Help Needed on the
+            If you can load and unload the van, choose No Help Needed on the
             form to save money.
           </p>
         </div>
@@ -751,7 +748,7 @@ const SectionVehicl = () => {
             >
               <img src={option.imgSrc} alt={option.label} className="" />
               <label className="inline-flex items-center cursor-pointer text-center">
-                <div className={`cursor-pointer`}>
+                <div className="cursor-pointer">
                   <div className="sm:w-[19px] sm:h-[19px] lg:w-[24px] lg:h-[24px] md:w-[24px] md:h-[24px] xl:w-[24px] xl:h-[24px] 2xl:w-[24px] 2xl:h-[24px]  w-[20px] h-[20px] rounded-full flex justify-center items-center border-2 border-[#E97B08] m-1">
                     <div
                       className={`h-[15px] w-[15px] border rounded-full ${
@@ -780,7 +777,7 @@ const SectionVehicl = () => {
           </h1>
           <p className="font-normal text-base leading-[19.36px] inter pt-2 text-[#444545]">
             If you will be able to bring your items downstairs, then choose no
-            flights of stairs on the booking form to save some money.
+            flights of stairs on the booking form to save some money.
           </p>
         </div>
         <div>
@@ -788,7 +785,9 @@ const SectionVehicl = () => {
             <p className="text-[#181919] text-xl	">
               Collection Address{" "}
               <span
-                className="text-[#E97B08] text-base cursor-pointer"
+                className={`text-base cursor-pointer border-[#E97B08] text-[#E97B08] ${
+                  isEditMode ? "border-b-0" : "border-b-2"
+                }`}
                 onClick={toggleEditMode}
               >
                 Edit
@@ -817,7 +816,7 @@ const SectionVehicl = () => {
 
             <div className="flex-1 pt-2 flex flex-col">
               <h2 className="py-2 text-sm md:text-base lg:text-lg">
-                PICK-UP STAIRS 
+                PICK-UP STAIRS
               </h2>
               <select
                 className="h-[40px] w-full md:w-auto bg-[#ECECEC] rounded"
@@ -839,7 +838,9 @@ const SectionVehicl = () => {
             <p className="text-[#181919] text-xl	">
               Delivery Address{" "}
               <span
-                className="text-[#E97B08] text-base		cursor-pointer"
+                className={`text-base cursor-pointer border-[#E97B08] text-[#E97B08] ${
+                  issecondEditMode ? "border-b-0" : "border-b-2"
+                }`}
                 onClick={togglesecondEditMode}
               >
                 Edit
@@ -869,7 +870,7 @@ const SectionVehicl = () => {
 
             <div className="flex-1 pt-2 flex flex-col">
               <h2 className="py-2 text-sm md:text-base lg:text-lg">
-                DROP-OFF STAIRS 
+                DROP-OFF STAIRS
               </h2>
               <select
                 className="h-[40px] w-full md:w-auto bg-[#ECECEC] rounded"
@@ -888,7 +889,7 @@ const SectionVehicl = () => {
 
         <div className="pt-[47px]">
           <h1 className=" font-medium text-xl leading-[24px] text-[#181919]">
-            DO YOU HAVE LIFTS? 
+            DO YOU HAVE LIFTS?
           </h1>
           <div className="flex gap-5 pt-6">
             <div className="flex gap-3 items-center">
@@ -1032,15 +1033,15 @@ const SectionVehicl = () => {
                   type="date"
                   placeholder="yyyy-mm-dd"
                   onChange={handleDateChange}
-                  value={storedselectedDate}
+                  value={selectedDate}
                 />
               ) : (
                 <input
-                  type='date'
-                  placeholder='Date_Time'
-                  className='bg-transparent'
+                  type="date"
+                  placeholder="Date_Time"
+                  className="bg-transparent"
                   onChange={handleDateChange}
-                  // value={StoDateValue}
+                  value={selectedDate}
                 />
               )}
               {selectedDate && (
@@ -1054,7 +1055,7 @@ const SectionVehicl = () => {
               {isSafari ? (
                 <input
                   type="time"
-                  placeholder="HH:mm"
+                  placeholder="HH:mm:ss"
                   onChange={handleTimeChange}
                   value={selectedTime}
                 />

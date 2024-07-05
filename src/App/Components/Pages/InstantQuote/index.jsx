@@ -512,6 +512,7 @@ const Index = () => {
   console.log('smalhelpersvalue:', helpersvalue);
 
   let TotalAmount;
+
   const menValues = {
     NOvalue: NOvalue,
     Drivervalue: Drivervalue,
@@ -528,7 +529,7 @@ const Index = () => {
       TotalAmount =
         menValues[menKey] * weekendMultiplier +
         10 +
-        totalFlightsOfStairs +
+        totalFlightsOfStairs+
         totalRate;
     } else {
       TotalAmount = menValues[menKey] + 10 + totalFlightsOfStairs + totalRate;
@@ -536,6 +537,8 @@ const Index = () => {
   } else {
     console.log('Hello');
   }
+
+
 
   console.log('TotalAmount:', TotalAmount);
 
