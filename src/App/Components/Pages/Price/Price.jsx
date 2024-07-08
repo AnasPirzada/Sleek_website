@@ -202,8 +202,8 @@ const Price = () => {
           formatEmailContent: emailContent,
         },
       });
-    } else if (activeOptionPaymentMethod === 'PayPal') {
-      alert('PayPal Is Coming Soon');
+    } else if (activeOptionPaymentMethod === 'Paypal') {
+      alert('Paypal Is Coming Soon');
     } else {
       alert('Please Select Payment Method');
     }
@@ -211,7 +211,7 @@ const Price = () => {
 
   let DriverChargesValue;
   DriverChargesValue = TotalExtendedAmount - DropOffAmount - PickupAmount;
-
+console.log("totalRatepermile",totalRatepermile);
   // let TotalAmount;
   // TotalAmount = TotalAmount + totalRatepermile;
 
@@ -314,7 +314,14 @@ const Price = () => {
   `;
   };
 
-  // Calculated Driver Value Charges
+
+  // Set totoal Value in session storage  
+  
+
+
+
+
+
 
   return (
     <>
