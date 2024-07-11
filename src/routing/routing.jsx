@@ -13,6 +13,8 @@ import StripeCheckout from '../App/Components/Pages/Price/StripeCheckout.jsx';
 import Price from '../App/Components/Pages/Price/Price';
 import Services from '../App/Components/Pages/Services/index';
 import InstantMain from '../App/Components/Pages/instantMain/SectionVehicl';
+import PaymentMethod from '../App/Components/Pages/Price/paymentMethod.jsx';
+
 export const router = createBrowserRouter([
   {
     path: '/',
@@ -152,6 +154,16 @@ export const router = createBrowserRouter([
       <>
         <Navbar />
         <Services />
+        <Footer />
+      </>
+    ),
+  },
+  {
+    path: '/paymentmethods/:depositAmount',
+    element: (
+      <>
+        <Navbar />
+        <PaymentMethod />
         <Footer />
       </>
     ),

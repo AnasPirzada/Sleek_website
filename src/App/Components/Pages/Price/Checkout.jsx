@@ -98,7 +98,7 @@ const CheckoutForm = ({ amountInCents, formatEmailContent }) => {
     }
   };
 
-  console.log('First start to send email...', formatEmailContent);
+  console.log('hellogi', formatEmailContent);
 
   const Emailsend = () => {
     console.log('Preparing to send email...');

@@ -793,6 +793,9 @@ const SectionVehicl = () => {
                 Edit
               </span>
             </p>
+
+
+            <p className="mt-2  text-[#E97B08] ">Click on Edit to Edit the Address</p>
           </div>
           <div className=" flex flex-col md:flex-row flex-wrap gap-4 justify-between">
             {inputFieldsData.map((inputh, index) => (
@@ -846,6 +849,8 @@ const SectionVehicl = () => {
                 Edit
               </span>
             </p>
+            <p className="mt-2  text-[#E97B08] ">Click on Edit to Edit the Address</p>
+
           </div>
           <div className="flex flex-col md:flex-row flex-wrap gap-4 justify-between">
             {inputFieldsDeliveryData.map((inputh, index) => (
