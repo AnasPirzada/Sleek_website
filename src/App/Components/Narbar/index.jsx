@@ -57,7 +57,7 @@ export const Index = () => {
                     onClick={toggleDropdown1}
                     className="cursor-pointer text-[#FFFFFF]"
                   >
-                    Reviews 
+                    Reviews
                   </NavLink>
                   {dropdown1Open && (
                     <div className="absolute bg-white mt-1 p-2 shadow-lg rounded-md">
@@ -65,13 +65,13 @@ export const Index = () => {
                       <NavLink
                         to="https://uk.trustpilot.com/review/sleekassuredremovals.com"
                         href=""
-                        className="text-[12px] text-nowrap"
+                        className="text-[12px] text-nowrap text-[#000]"
                       >
                         TrustPilot review <br />
                       </NavLink>
                       <NavLink
                         to="https://www.google.com/search?q=sleekassuredremovals&oq=sleekassuredremovals&gs_lcrp=EgZjaHJvbWUyBggAEEUYOTIGCAEQRRg8MgYIAhBFGDwyBggDEEUYPDIGCAQQRRg8MgYIBRBFGDzSAQg2MzkyajBqNKgCALACAA&sourceid=chrome&ie=UTF-8"
-                        className="text-[12px] text-nowrap my-1"
+                        className="text-[12px] text-nowrap my-1 text-[#000]"
                       >
                         Google Reviews
                       </NavLink>
@@ -143,6 +143,34 @@ export const Index = () => {
                       <li className="mb-6">{link.text}</li>
                     </NavLink>
                   ))}
+                </ul>
+                <ul className="text-white text-[14px] font-[400]">
+                  <div className="relative">
+                    <NavLink
+                      onClick={toggleDropdown1}
+                      className="cursor-pointer text-[#FFFFFF]"
+                    >
+                      Reviews
+                    </NavLink>
+                    {dropdown1Open && (
+                      <div className="absolute bg-white mt-1 p-2 shadow-lg rounded-md">
+                        {/* Dropdown 1 content */}
+                        <NavLink
+                          to="https://uk.trustpilot.com/review/sleekassuredremovals.com"
+                          href=""
+                          className="text-[12px] text-nowrap text-[#000]"
+                        >
+                          TrustPilot review <br />
+                        </NavLink>
+                        <NavLink
+                          to="https://www.google.com/search?q=sleekassuredremovals&oq=sleekassuredremovals&gs_lcrp=EgZjaHJvbWUyBggAEEUYOTIGCAEQRRg8MgYIAhBFGDwyBggDEEUYPDIGCAQQRRg8MgYIBRBFGDzSAQg2MzkyajBqNKgCALACAA&sourceid=chrome&ie=UTF-8"
+                          className="text-[12px] text-nowrap my-1 text-[#000]"
+                        >
+                          Google Reviews
+                        </NavLink>
+                      </div>
+                    )}
+                  </div>
                 </ul>
                 {/* Social icons */}
                 <div className="flex gap-4 mt-4">
