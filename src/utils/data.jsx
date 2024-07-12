@@ -182,7 +182,6 @@ export const navLinks = [
   { text: "FAQ", route: "/faqs" },
   { text: "Blog", route: "/blog" },
   { text: "Instant Quote", route: "/instantQuotes" },
-  { text: "Reviews", route: "/review" },
 ];
 
 export const CardData = [

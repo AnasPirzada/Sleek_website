@@ -175,7 +175,7 @@ const Price = () => {
 
   let TotalExtendedAmount;
 
-  TotalExtendedAmount = TotalAmount ;
+  TotalExtendedAmount = TotalAmount;
 
   depositAmount = 0.1 * TotalExtendedAmount;
 
@@ -203,9 +203,19 @@ const Price = () => {
     });
   };
 
-  let DriverChargesValue;
-  DriverChargesValue = TotalExtendedAmount - DropOffAmount - PickupAmount;
-  console.log("totalRatepermile", totalRatepermile);
+  let DriverChargesValue ;
+  DriverChargesValue =
+    TotalExtendedAmount - DropOffAmount - PickupAmount - totalRatepermile;
+  console.log("DriverChargesValue");
+  console.log(
+    "totalRatepermile",
+    totalRatepermile,
+    DropOffAmount,
+    PickupAmount,
+    TotalExtendedAmount,
+    TotalAmount,
+    DriverChargesValue
+  );
   // let TotalAmount;
   // TotalAmount = TotalAmount + totalRatepermile;
 
@@ -309,7 +319,26 @@ const Price = () => {
   };
 
   // Set totoal Value in session storage
-
+  const [additionalTimePrice, setAdditionalTimePrice] = useState("£42.50");
+  useEffect(() => {
+    switch (selectedVehicleValue) {
+      case "small-van":
+        setAdditionalTimePrice("£15.00");
+        break;
+      case "medium-van":
+        setAdditionalTimePrice("£25.00");
+        break;
+      case "large-van":
+        setAdditionalTimePrice("£35.00");
+        break;
+      case "giant-van":
+        setAdditionalTimePrice("£45.00");
+        break;
+      default:
+        setAdditionalTimePrice("£42.50");
+        break;
+    }
+  }, [selectedVehicleValue]);
   return (
     <>
       <Navbar />
@@ -521,17 +550,7 @@ const Price = () => {
               </div>
               <hr className="border-black w-full mt-6 sm:mt-8 md:mt-10" />
             </div>
-            {/* <div className='rounded-xl py-6 sm:py-8 md:py-10'>
-              <div className='flex justify-between'>
-                <p className='text-base sm:text-lg md:text-xl lg:text-2xl font-normal text-[#272828]'>
-                  Driver Time Charges
-                </p>
-                <p className='text-base sm:text-lg md:text-xl lg:text-2xl text-[#181919] font-medium'>
-                  £{DrivervalueCharges}
-                </p>
-              </div>
-              <hr className='border-black w-full mt-6 sm:mt-8 md:mt-10' />
-            </div> */}
+
             <div className="rounded-xl py-6 sm:py-8 md:py-10">
               <div className="flex justify-between">
                 <p className="text-base sm:text-lg md:text-xl lg:text-2xl font-normal text-[#272828]">
@@ -543,19 +562,10 @@ const Price = () => {
               </div>
               <hr className="border-black w-full mt-6 sm:mt-8 md:mt-10" />
             </div>
-            {/* <div className="rounded-xl py-6 sm:py-8 md:py-10">
-              <div className="flex justify-between">
-                <p className="text-base sm:text-lg md:text-xl lg:text-2xl font-normal text-[#272828]">
-                  any additional Charges
-                </p>
-                <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-[#181919] font-medium">
-                  £42.50 Per Half Hour
-                </p>
-              </div>
-              <hr className="border-black w-full mt-6 sm:mt-8 md:mt-10" />
-            </div> */}
+
             <p className="my-10 text-red-500 text-base">
-              ANY ADDITIONAL TIME WILL BE CHARGED AT £42.50 Per Half Hour
+              ANY ADDITIONAL TIME WILL BE CHARGED AT {additionalTimePrice} Per
+              Half Hour
             </p>
             <div className="flex justify-between pt-10">
               <h2 className="font-semibold text-lg sm:text-2xl">Total Cost</h2>
@@ -575,50 +585,6 @@ const Price = () => {
               </p>
             </div>
             <div className="my-10">
-              {/* <p className="text-[#181919] text-[24px]">
-                Choose the payment method
-              </p>
-              <div className="flex gap-5 pt-6">
-                <div className="flex gap-3 items-center">
-                  <div
-                    className={`h-[24px] w-[24px] border-2 rounded-full flex justify-center items-center text-center cursor-pointer ${
-                      activeOptionPaymentMethod === "Stripe"
-                        ? "border-[#E97B08]"
-                        : "border-black"
-                    }`}
-                    // onClick={() => handleOptionPaymentMethod("Stripe")}
-                  >
-                    <div
-                      className={`h-[16px] w-[16px] rounded-full ${
-                        activeOptionPaymentMethod === "Stripe"
-                          ? "bg-[#E97B08]"
-                          : "bg-white"
-                      }`}
-                    ></div>
-                  </div>
-                  <img src="/Strip.svg" alt="Stripe" />
-                </div>
-                <div className="flex gap-3 items-center">
-                  <div
-                    className={`h-[24px] w-[24px] border-2 rounded-full flex justify-center items-center text-center cursor-pointer ${
-                      activeOptionPaymentMethod === "Paypal"
-                        ? "border-[#E97B08]"
-                        : "border-black"
-                    }`}
-                    // onClick={() => handleOptionPaymentMethod("Paypal")}
-                  >
-                    <div
-                      className={`h-[16px] w-[16px] rounded-full ${
-                        activeOptionPaymentMethod === "Paypal"
-                          ? "bg-[#E97B08]"
-                          : "bg-white"
-                      }`}
-                    ></div>
-                  </div>
-                  <img src="/Frame 109.png" alt="Paypal" />
-                </div>
-              </div> */}
-
               <div className="text-center my-5">
                 <button
                   onClick={SelectedPaymentMethod}

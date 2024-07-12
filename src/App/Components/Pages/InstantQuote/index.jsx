@@ -387,7 +387,7 @@ const Index = () => {
 
     return total;
   }
-  let TotalAmount;
+  let TotalAmount =0;
 
 
   if (finalResult === "Weekday:") {
@@ -424,6 +424,8 @@ console.log("TotalAmount",TotalAmount,totalRate);
 
   console.log("MEnuValues", menValues);
   const vehicleTypes = ["small-van", "medium-van", "large-van", "giant-van"];
+ 
+
  
   sessionStorage.setItem("TotalAmount", TotalAmount);
   sessionStorage.setItem("totalRate", totalRate);
@@ -463,11 +465,11 @@ console.log("TotalAmount",TotalAmount,totalRate);
             a <span className="font-semibold	">{selectedVehicle}</span> for{" "}
             <span className="font-semibold	"> {selectedVehicleDuration} </span>
             with <span className="font-semibold	"> {deliveryValues} </span>{" "}
-            &nbsp;loading it.
+            &nbsp;loading and unloading.
           </p>
-          <p className="text-base	font-[400] text-[#E97B08]">
+          {/* <p className="text-base	font-[400] text-[#E97B08]">
             Pay the payment below by pressing the Book Now button.
-          </p>
+          </p> */}
           {/* <div className='rounded-xl py-6 sm:py-8 md:py-10'>
             <div className='flex items-center'>
               <p className='text-base sm:text-lg md:text-xl lg:text-2xl font-normal text-[#272828]'>

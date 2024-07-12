@@ -152,10 +152,7 @@ const SectionVehicl = () => {
   // );
 
   const hoursOptions = [
-    {
-      label: "1 hour",
-      value: "1 hour",
-    },
+    
     {
       label: "2 hours",
       value: "2 hours",
@@ -795,7 +792,8 @@ const SectionVehicl = () => {
             </p>
 
 
-            <p className="mt-2  text-[#E97B08] ">Click on Edit to Edit the Address</p>
+            <p className="mt-2  text-[#E97B08] ">Click on Edit to Add Door/Flat Number</p>
+
           </div>
           <div className=" flex flex-col md:flex-row flex-wrap gap-4 justify-between">
             {inputFieldsData.map((inputh, index) => (
@@ -849,7 +847,8 @@ const SectionVehicl = () => {
                 Edit
               </span>
             </p>
-            <p className="mt-2  text-[#E97B08] ">Click on Edit to Edit the Address</p>
+            <p className="mt-2  text-[#E97B08] ">Click on Edit to Add Door/Flat Number
+            </p>
 
           </div>
           <div className="flex flex-col md:flex-row flex-wrap gap-4 justify-between">
