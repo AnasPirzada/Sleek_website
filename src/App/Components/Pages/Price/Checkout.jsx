@@ -1,6 +1,8 @@
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import emailjs from 'emailjs-com';
 import React, { useEffect, useState } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const CheckoutForm = ({ amountInCents, formatEmailContent }) => {
   const stripe = useStripe();
@@ -41,34 +43,40 @@ const CheckoutForm = ({ amountInCents, formatEmailContent }) => {
             setPaymentIntentStatus(data.paymentIntent.status);
           } else {
             setPaymentError('Received incomplete data from server');
+            toast.error('Received incomplete data from server');
           }
         })
         .catch(error => {
           console.error('Error fetching client secret:', error.message);
           setPaymentError('Error fetching client secret');
+          toast.error('Error fetching client secret');
         });
     }
   }, [amountInCents]);
+
   // Initialize EmailJS
   useEffect(() => {
     emailjs.init('ZIx7xdSk-EHLqBZOd');
   }, []);
+
   const handlePayment = async () => {
     if (!clientSecret) {
-      setPaymentError(
-        'Invalid client secret or payment intent status received'
-      );
+      const errorMessage = 'Invalid client secret or payment intent status received';
+      setPaymentError(errorMessage);
+      toast.error(errorMessage);
       return;
     }
 
     if (paymentIntentStatus === 'succeeded') {
-      setPaymentError('Payment Succeeded');
+      toast.success('Payment Succeeded');
       return;
     } else if (
       paymentIntentStatus !== 'requires_confirmation' &&
       paymentIntentStatus !== 'requires_action'
     ) {
-      setPaymentError(`Unexpected payment status: ${paymentIntentStatus}`);
+      const errorMessage = `Unexpected payment status: ${paymentIntentStatus}`;
+      setPaymentError(errorMessage);
+      toast.error(errorMessage);
       return;
     }
 
@@ -84,23 +92,28 @@ const CheckoutForm = ({ amountInCents, formatEmailContent }) => {
 
       if (error) {
         console.error('Stripe payment error:', error);
-        setPaymentError(`Payment failed: ${error.message}`);
+        const errorMessage = `Payment failed: ${error.message}`;
+        setPaymentError(errorMessage);
+        toast.error(errorMessage);
       } else if (paymentIntent.status === 'succeeded') {
         console.log('Payment succeeded:', paymentIntent);
-        sendEmail();
+        toast.success('Payment Succeeded');
+        sendEmail(); // Assuming sendEmail is defined elsewhere
       } else {
         console.warn('Unexpected payment status:', paymentIntent.status);
-        setPaymentError(`Unexpected payment status: ${paymentIntent.status}`);
+        const errorMessage = `Unexpected payment status: ${paymentIntent.status}`;
+        setPaymentError(errorMessage);
+        toast.error(errorMessage);
       }
     } catch (error) {
       console.error('Payment processing error:', error.message);
-      setPaymentError(`Payment processing error: ${error.message}`);
+      const errorMessage = `Payment processing error: ${error.message}`;
+      setPaymentError(errorMessage);
+      toast.error(errorMessage);
     }
   };
 
-  console.log('hellogi', formatEmailContent);
-
-  const Emailsend = () => {
+  const sendEmail = () => {
     console.log('Preparing to send email...');
     const emailContent = formatEmailContent;
     const templateParams = {
@@ -111,15 +124,11 @@ const CheckoutForm = ({ amountInCents, formatEmailContent }) => {
       .send('service_fwnx2ff', 'template_owfy6ml', templateParams)
       .then(response => {
         console.log('SUCCESS!', response.status, response.text);
-        alert('Email sent successfully!');
+        toast.success('Email sent successfully!');
       })
       .catch(error => {
         console.error('FAILED...', error);
-        alert('Failed to send email.');
-      })
-      .catch(err => {
-        console.error('Error during email sending:', err.message);
-        setPaymentError('Error during email sending');
+        toast.error('Failed to send email.');
       });
   };
 
@@ -127,7 +136,9 @@ const CheckoutForm = ({ amountInCents, formatEmailContent }) => {
     event.preventDefault();
 
     if (!stripe || !elements) {
-      setErrorMessage('Stripe has not loaded correctly.');
+      const errorMessage = 'Stripe has not loaded correctly.';
+      setErrorMessage(errorMessage);
+      toast.error(errorMessage);
       return;
     }
 
@@ -135,35 +146,40 @@ const CheckoutForm = ({ amountInCents, formatEmailContent }) => {
   };
 
   return (
-    <div className='flex justify-center items-center h-screen'>
-      <form
-        onSubmit={handleSubmit}
-        className='max-w-md w-full p-4 bg-white rounded shadow'
-      >
-        <h2 className='text-xl font-semibold mb-4'>Payment method</h2>
-
-        <div className='mb-4'>
-          <label className='block mb-2'>Card Details</label>
-          <CardElement className='w-full p-2 border rounded' />
-        </div>
-        <button
-          type='submit'
-          className='w-full py-2 px-4 bg-blue-600 text-white rounded hover:bg-blue-700'
-          disabled={!stripe || !elements}
-          onClick={Emailsend}
+    <>
+      <ToastContainer
+        position='top-right'
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme='light'
+      />
+      <div className='flex justify-center items-center h-screen'>
+        <form
+          onSubmit={handleSubmit}
+          className='max-w-md w-full p-4 bg-white rounded shadow'
         >
-          Pay Amount in Ounce £{amountInCents}
-        </button>
-        {paymentError && (
-          <div className='text-red-500 mb-4'>{paymentError}</div>
-        )}
-        {errorMessage && (
-          <div className='text-red-500 mb-4'>{errorMessage}</div>
-        )}
-      </form>
+          <h2 className='text-xl font-semibold mb-4'>Payment method</h2>
 
-      {/* <button onClick={Emailsend}>Send Email</button> */}
-    </div>
+          <div className='mb-4'>
+            <label className='block mb-2'>Card Details</label>
+            <CardElement className='w-full p-2 border rounded' />
+          </div>
+          <button
+            type='submit'
+            className='w-full py-2 px-4 bg-blue-600 text-white rounded hover:bg-blue-700'
+            disabled={!stripe || !elements}
+          >
+            Pay Amount in Ounce £{amountInCents}
+          </button>
+        </form>
+      </div>
+    </>
   );
 };
 
