@@ -318,7 +318,7 @@ const Price = () => {
   };
 
   // Set totoal Value in session storage
-  const [additionalTimePrice, setAdditionalTimePrice] = useState('£42.50');
+  const [additionalTimePrice, setAdditionalTimePrice] = useState('£22.50');
   useEffect(() => {
     switch (selectedVehicleValue) {
       case 'small-van':
