@@ -65,7 +65,7 @@ const Index = () => {
       </div>
       <div className='sm:w-[80%]  m-auto'>
         <DeatilSection />
-        <OurVision />
+        {/* <OurVision /> */}
         <Carousel />
         <ContactUs></ContactUs>
       </div>
