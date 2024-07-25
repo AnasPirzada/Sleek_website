@@ -316,143 +316,143 @@ const Price = () => {
     }
 
     return `
-    <div class="bg-white p-4">
-      <p>Hello,</p>
-      
-    
-      <table class="w-full border border-collapse border-gray-300">
-        <thead class="bg-gray-200">
-          <tr>
-            <th class="border p-2 text-left">Contact & Billing Info</th>
-            <th class="border p-2 text-left"></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="border p-2">Name:</td>
-            <td class="border p-2">${Name}</td>
-          </tr>
-          <tr>
-            <td class="border p-2">Email:</td>
-            <td class="border p-2">${Emailofuser}</td>
-          </tr>
-          <tr>
-            <td class="border p-2">Phone:</td>
-            <td class="border p-2">${Phone}</td>
-          </tr>
-        </tbody>
-      </table>
+  <div style="background-color: white; padding: 1rem;">
+  <p>Hello,</p>
   
-      <hr class="my-4">
-  
-      <table class="w-full border border-collapse border-gray-300">
-        <thead class="bg-gray-200">
-          <tr>
-            <th class="border p-2 text-left">Moving details</th>
-            <th class="border p-2 text-left"></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="border p-2">PICKUP LOCATION:</td>
-            <td class="border p-2">${pickupStreetAddress} + ${pickupCityItem}</td>
-          </tr>
-          <tr>
-            <td class="border p-2">DROP-OFF LOCATION:</td>
-            <td class="border p-2">${deliveryStreetAddress} + ${deliveryCityItem}</td>
-          </tr>
-          <tr>
-            <td class="border p-2">PICKUP DATE, TIME:</td>
-            <td class="border p-2">${selectedDate} ${VehicleDuration}</td>
-          </tr>
-          <tr>
-            <td class="border p-2">PICKUP STAIRS:</td>
-            <td class="border p-2">${pickupStairsValue}</td>
-          </tr>
-          <tr>
-            <td class="border p-2">DROP-OFF STAIRS:</td>
-            <td class="border p-2">${deliveryStairsValue}</td>
-          </tr>
-          <tr>
-            <td class="border p-2">SELECTED VAN:</td>
-            <td class="border p-2">${selectedVehicleValue}</td>
-          </tr>
-          <tr>
-            <td class="border p-2">Van Details:</td>
-            <td class="border p-2">${vanDetails}</td>
-          </tr>
-        </tbody>
-      </table>
-  
-      <hr class="my-4">
-  
-      <table class="w-full border border-collapse border-gray-300">
-        <thead class="bg-gray-200">
-          <tr>
-            <th class="border p-2 text-left">Price Breakdown</th>
-            <th class="border p-2 text-left"></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="border p-2">Lift Availability:</td>
-            <td class="border p-2">${activeOptionYouHaveLIFTS}</td>
-          </tr>
-          <tr>
-            <td class="border p-2">Booking Time:</td>
-            <td class="border p-2">${selectedVehicleDuration}</td>
-          </tr>
-          <tr>
-            <td class="border p-2">Total Distance:</td>
-            <td class="border p-2">${totalDistance} mile's</td>
-          </tr>
-          <tr>
-            <td class="border p-2">Mileage Charges:</td>
-            <td class="border p-2">£${
-              !isNaN(parseFloat(totalRatepermile))
-                ? parseFloat(totalRatepermile).toFixed(1)
-                : 'Invalid amount'
-            }</td>
-          </tr>
-          <tr>
-            <td class="border p-2">Drop-off-stairs:</td>
-            <td class="border p-2">£${DropOffAmount}</td>
-          </tr>
-          <tr>
-            <td class="border p-2">Pickup-stairs:</td>
-            <td class="border p-2">£${PickupAmount}</td>
-          </tr>
-          <tr>
-            <td class="border p-2">Helping Loading & Unloading:</td>
-            <td class="border p-2">${deliveryValues}</td>
-          </tr>
-          <tr>
-            <td class="border p-2">Driver Time Charges:</td>
-            <td class="border p-2">${DriverChargesValue}</td>
-          </tr>
-          <tr>
-            <td class="border p-2">Additional Note:</td>
-            <td class="border p-2">${Description}</td>
-          </tr>
-        </tbody>
-      </table>
-  
-      <hr class="my-4">
-  
-      <p><strong>Total Cost:</strong> £${TotalExtendedAmount}</p>
-      <p><strong>To Pay now (10% deposit):</strong> £${depositAmountValue.toFixed(
-        1
-      )}</p>
-      <p><strong>Payed Amount:</strong> £${selectedPaymentAmount.toFixed(1)}</p>
-  
-      <hr class="my-4">
-  
-      <p>If you have any questions or issues, please feel free to contact your driver (Samuel) on 07462 877455 or email him at info@sleekassuredremovals.com or any of the numbers on our website or through the contact form.</p>
-      <p>You can also contact our support line at 07462 877455, 07455 911888, 0203 4176141.</p>
-  
-      <p>Best wishes,</p>
-      <p>Createex team</p>
-    </div>
+  <table style="width: 100%; border: 1px solid #D1D5DB; border-collapse: collapse;">
+    <thead style="background-color: #E5E7EB;">
+      <tr>
+        <th style="border: 1px solid #D1D5DB; padding: 0.5rem; text-align: left;">Contact & Billing Info</th>
+        <th style="border: 1px solid #D1D5DB; padding: 0.5rem; text-align: left;"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="border: 1px solid #D1D5DB; padding: 0.5rem;">Name:</td>
+        <td style="border: 1px solid #D1D5DB; padding: 0.5rem;">${Name}</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid #D1D5DB; padding: 0.5rem;">Email:</td>
+        <td style="border: 1px solid #D1D5DB; padding: 0.5rem;">${Emailofuser}</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid #D1D5DB; padding: 0.5rem;">Phone:</td>
+        <td style="border: 1px solid #D1D5DB; padding: 0.5rem;">${Phone}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <hr style="margin: 1rem 0;">
+
+  <table style="width: 100%; border: 1px solid #D1D5DB; border-collapse: collapse;">
+    <thead style="background-color: #E5E7EB;">
+      <tr>
+        <th style="border: 1px solid #D1D5DB; padding: 0.5rem; text-align: left;">Moving details</th>
+        <th style="border: 1px solid #D1D5DB; padding: 0.5rem; text-align: left;"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="border: 1px solid #D1D5DB; padding: 0.5rem;">PICKUP LOCATION:</td>
+        <td style="border: 1px solid #D1D5DB; padding: 0.5rem;">${pickupStreetAddress} + ${pickupCityItem}</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid #D1D5DB; padding: 0.5rem;">DROP-OFF LOCATION:</td>
+        <td style="border: 1px solid #D1D5DB; padding: 0.5rem;">${deliveryStreetAddress} + ${deliveryCityItem}</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid #D1D5DB; padding: 0.5rem;">PICKUP DATE, TIME:</td>
+        <td style="border: 1px solid #D1D5DB; padding: 0.5rem;">${selectedDate} ${VehicleDuration}</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid #D1D5DB; padding: 0.5rem;">PICKUP STAIRS:</td>
+        <td style="border: 1px solid #D1D5DB; padding: 0.5rem;">${pickupStairsValue}</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid #D1D5DB; padding: 0.5rem;">DROP-OFF STAIRS:</td>
+        <td style="border: 1px solid #D1D5DB; padding: 0.5rem;">${deliveryStairsValue}</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid #D1D5DB; padding: 0.5rem;">SELECTED VAN:</td>
+        <td style="border: 1px solid #D1D5DB; padding: 0.5rem;">${selectedVehicleValue}</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid #D1D5DB; padding: 0.5rem;">Van Details:</td>
+        <td style="border: 1px solid #D1D5DB; padding: 0.5rem;">${vanDetails}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <hr style="margin: 1rem 0;">
+
+  <table style="width: 100%; border: 1px solid #D1D5DB; border-collapse: collapse;">
+    <thead style="background-color: #E5E7EB;">
+      <tr>
+        <th style="border: 1px solid #D1D5DB; padding: 0.5rem; text-align: left;">Price Breakdown</th>
+        <th style="border: 1px solid #D1D5DB; padding: 0.5rem; text-align: left;"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="border: 1px solid #D1D5DB; padding: 0.5rem;">Lift Availability:</td>
+        <td style="border: 1px solid #D1D5DB; padding: 0.5rem;">${activeOptionYouHaveLIFTS}</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid #D1D5DB; padding: 0.5rem;">Booking Time:</td>
+        <td style="border: 1px solid #D1D5DB; padding: 0.5rem;">${selectedVehicleDuration}</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid #D1D5DB; padding: 0.5rem;">Total Distance:</td>
+        <td style="border: 1px solid #D1D5DB; padding: 0.5rem;">${totalDistance} mile's</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid #D1D5DB; padding: 0.5rem;">Mileage Charges:</td>
+        <td style="border: 1px solid #D1D5DB; padding: 0.5rem;">£${
+          !isNaN(parseFloat(totalRatepermile))
+            ? parseFloat(totalRatepermile).toFixed(1)
+            : 'Invalid amount'
+        }</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid #D1D5DB; padding: 0.5rem;">Drop-off-stairs:</td>
+        <td style="border: 1px solid #D1D5DB; padding: 0.5rem;">£${DropOffAmount}</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid #D1D5DB; padding: 0.5rem;">Pickup-stairs:</td>
+        <td style="border: 1px solid #D1D5DB; padding: 0.5rem;">£${PickupAmount}</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid #D1D5DB; padding: 0.5rem;">Helping Loading & Unloading:</td>
+        <td style="border: 1px solid #D1D5DB; padding: 0.5rem;">${deliveryValues}</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid #D1D5DB; padding: 0.5rem;">Driver Time Charges:</td>
+        <td style="border: 1px solid #D1D5DB; padding: 0.5rem;">${DriverChargesValue}</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid #D1D5DB; padding: 0.5rem;">Additional Note:</td>
+        <td style="border: 1px solid #D1D5DB; padding: 0.5rem;">${Description}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <hr style="margin: 1rem 0;">
+
+  <p><strong>Total Cost:</strong> £${TotalExtendedAmount}</p>
+  <p><strong>To Pay now (10% deposit):</strong> £${depositAmountValue.toFixed(
+    1
+  )}</p>
+  <p><strong>Payed Amount:</strong> £${selectedPaymentAmount.toFixed(1)}</p>
+
+  <hr style="margin: 1rem 0;">
+
+  <p>If you have any questions or issues, please feel free to contact your driver (Samuel) on 07462 877455 or email him at info@sleekassuredremovals.com or any of the numbers on our website or through the contact form.</p>
+  <p>You can also contact our support line at 07462 877455, 07455 911888, 0203 4176141.</p>
+
+  <p>Best wishes,</p>
+  <p>Sleek Assured Removals</p>
+</div>
+
     `;
   };
 
