@@ -160,11 +160,6 @@ const Index = () => {
 
   const deliveryHelp1 = deliveryHelp;
 
-  // Split the string to extract the integer
-
-  // Split the string to extract the parts
-  // const parts = deliveryHelp.split(" ");
-  // console.log("dfa", parts);
 
   let NOvalue = 0;
   let Drivervalue = 0;

@@ -1,12 +1,12 @@
 .backgroundimg {
-  background-image: url('./imgf.jpg'); /* Ensure the path is correct */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 }
-.text1:hover{
- color: #E97B08;
- transition: 1s;
- transition-duration: 1s;
+
+.text1:hover {
+  color: #E97B08;
+  transition: 1s;
+  transition-duration: 1s;
 
 }

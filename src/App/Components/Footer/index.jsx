@@ -66,7 +66,7 @@ const Navbar = () => {
         <p className='uppercase mt-2 sm:text-[#ECECEC]  text-[#444545] text-xs md:text-sm '>
           Registered in England and Wales as SLEEK IMAGING LTD & trading as
           Sleek Assured Removals.
-          <br /> Company Number: 08914304 YOU PAY WITH
+          <br /> Company Number: 08914304
         </p>
       </div>
     </div>

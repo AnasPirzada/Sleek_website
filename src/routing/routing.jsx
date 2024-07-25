@@ -5,15 +5,16 @@ import Footer from '../App/Components/Footer/index';
 import Blog from '../App/Components/Pages/Blog/Blog';
 import Blogpag1 from '../App/Components/Pages/Blog/Blogpag1';
 import Blogpag2 from '../App/Components/Pages/Blog/Blogpag2';
+import Blogpag3 from '../App/Components/Pages/Blog/Blogpag3';
 import ContactUS from '../App/Components/Pages/ContactUs/index';
 import Faqs from '../App/Components/Pages/Faqs';
 import Home from '../App/Components/Pages/Home/Index';
-import InstantQuotes from '../App/Components/Pages/InstantQuote/index';
-import StripeCheckout from '../App/Components/Pages/Price/StripeCheckout.jsx';
-import Price from '../App/Components/Pages/Price/Price';
-import Services from '../App/Components/Pages/Services/index';
 import InstantMain from '../App/Components/Pages/instantMain/SectionVehicl';
+import InstantQuotes from '../App/Components/Pages/InstantQuote/index';
 import PaymentMethod from '../App/Components/Pages/Price/paymentMethod.jsx';
+import Price from '../App/Components/Pages/Price/Price';
+import StripeCheckout from '../App/Components/Pages/Price/StripeCheckout.jsx';
+import Services from '../App/Components/Pages/Services/index';
 
 export const router = createBrowserRouter([
   {
@@ -47,7 +48,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: 'blogpage1',
+        path: '/blogDetails2',
         element: (
           <>
             <Navbar />
@@ -144,6 +145,16 @@ export const router = createBrowserRouter([
       <>
         <Navbar />
         <Blogpag2 />
+        <Footer />
+      </>
+    ),
+  },
+  {
+    path: '/blogDetails3',
+    element: (
+      <>
+        <Navbar />
+        <Blogpag3 />
         <Footer />
       </>
     ),

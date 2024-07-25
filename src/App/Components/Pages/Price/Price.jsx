@@ -50,6 +50,8 @@ const Price = () => {
   const [DrivervalueCharges, setssavedDrivervalueCharges] = useState(0);
   const [selecteddeliveryValues, setdeliveryValues] = useState(0);
 
+  const [selectedPaymentOption, setSelectedPaymentOption] = useState('');
+  const [selectedPaymentAmount, setSelectedPaymentAmount] = useState(0);
   const location = useLocation();
   console.log('Totoal Distance', deliveryStreetAddress);
   // const { distanceInMiles } = location.state || { distanceInMiles: 0 };
@@ -167,7 +169,6 @@ const Price = () => {
   }, []);
   console.log('Pick Up Stairs', deliveryStreetAddress);
 
-  // console.log('Pick Up Stairs', pickupStairsValue);
   console.log('Devlivery Stairs', deliveryStairsValue);
   console.log('deliveryValues', selecteddeliveryValues);
   console.log('car', selectedVehicleValue);
@@ -176,28 +177,26 @@ const Price = () => {
 
   TotalExtendedAmount = TotalAmount;
 
-  depositAmount = 0.1 * TotalExtendedAmount;
-
-  // TotalDespositedAmount=TotalAmount-depositAmount
-
+  const depositAmountValue = 0.1 * TotalExtendedAmount;
   // Getting Click result
-  // Seeting Email Sending
   const [recipientEmail, setRecipientEmail] = useState('');
 
   const [activeOptionPaymentMethod, setActivePaymentMethod] = useState(null);
 
-  const handleOptionPaymentMethod = method => {
+  const handleOptionPaymentMethod = (method, amount) => {
     setActivePaymentMethod(method);
+    setSelectedPaymentOption(method);
+    setSelectedPaymentAmount(amount);
     console.log(`Selected payment method: ${method}`);
   };
 
   const SelectedPaymentMethod = () => {
     const emailContent = formatEmailContent();
     console.log('Formatted Email Content in Price.jsx:', emailContent);
-    navigate(`/paymentmethods/${depositAmount}`, {
+    navigate(`/paymentmethods/${selectedPaymentAmount}`, {
       state: {
         formatEmailContent: emailContent,
-        depositAmount: depositAmount,
+        depositAmount: selectedPaymentAmount,
       },
     });
   };
@@ -215,8 +214,61 @@ const Price = () => {
     TotalAmount,
     DriverChargesValue
   );
-  // let TotalAmount;
-  // TotalAmount = TotalAmount + totalRatepermile;
+
+  // const formatEmailContent = () => {
+  //   let vanDetails = '';
+
+  //   return `
+  //   Hello,
+
+  //   You got a new message from the Createex team:
+
+  //   **Contact & Billing Info:**
+  //   - Name: ${Name}
+  //   - Email: ${Emailofuser}
+  //   - Phone: ${Phone}
+
+  //   **--------------------------------------------------**
+
+  //   **Moving details**
+  //   - PICKUP LOCATION: ${pickupStreetAddress} + ${pickupCityItem}
+  //   - DROP-OFF LOCATION: ${deliveryStreetAddress} + ${deliveryCityItem}
+  //   - PICKUP DATE, TIME: ${selectedDate} ${VehicleDuration}
+  //   - PICKUP STAIRS: ${pickupStairsValue}
+  //   - DROP-OFF STAIRS: ${deliveryStairsValue}
+  //   - SELECTED VAN: ${selectedVehicleValue}
+  //   - Van Details :  ${vanDetails}
+  //   **--------------------------------------------------**
+
+  //   **Price Breakdown:**
+  //   - Lift Availability: ${activeOptionYouHaveLIFTS}
+  //   - Booking Time: ${selectedVehicleDuration}
+  //   - Total Distance: ${totalDistance} mile's
+  //   - Mileage Charges: £${
+  //     !isNaN(parseFloat(totalRatepermile))
+  //       ? parseFloat(totalRatepermile).toFixed(1)
+  //       : 'Invalid amount'
+  //   }
+  //   - Drop-off-stairs: £${DropOffAmount}
+  //   - Pickup-stairs: £${PickupAmount}
+  //   - Helping Loading & Unloading: ${deliveryValues}
+  //   - Driver Time Charges :  ${DriverChargesValue}
+
+  //   - Additional Note ${Description}
+
+  //   **Total Cost: £${TotalExtendedAmount}**
+  //   **To Pay now (10% deposit): £${depositAmountValue.toFixed(1)}**
+  //   **Payed Amount: £${selectedPaymentAmount.toFixed(1)}**
+
+  //   **------------------------------------------------------**
+  //   **If you have any questions or issues, please feel free to contact  your driver (Samuel) on  07462877455 or email him at info@sleekassuredremovals.com or any of the numbers on our website or through the contact form.
+  //   You can also contact our support line at 07462877455, 07455 911888 , 0203 4176141**
+  //   **-------------------------------------------------------**
+
+  //   Best wishes,
+  //   Createex team
+  // `;
+  // };
 
   const formatEmailContent = () => {
     let vanDetails = '';
@@ -262,59 +314,146 @@ const Price = () => {
         vanDetails = '';
         break;
     }
+
     return `
-    Hello,
+    <div class="bg-white p-4">
+      <p>Hello,</p>
+      
+    
+      <table class="w-full border border-collapse border-gray-300">
+        <thead class="bg-gray-200">
+          <tr>
+            <th class="border p-2 text-left">Contact & Billing Info</th>
+            <th class="border p-2 text-left"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="border p-2">Name:</td>
+            <td class="border p-2">${Name}</td>
+          </tr>
+          <tr>
+            <td class="border p-2">Email:</td>
+            <td class="border p-2">${Emailofuser}</td>
+          </tr>
+          <tr>
+            <td class="border p-2">Phone:</td>
+            <td class="border p-2">${Phone}</td>
+          </tr>
+        </tbody>
+      </table>
   
-    You got a new message from the Createex team:
+      <hr class="my-4">
   
-    **Contact & Billing Info:**
-    - Name: ${Name}
-    - Email: ${Emailofuser}
-    - Phone: ${Phone}
-
-    **--------------------------------------------------**
-
-
-    **Moving details**
-    - PICKUP LOCATION: ${pickupStreetAddress} + ${pickupCityItem}
-    - DROP-OFF LOCATION: ${deliveryStreetAddress} + ${deliveryCityItem}
-    - PICKUP DATE, TIME: ${selectedDate} ${VehicleDuration}
-    - PICKUP STAIRS: ${pickupStairsValue}
-    - DROP-OFF STAIRS: ${deliveryStairsValue}
-    - SELECTED VAN: ${selectedVehicleValue}
-    - Van Details :  ${vanDetails}
-    **--------------------------------------------------**
-
-    **Price Breakdown:**
-    - Lift Availability: ${activeOptionYouHaveLIFTS}
-    - Booking Time: ${selectedVehicleDuration}
-    - Total Distance: ${totalDistance} mile's
-    - Mileage Charges: £${
-      !isNaN(parseFloat(totalRatepermile))
-        ? parseFloat(totalRatepermile).toFixed(1)
-        : 'Invalid amount'
-    }
-    - Drop-off-stairs: £${DropOffAmount}
-    - Pickup-stairs: £${PickupAmount}
-    - Helping Loading & Unloading: ${deliveryValues}
-    - Driver Time Charges :  ${DriverChargesValue}
-
-    - Additional Note ${Description}
+      <table class="w-full border border-collapse border-gray-300">
+        <thead class="bg-gray-200">
+          <tr>
+            <th class="border p-2 text-left">Moving details</th>
+            <th class="border p-2 text-left"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="border p-2">PICKUP LOCATION:</td>
+            <td class="border p-2">${pickupStreetAddress} + ${pickupCityItem}</td>
+          </tr>
+          <tr>
+            <td class="border p-2">DROP-OFF LOCATION:</td>
+            <td class="border p-2">${deliveryStreetAddress} + ${deliveryCityItem}</td>
+          </tr>
+          <tr>
+            <td class="border p-2">PICKUP DATE, TIME:</td>
+            <td class="border p-2">${selectedDate} ${VehicleDuration}</td>
+          </tr>
+          <tr>
+            <td class="border p-2">PICKUP STAIRS:</td>
+            <td class="border p-2">${pickupStairsValue}</td>
+          </tr>
+          <tr>
+            <td class="border p-2">DROP-OFF STAIRS:</td>
+            <td class="border p-2">${deliveryStairsValue}</td>
+          </tr>
+          <tr>
+            <td class="border p-2">SELECTED VAN:</td>
+            <td class="border p-2">${selectedVehicleValue}</td>
+          </tr>
+          <tr>
+            <td class="border p-2">Van Details:</td>
+            <td class="border p-2">${vanDetails}</td>
+          </tr>
+        </tbody>
+      </table>
   
+      <hr class="my-4">
   
-    **Total Cost: £${TotalExtendedAmount}**
-    **To Pay now (10% deposit): £${depositAmount.toFixed(1)}**
-
-
-    **------------------------------------------------------**
-    **If you have any questions or issues, please feel free to contact  your driver (Samuel) on  07462877455 or email him at info@sleekassuredremovals.com or any of the numbers on our website or through the contact form.
-    You can also contact our support line at 07462877455, 07455 911888 , 0203 4176141**
-    **-------------------------------------------------------**
-
-
-    Best wishes,
-    Createex team
-  `;
+      <table class="w-full border border-collapse border-gray-300">
+        <thead class="bg-gray-200">
+          <tr>
+            <th class="border p-2 text-left">Price Breakdown</th>
+            <th class="border p-2 text-left"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="border p-2">Lift Availability:</td>
+            <td class="border p-2">${activeOptionYouHaveLIFTS}</td>
+          </tr>
+          <tr>
+            <td class="border p-2">Booking Time:</td>
+            <td class="border p-2">${selectedVehicleDuration}</td>
+          </tr>
+          <tr>
+            <td class="border p-2">Total Distance:</td>
+            <td class="border p-2">${totalDistance} mile's</td>
+          </tr>
+          <tr>
+            <td class="border p-2">Mileage Charges:</td>
+            <td class="border p-2">£${
+              !isNaN(parseFloat(totalRatepermile))
+                ? parseFloat(totalRatepermile).toFixed(1)
+                : 'Invalid amount'
+            }</td>
+          </tr>
+          <tr>
+            <td class="border p-2">Drop-off-stairs:</td>
+            <td class="border p-2">£${DropOffAmount}</td>
+          </tr>
+          <tr>
+            <td class="border p-2">Pickup-stairs:</td>
+            <td class="border p-2">£${PickupAmount}</td>
+          </tr>
+          <tr>
+            <td class="border p-2">Helping Loading & Unloading:</td>
+            <td class="border p-2">${deliveryValues}</td>
+          </tr>
+          <tr>
+            <td class="border p-2">Driver Time Charges:</td>
+            <td class="border p-2">${DriverChargesValue}</td>
+          </tr>
+          <tr>
+            <td class="border p-2">Additional Note:</td>
+            <td class="border p-2">${Description}</td>
+          </tr>
+        </tbody>
+      </table>
+  
+      <hr class="my-4">
+  
+      <p><strong>Total Cost:</strong> £${TotalExtendedAmount}</p>
+      <p><strong>To Pay now (10% deposit):</strong> £${depositAmountValue.toFixed(
+        1
+      )}</p>
+      <p><strong>Payed Amount:</strong> £${selectedPaymentAmount.toFixed(1)}</p>
+  
+      <hr class="my-4">
+  
+      <p>If you have any questions or issues, please feel free to contact your driver (Samuel) on 07462 877455 or email him at info@sleekassuredremovals.com or any of the numbers on our website or through the contact form.</p>
+      <p>You can also contact our support line at 07462 877455, 07455 911888, 0203 4176141.</p>
+  
+      <p>Best wishes,</p>
+      <p>Createex team</p>
+    </div>
+    `;
   };
 
   // Set totoal Value in session storage
@@ -580,9 +719,37 @@ const Price = () => {
                 </span>
               </h2>
               <p className='font-medium text-lg sm:text-2xl'>
-                £{depositAmount.toFixed(1)}
+                £{depositAmountValue.toFixed(1)}
               </p>
             </div>
+
+            <div className='text-start my-5'>
+              <button
+                onClick={() =>
+                  handleOptionPaymentMethod('deposit', depositAmountValue)
+                }
+                className={`py-2 px-5 rounded-md text-[#FFFFFF] ${
+                  selectedPaymentOption === 'deposit'
+                    ? 'bg-[#E97B08]'
+                    : 'bg-gray-400'
+                } shadow-lg`}
+              >
+                Pay 10% Deposit
+              </button>
+              <button
+                onClick={() =>
+                  handleOptionPaymentMethod('total', TotalExtendedAmount)
+                }
+                className={`py-2 px-5 rounded-md text-[#FFFFFF] ${
+                  selectedPaymentOption === 'total'
+                    ? 'bg-[#E97B08]'
+                    : 'bg-gray-400'
+                } shadow-lg ml-4`}
+              >
+                Pay Total Amount
+              </button>
+            </div>
+
             <div className='my-10'>
               <div className='text-center my-5'>
                 <button

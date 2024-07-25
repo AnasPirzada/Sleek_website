@@ -13,53 +13,10 @@ const CheckoutForm = ({ amountInCents, formatEmailContent }) => {
   const [clientSecret, setClientSecret] = useState('');
 
   useEffect(() => {
-    if (amountInCents > 0) {
-      const paymentIntentData = {
-        amount: amountInCents,
-        currency: 'gpb',
-        paymentMethodId: 'pm_card_visa',
-        callbackUrl: 'https://ecom-gpay.vercel.app/success',
-      };
-
-      fetch('https://gstaxi.azurewebsites.net/stripe/charge', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(paymentIntentData),
-      })
-        .then(res => {
-          if (!res.ok) {
-            return res.json().then(error => {
-              throw new Error(error.message || 'Failed to fetch client secret');
-            });
-          }
-          return res.json();
-        })
-        .then(data => {
-          console.log('Received data from server:', data);
-          if (data.paymentIntent.client_secret && data.paymentIntent.status) {
-            setClientSecret(data.paymentIntent.client_secret);
-            setPaymentIntentStatus(data.paymentIntent.status);
-          } else {
-            setPaymentError('Received incomplete data from server');
-            toast.error('Received incomplete data from server');
-          }
-        })
-        .catch(error => {
-          console.error('Error fetching client secret:', error.message);
-          setPaymentError('Error fetching client secret');
-          toast.error('Error fetching client secret');
-        });
-    }
-  }, [amountInCents]);
-
-  // Initialize EmailJS
-  useEffect(() => {
-    emailjs.init('ZIx7xdSk-EHLqBZOd');
+    emailjs.init('ZIx7xdSk-EHLqBZOd'); // Replace with your actual EmailJS user ID
   }, []);
 
-  const handlePayment = async () => {
+  const handlePayment = async (clientSecret) => {
     if (!clientSecret) {
       const errorMessage = 'Invalid client secret or payment intent status received';
       setPaymentError(errorMessage);
@@ -69,6 +26,7 @@ const CheckoutForm = ({ amountInCents, formatEmailContent }) => {
 
     if (paymentIntentStatus === 'succeeded') {
       toast.success('Payment Succeeded');
+      sendEmail();
       return;
     } else if (
       paymentIntentStatus !== 'requires_confirmation' &&
@@ -98,7 +56,7 @@ const CheckoutForm = ({ amountInCents, formatEmailContent }) => {
       } else if (paymentIntent.status === 'succeeded') {
         console.log('Payment succeeded:', paymentIntent);
         toast.success('Payment Succeeded');
-        sendEmail(); // Assuming sendEmail is defined elsewhere
+        sendEmail();
       } else {
         console.warn('Unexpected payment status:', paymentIntent.status);
         const errorMessage = `Unexpected payment status: ${paymentIntent.status}`;
@@ -115,13 +73,13 @@ const CheckoutForm = ({ amountInCents, formatEmailContent }) => {
 
   const sendEmail = () => {
     console.log('Preparing to send email...');
-    const emailContent = formatEmailContent;
+    const emailContent = formatEmailContent();
     const templateParams = {
       message: emailContent,
     };
 
     emailjs
-      .send('service_fwnx2ff', 'template_owfy6ml', templateParams)
+      .send('service_fwnx2ff', 'template_owfy6ml', templateParams) // Replace with your actual service ID and template ID
       .then(response => {
         console.log('SUCCESS!', response.status, response.text);
         toast.success('Email sent successfully!');
@@ -142,7 +100,57 @@ const CheckoutForm = ({ amountInCents, formatEmailContent }) => {
       return;
     }
 
-    handlePayment();
+    const cardElement = elements.getElement(CardElement);
+
+    // Create payment method
+    const { error: createPaymentMethodError, paymentMethod } = await stripe.createPaymentMethod({
+      type: 'card',
+      card: cardElement,
+    });
+
+    if (createPaymentMethodError) {
+      console.error('Error creating payment method:', createPaymentMethodError);
+      toast.error(createPaymentMethodError.message);
+      return;
+    }
+
+    const paymentIntentData = {
+      amount: amountInCents,
+      currency: 'gbp',
+      paymentMethodId: paymentMethod.id,
+      callbackUrl: 'https://ecom-gpay.vercel.app/success',
+    };
+
+    try {
+      const res = await fetch('https://gstaxi.azurewebsites.net/stripe/charge', { // Replace with your live server URL
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(paymentIntentData),
+      });
+
+      if (!res.ok) {
+        const error = await res.json();
+        throw new Error(error.message || 'Client secret fetch failed');
+      }
+
+      const data = await res.json();
+      console.log('Received data from server:', data);
+
+      if (data.paymentIntent.client_secret && data.paymentIntent.status) {
+        setClientSecret(data.paymentIntent.client_secret);
+        setPaymentIntentStatus(data.paymentIntent.status);
+        handlePayment(data.paymentIntent.client_secret); // Call handlePayment with the client secret
+      } else {
+        setPaymentError('Received incomplete data from server');
+        toast.error('Received incomplete data from server');
+      }
+    } catch (error) {
+      console.error('Error fetching client secret:', error);
+      setPaymentError('Error fetching client secret');
+      toast.error('Error fetching client secret');
+    }
   };
 
   return (
@@ -165,7 +173,6 @@ const CheckoutForm = ({ amountInCents, formatEmailContent }) => {
           className='max-w-md w-full p-4 bg-white rounded shadow'
         >
           <h2 className='text-xl font-semibold mb-4'>Payment method</h2>
-
           <div className='mb-4'>
             <label className='block mb-2'>Card Details</label>
             <CardElement className='w-full p-2 border rounded' />
@@ -175,7 +182,7 @@ const CheckoutForm = ({ amountInCents, formatEmailContent }) => {
             className='w-full py-2 px-4 bg-blue-600 text-white rounded hover:bg-blue-700'
             disabled={!stripe || !elements}
           >
-            Pay Amount in Ounce £{amountInCents}
+            Pay Amount in Pence £{amountInCents / 100}
           </button>
         </form>
       </div>
