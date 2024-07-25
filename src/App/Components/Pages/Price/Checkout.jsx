@@ -13,12 +13,13 @@ const CheckoutForm = ({ amountInCents, formatEmailContent }) => {
   const [clientSecret, setClientSecret] = useState('');
 
   useEffect(() => {
-    emailjs.init('ZIx7xdSk-EHLqBZOd'); // Replace with your actual EmailJS user ID
+    emailjs.init('glK5HRwZy44bPjq46'); // Replace with your actual EmailJS user ID
   }, []);
 
-  const handlePayment = async (clientSecret) => {
+  const handlePayment = async clientSecret => {
     if (!clientSecret) {
-      const errorMessage = 'Invalid client secret or payment intent status received';
+      const errorMessage =
+        'Invalid client secret or payment intent status received';
       setPaymentError(errorMessage);
       toast.error(errorMessage);
       return;
@@ -79,7 +80,7 @@ const CheckoutForm = ({ amountInCents, formatEmailContent }) => {
     };
 
     emailjs
-      .send('service_fwnx2ff', 'template_owfy6ml', templateParams) // Replace with your actual service ID and template ID
+      .send('service_a6w4npr', 'template_qf31tb8', templateParams) // Replace with your actual service ID and template ID
       .then(response => {
         console.log('SUCCESS!', response.status, response.text);
         toast.success('Email sent successfully!');
@@ -103,10 +104,11 @@ const CheckoutForm = ({ amountInCents, formatEmailContent }) => {
     const cardElement = elements.getElement(CardElement);
 
     // Create payment method
-    const { error: createPaymentMethodError, paymentMethod } = await stripe.createPaymentMethod({
-      type: 'card',
-      card: cardElement,
-    });
+    const { error: createPaymentMethodError, paymentMethod } =
+      await stripe.createPaymentMethod({
+        type: 'card',
+        card: cardElement,
+      });
 
     if (createPaymentMethodError) {
       console.error('Error creating payment method:', createPaymentMethodError);
@@ -122,13 +124,17 @@ const CheckoutForm = ({ amountInCents, formatEmailContent }) => {
     };
 
     try {
-      const res = await fetch('https://gstaxi.azurewebsites.net/stripe/charge', { // Replace with your live server URL
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(paymentIntentData),
-      });
+      const res = await fetch(
+        'https://gstaxi.azurewebsites.net/stripe/charge',
+        {
+          // Replace with your live server URL
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(paymentIntentData),
+        }
+      );
 
       if (!res.ok) {
         const error = await res.json();
@@ -182,7 +188,7 @@ const CheckoutForm = ({ amountInCents, formatEmailContent }) => {
             className='w-full py-2 px-4 bg-blue-600 text-white rounded hover:bg-blue-700'
             disabled={!stripe || !elements}
           >
-            Pay Amount in Pence £{amountInCents / 100}
+            Pay Amount in Pence £{amountInCents.toFixed(2)}
           </button>
         </form>
       </div>

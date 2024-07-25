@@ -21,8 +21,10 @@ const StripeCheckout = () => {
     const depositAmountFromPath = parseFloat(
       pathSegments[pathSegments.length - 1]
     );
+    console.log('total amount', depositAmountFromPath);
     if (!isNaN(depositAmountFromPath)) {
-      const amountInCents = Math.floor(depositAmountFromPath * 16);
+      const amountInCents = depositAmountFromPath;
+      // const amountInCents = Math.floor(depositAmountFromPath * 16);
       setAmountInCents(amountInCents);
     } else {
       toast.error('Invalid deposit amount in URL.');
@@ -35,6 +37,7 @@ const StripeCheckout = () => {
       setRecipientEmail(savedEmail);
     }
   }, []);
+  console.log('total amountInCents', amountInCents);
 
   return (
     <>
