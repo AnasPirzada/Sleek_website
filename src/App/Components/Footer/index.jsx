@@ -13,7 +13,7 @@ const Navbar = () => {
       <div className='flex w-[80%] m-auto'>
         <div className='flex justify-center sm:justify-start w-full sm:w-auto'>
           <img
-            src='Sleek_Logo.svg'
+            src='/Sleek_Logo.svg'
             alt='company logo'
             className='w-1/2 md:w-32 h-auto'
           />

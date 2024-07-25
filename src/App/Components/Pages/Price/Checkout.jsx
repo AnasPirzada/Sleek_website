@@ -4,7 +4,11 @@ import React, { useEffect, useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const CheckoutForm = ({ amountInCents, formatEmailContent }) => {
+const CheckoutForm = ({
+  amountInCents,
+  formatEmailContent,
+  amountInpounds,
+}) => {
   const stripe = useStripe();
   const elements = useElements();
   const [paymentError, setPaymentError] = useState(null);
@@ -13,7 +17,7 @@ const CheckoutForm = ({ amountInCents, formatEmailContent }) => {
   const [clientSecret, setClientSecret] = useState('');
 
   useEffect(() => {
-    emailjs.init('glK5HRwZy44bPjq46'); // Replace with your actual EmailJS user ID
+    emailjs.init('ZIx7xdSk-EHLqBZOd'); // Replace with your actual EmailJS user ID
   }, []);
 
   const handlePayment = async clientSecret => {
@@ -80,7 +84,7 @@ const CheckoutForm = ({ amountInCents, formatEmailContent }) => {
     };
 
     emailjs
-      .send('service_a6w4npr', 'template_qf31tb8', templateParams) // Replace with your actual service ID and template ID
+      .send('service_fwnx2ff', 'template_owfy6ml', templateParams) // Replace with your actual service ID and template ID
       .then(response => {
         console.log('SUCCESS!', response.status, response.text);
         toast.success('Email sent successfully!');
@@ -188,7 +192,7 @@ const CheckoutForm = ({ amountInCents, formatEmailContent }) => {
             className='w-full py-2 px-4 bg-blue-600 text-white rounded hover:bg-blue-700'
             disabled={!stripe || !elements}
           >
-            Pay Amount in Pence £{amountInCents.toFixed(2)}
+            Pay Amount £{amountInpounds.toFixed(2)}
           </button>
         </form>
       </div>

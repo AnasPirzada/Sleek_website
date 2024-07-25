@@ -723,7 +723,7 @@ const Price = () => {
               </p>
             </div>
 
-            <div className='text-start my-5'>
+            <div className='text-start my-5 flex flex-col sm:flex-row sm:justify-start'>
               <button
                 onClick={() =>
                   handleOptionPaymentMethod('deposit', depositAmountValue)
@@ -744,11 +744,16 @@ const Price = () => {
                   selectedPaymentOption === 'total'
                     ? 'bg-[#E97B08]'
                     : 'bg-gray-400'
-                } shadow-lg ml-4`}
+                } shadow-lg ml:0 mt-5 md:mt-0 md:ml-4`}
               >
                 Pay Total Amount
               </button>
             </div>
+
+            <p className='my-5 text-black-400 text-base'>
+              Pay 10% deposit now and pay the balance in cash after
+              the job is done
+            </p>
 
             <div className='my-10'>
               <div className='text-center my-5'>

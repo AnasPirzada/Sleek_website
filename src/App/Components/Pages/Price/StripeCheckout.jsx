@@ -14,6 +14,7 @@ const StripeCheckout = () => {
   const { activeOptionPaymentMethod, formatEmailContent } =
     location.state || {};
   const [amountInCents, setAmountInCents] = useState(0);
+  const [AmountInpounds, setAmountInpounds] = useState(0);
   const [recipientEmail, setRecipientEmail] = useState('');
 
   useEffect(() => {
@@ -23,9 +24,12 @@ const StripeCheckout = () => {
     );
     console.log('total amount', depositAmountFromPath);
     if (!isNaN(depositAmountFromPath)) {
-      const amountInCents = depositAmountFromPath;
-      // const amountInCents = Math.floor(depositAmountFromPath * 16);
+      const amountInpounds = depositAmountFromPath;
+
+      const amountInCents = Math.floor(depositAmountFromPath * 100);
+      console.log('convertedamountInCents', amountInCents);
       setAmountInCents(amountInCents);
+      setAmountInpounds(amountInpounds);
     } else {
       toast.error('Invalid deposit amount in URL.');
     }
@@ -56,6 +60,7 @@ const StripeCheckout = () => {
       <div>
         <Elements stripe={stripePromise}>
           <CheckoutForm
+            amountInpounds={AmountInpounds}
             amountInCents={amountInCents}
             recipientEmail={recipientEmail}
             formatEmailContent={formatEmailContent}
