@@ -31,7 +31,6 @@ const CheckoutForm = ({
 
     if (paymentIntentStatus === 'succeeded') {
       toast.success('Payment Succeeded');
-      sendEmail();
       return;
     } else if (
       paymentIntentStatus !== 'requires_confirmation' &&
@@ -61,7 +60,6 @@ const CheckoutForm = ({
       } else if (paymentIntent.status === 'succeeded') {
         console.log('Payment succeeded:', paymentIntent);
         toast.success('Payment Succeeded');
-        sendEmail();
       } else {
         console.warn('Unexpected payment status:', paymentIntent.status);
         const errorMessage = `Unexpected payment status: ${paymentIntent.status}`;
@@ -78,19 +76,25 @@ const CheckoutForm = ({
 
   const sendEmail = () => {
     console.log('Preparing to send email...');
-    const emailContent = formatEmailContent();
-    const templateParams = {
-      message: emailContent,
-    };
 
+    if (
+      typeof formatEmailContent !== 'string' ||
+      formatEmailContent.trim() === ''
+    ) {
+      toast.error('Failed to send email: Invalid email content');
+      return;
+    }
+
+    // const emailContent = formatEmailContent();
+    const templateParams = {
+      message: formatEmailContent,
+    };
     emailjs
-      .send('service_fwnx2ff', 'template_owfy6ml', templateParams) // Replace with your actual service ID and template ID
+      .send('service_fwnx2ff', 'template_owfy6ml', templateParams)
       .then(response => {
-        console.log('SUCCESS!', response.status, response.text);
         toast.success('Email sent successfully!');
       })
       .catch(error => {
-        console.error('FAILED...', error);
         toast.error('Failed to send email.');
       });
   };
@@ -189,6 +193,7 @@ const CheckoutForm = ({
           </div>
           <button
             type='submit'
+            onClick={sendEmail}
             className='w-full py-2 px-4 bg-blue-600 text-white rounded hover:bg-blue-700'
             disabled={!stripe || !elements}
           >
