@@ -1,7 +1,4 @@
-import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
-import emailjs from 'emailjs-com';
-import React, { useEffect, useState } from 'react';
-import { ToastContainer, toast } from 'react-toastify';
+import React from 'react';
 import 'react-toastify/dist/ReactToastify.css';
 
 const CheckoutForm = ({
@@ -85,7 +82,7 @@ const CheckoutForm = ({
       } else if (paymentIntent.status === 'succeeded') {
         console.log('Payment succeeded:', paymentIntent);
         toast.success('Payment Succeeded');
-        sendEmail(); // Send email after successful payment
+        sendEmail();
       } else {
         console.warn('Unexpected payment status:', paymentIntent.status);
         const errorMessage = `Unexpected payment status: ${paymentIntent.status}`;
@@ -132,7 +129,6 @@ const CheckoutForm = ({
 
     const templateParams = {
       Name,
-      Emailofuser,
       Phone,
       pickupStreetAddress,
       pickupCityItem,
@@ -157,6 +153,8 @@ const CheckoutForm = ({
       TotalExtendedAmount,
       depositAmountValue,
       selectedPaymentAmount,
+      recipient: Emailofuser, // User email
+      ownerEmail: 'sleekassured@gmail.com', // Owner email (replace with actual email)
     };
 
     emailjs
