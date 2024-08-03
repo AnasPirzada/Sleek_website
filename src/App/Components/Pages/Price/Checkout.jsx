@@ -1,4 +1,7 @@
-import React from 'react';
+import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
+import emailjs from 'emailjs-com';
+import React, { useEffect, useState } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const CheckoutForm = ({
@@ -154,7 +157,7 @@ const CheckoutForm = ({
       depositAmountValue,
       selectedPaymentAmount,
       recipient: Emailofuser, // User email
-      ownerEmail: 'sleekassured@gmail.com', // Owner email (replace with actual email)
+      ownerEmail: 'sleekassured@gmail.com',
     };
 
     emailjs
