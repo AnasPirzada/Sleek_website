@@ -3,7 +3,7 @@ import emailjs from 'emailjs-com';
 import React, { useEffect, useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import image_url from '/sleeklogo.png';
 const CheckoutForm = ({
   amountInCents,
   amountInpounds,
@@ -105,6 +105,7 @@ const CheckoutForm = ({
       Name,
       Emailofuser,
       Phone,
+      image_url,
       pickupStreetAddress,
       pickupCityItem,
       vanDetails,
@@ -135,6 +136,7 @@ const CheckoutForm = ({
       Phone,
       pickupStreetAddress,
       pickupCityItem,
+      image_url,
       deliveryStreetAddress,
       emailContent,
       deliveryCityItem,
