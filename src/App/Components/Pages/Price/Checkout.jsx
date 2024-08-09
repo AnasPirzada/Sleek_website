@@ -1,9 +1,11 @@
+// /components/CheckoutForm.js
+
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import emailjs from 'emailjs-com';
 import React, { useEffect, useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import image_url from '/sleeklogo.png';
+
 const CheckoutForm = ({
   amountInCents,
   amountInpounds,
@@ -42,7 +44,7 @@ const CheckoutForm = ({
   const [clientSecret, setClientSecret] = useState('');
 
   useEffect(() => {
-    emailjs.init('ZIx7xdSk-EHLqBZOd');
+    emailjs.init('yx1PsFh4noFbGOEmj');
   }, []);
 
   const handlePayment = async clientSecret => {
@@ -85,7 +87,6 @@ const CheckoutForm = ({
       } else if (paymentIntent.status === 'succeeded') {
         console.log('Payment succeeded:', paymentIntent);
         toast.success('Payment Succeeded');
-        sendEmail();
       } else {
         console.warn('Unexpected payment status:', paymentIntent.status);
         const errorMessage = `Unexpected payment status: ${paymentIntent.status}`;
@@ -101,42 +102,12 @@ const CheckoutForm = ({
   };
 
   const sendEmail = () => {
-    console.log('Preparing to values on checkout page...', {
-      Name,
-      Emailofuser,
-      Phone,
-      image_url,
-      pickupStreetAddress,
-      pickupCityItem,
-      vanDetails,
-      deliveryStreetAddress,
-      deliveryCityItem,
-      selectedDate,
-      emailContent,
-      VehicleDuration,
-      pickupStairsValue,
-      deliveryStairsValue,
-      selectedVehicleValue,
-      activeOptionYouHaveLIFTS,
-      selectedVehicleDuration,
-      totalDistance,
-      totalRatepermile,
-      DropOffAmount,
-      PickupAmount,
-      deliveryValues,
-      DriverChargesValue,
-      Description,
-      TotalExtendedAmount,
-      depositAmountValue,
-      selectedPaymentAmount,
-    });
-
     const templateParams = {
       Name,
       Phone,
       pickupStreetAddress,
       pickupCityItem,
-      image_url,
+      image_url: 'https://i.postimg.cc/XqMf2kzm/sleeklogo.png',
       deliveryStreetAddress,
       emailContent,
       deliveryCityItem,
@@ -158,12 +129,15 @@ const CheckoutForm = ({
       TotalExtendedAmount,
       depositAmountValue,
       selectedPaymentAmount,
-      recipient: Emailofuser, // User email
-      ownerEmail: 'sleekassured@gmail.com',
+      recipient: Emailofuser,
+      ownerEmail: 'info@sleekassuredremovals.com',
+      bcc_email: 'info@sleekassuredremovals.com',
+      from_name: 'sleek assured removals',
+      from_email: 'info@sleekassuredremovals.com',
     };
 
     emailjs
-      .send('service_fwnx2ff', 'template_owfy6ml', templateParams)
+      .send('service_cm4t99h', 'template_5y4f81g', templateParams)
       .then(response => {
         toast.success('Email sent successfully!');
       })
@@ -172,7 +146,7 @@ const CheckoutForm = ({
       });
   };
 
-  const handleSubmit = async event => {
+  const handlePaymentSubmit = async event => {
     event.preventDefault();
 
     if (!stripe || !elements) {
@@ -184,7 +158,6 @@ const CheckoutForm = ({
 
     const cardElement = elements.getElement(CardElement);
 
-    // Create payment method
     const { error: createPaymentMethodError, paymentMethod } =
       await stripe.createPaymentMethod({
         type: 'card',
@@ -208,7 +181,6 @@ const CheckoutForm = ({
       const res = await fetch(
         'https://gstaxi.azurewebsites.net/stripe/charge',
         {
-          // Replace with your live server URL
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -228,7 +200,7 @@ const CheckoutForm = ({
       if (data.paymentIntent.client_secret && data.paymentIntent.status) {
         setClientSecret(data.paymentIntent.client_secret);
         setPaymentIntentStatus(data.paymentIntent.status);
-        handlePayment(data.paymentIntent.client_secret); // Call handlePayment with the client secret
+        handlePayment(data.paymentIntent.client_secret);
       } else {
         setPaymentError('Received incomplete data from server');
         toast.error('Received incomplete data from server');
@@ -255,21 +227,26 @@ const CheckoutForm = ({
         theme='light'
       />
       <div className='flex justify-center items-center h-screen'>
-        <form
-          onSubmit={handleSubmit}
-          className='max-w-md w-full p-4 bg-white rounded shadow'
-        >
-          <h2 className='text-xl font-semibold mb-4'>Payment method</h2>
+        <form className='max-w-md w-full p-4 bg-white rounded shadow'>
+          <h2 className='text-xl font-semibold mb-4'>Payment and Email</h2>
           <div className='mb-4'>
             <label className='block mb-2'>Card Details</label>
             <CardElement className='w-full p-2 border rounded' />
           </div>
           <button
-            type='submit'
-            className='w-full py-2 px-4 bg-blue-600 text-white rounded hover:bg-blue-700'
+            type='button'
+            onClick={handlePaymentSubmit}
+            className='w-full py-2 px-4 bg-blue-600 text-white rounded hover:bg-blue-700 mb-2'
             disabled={!stripe || !elements}
           >
             Pay Amount £{amountInpounds.toFixed(2)}
+          </button>
+          <button
+            type='button'
+            onClick={sendEmail}
+            className='w-full py-2 px-4 bg-green-600 text-white rounded hover:bg-green-700'
+          >
+            Send Email
           </button>
         </form>
       </div>

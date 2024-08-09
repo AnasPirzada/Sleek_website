@@ -200,13 +200,18 @@ const SectionVehicl = () => {
   const handleHelpClick = value => {
     setSelectedHelp(value);
     setIsStairsDisabled(value === 'No Need Help');
-  
-  
+
     if (value === 'No Need Help') {
       setSelectedStairsValue('There are no flights of stairs0');
-      sessionStorage.setItem('DeliverySTAIRS', JSON.stringify('There are no flights of stairs0'));
+      sessionStorage.setItem(
+        'DeliverySTAIRS',
+        JSON.stringify('There are no flights of stairs0')
+      );
       setSelectedValue('There are no flights of stairs0');
-      sessionStorage.setItem('PICKUPSTAIRS', JSON.stringify('There are no flights of stairs0'));
+      sessionStorage.setItem(
+        'PICKUPSTAIRS',
+        JSON.stringify('There are no flights of stairs0')
+      );
     }
   };
 
@@ -680,12 +685,13 @@ const SectionVehicl = () => {
           </p>
           <p className='font-normal text-sm md:text-base leading-4 md:leading-5 xl:leading-[19px] text-[#444545] pt-2 md:pt-4 xl:pt-[8px]'>
             Large Van is perfect for 1 bedroom flat/house moves with no white
-            goods and heavy furniture.
+            goods and heavy furniture.It is good for single white goods and
+            furniture pickup
           </p>
           <p className='font-normal text-sm md:text-base leading-4 md:leading-5 xl:leading-[19px] text-[#444545] pt-2 md:pt-4 xl:pt-[8px]'>
-            Luton Van suitable for 3 bedroom flat/house with white goods. It’s
-            perfect for heavy items move because it has a tail lift for heavy
-            lifting.
+            Luton Van suitable for 3 bedroom flat/house with goods and large
+            furniture. It’s perfect for heavy lifting and big spaces items move
+            because it has a tail lift for heavy lifting
           </p>
         </div>
         <div className=' pt-4 md:pt-6 lg:pt-8 xl:pt-[34px] grid gap-2 sm:gap-6 md:gap-6 lg:gap-6 xl:gap-6 2xl:gap-6 grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-center'>
@@ -771,8 +777,9 @@ const SectionVehicl = () => {
             To Avoid stairs charge
           </h1>
           <p className='font-normal text-base leading-[19.36px] inter pt-2 text-[#444545]'>
-            If you will be able to bring your items downstairs, then choose no
-            flights of stairs on the booking form to save some money.
+            If you will be able to bring your items downstairs and take them
+            upstairs, then choose no flights of stairs on the booking form to
+            save some money.
           </p>
         </div>
         <div>
