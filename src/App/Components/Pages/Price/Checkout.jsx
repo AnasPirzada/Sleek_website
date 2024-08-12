@@ -1,8 +1,6 @@
-// /components/CheckoutForm.js
-
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import emailjs from 'emailjs-com';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -42,10 +40,6 @@ const CheckoutForm = ({
   const [paymentIntentStatus, setPaymentIntentStatus] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [clientSecret, setClientSecret] = useState('');
-
-  useEffect(() => {
-    emailjs.init('yx1PsFh4noFbGOEmj');
-  }, []);
 
   const handlePayment = async clientSecret => {
     if (!clientSecret) {
@@ -87,6 +81,8 @@ const CheckoutForm = ({
       } else if (paymentIntent.status === 'succeeded') {
         console.log('Payment succeeded:', paymentIntent);
         toast.success('Payment Succeeded');
+        sendEmail();
+        sendEmailowner();
       } else {
         console.warn('Unexpected payment status:', paymentIntent.status);
         const errorMessage = `Unexpected payment status: ${paymentIntent.status}`;
@@ -102,6 +98,8 @@ const CheckoutForm = ({
   };
 
   const sendEmail = () => {
+    emailjs.init('ZIx7xdSk-EHLqBZOd');
+
     const templateParams = {
       Name,
       Phone,
@@ -130,19 +128,60 @@ const CheckoutForm = ({
       depositAmountValue,
       selectedPaymentAmount,
       recipient: Emailofuser,
-      ownerEmail: 'info@sleekassuredremovals.com',
-      bcc_email: 'info@sleekassuredremovals.com',
-      from_name: 'sleek assured removals',
-      from_email: 'info@sleekassuredremovals.com',
+      recipient2: 'info@sleekassuredremovals.com',
     };
 
     emailjs
-      .send('service_cm4t99h', 'template_5y4f81g', templateParams)
+      .send('service_fwnx2ff', 'template_owfy6ml', templateParams)
       .then(response => {
         toast.success('Email sent successfully!');
       })
       .catch(error => {
-        toast.error('Failed to send email.');
+        toast.error('Failed to send email from user.');
+      });
+  };
+
+  const sendEmailowner = () => {
+    emailjs.init('11lrFgaoolgs5OXbW');
+
+    const templateParams = {
+      Name,
+      Phone,
+      pickupStreetAddress,
+      pickupCityItem,
+      image_url: 'https://i.postimg.cc/XqMf2kzm/sleeklogo.png',
+      deliveryStreetAddress,
+      emailContent,
+      deliveryCityItem,
+      selectedDate,
+      VehicleDuration,
+      pickupStairsValue,
+      deliveryStairsValue,
+      selectedVehicleValue,
+      activeOptionYouHaveLIFTS,
+      selectedVehicleDuration,
+      vanDetails,
+      totalDistance,
+      totalRatepermile,
+      DropOffAmount,
+      PickupAmount,
+      deliveryValues,
+      DriverChargesValue,
+      Description,
+      TotalExtendedAmount,
+      depositAmountValue,
+      selectedPaymentAmount,
+      recipient: Emailofuser,
+      recipient2: 'info@sleekassuredremovals.com',
+    };
+
+    emailjs
+      .send('service_8hymawn', 'template_r740ll9', templateParams)
+      .then(response => {
+        // toast.success('Email sent successfully!');
+      })
+      .catch(error => {
+        toast.error('Failed to send email from owner.');
       });
   };
 
@@ -241,13 +280,16 @@ const CheckoutForm = ({
           >
             Pay Amount £{amountInpounds.toFixed(2)}
           </button>
-          <button
+          {/* <button
             type='button'
-            onClick={sendEmail}
+            onClick={() => {
+              sendEmail();
+              sendEmailowner();
+            }}
             className='w-full py-2 px-4 bg-green-600 text-white rounded hover:bg-green-700'
           >
             Send Email
-          </button>
+          </button> */}
         </form>
       </div>
     </>
