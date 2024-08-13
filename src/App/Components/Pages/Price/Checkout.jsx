@@ -38,7 +38,6 @@ const CheckoutForm = ({
   const elements = useElements();
   const [paymentError, setPaymentError] = useState(null);
   const [paymentIntentStatus, setPaymentIntentStatus] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
   const [clientSecret, setClientSecret] = useState('');
 
   const handlePayment = async clientSecret => {
@@ -53,14 +52,6 @@ const CheckoutForm = ({
     if (paymentIntentStatus === 'succeeded') {
       toast.success('Payment Succeeded');
       return;
-    } else if (
-      paymentIntentStatus !== 'requires_confirmation' &&
-      paymentIntentStatus !== 'requires_action'
-    ) {
-      const errorMessage = `Unexpected payment status: ${paymentIntentStatus}`;
-      setPaymentError(errorMessage);
-      toast.error(errorMessage);
-      return;
     }
 
     try {
@@ -74,23 +65,19 @@ const CheckoutForm = ({
       );
 
       if (error) {
-        console.error('Stripe payment error:', error);
         const errorMessage = `Payment failed: ${error.message}`;
         setPaymentError(errorMessage);
         toast.error(errorMessage);
       } else if (paymentIntent.status === 'succeeded') {
-        console.log('Payment succeeded:', paymentIntent);
         toast.success('Payment Succeeded');
         sendEmail();
         sendEmailowner();
       } else {
-        console.warn('Unexpected payment status:', paymentIntent.status);
         const errorMessage = `Unexpected payment status: ${paymentIntent.status}`;
         setPaymentError(errorMessage);
         toast.error(errorMessage);
       }
     } catch (error) {
-      console.error('Payment processing error:', error.message);
       const errorMessage = `Payment processing error: ${error.message}`;
       setPaymentError(errorMessage);
       toast.error(errorMessage);
@@ -133,10 +120,10 @@ const CheckoutForm = ({
 
     emailjs
       .send('service_fwnx2ff', 'template_owfy6ml', templateParams)
-      .then(response => {
+      .then(() => {
         toast.success('Email sent successfully!');
       })
-      .catch(error => {
+      .catch(() => {
         toast.error('Failed to send email from user.');
       });
   };
@@ -177,20 +164,17 @@ const CheckoutForm = ({
 
     emailjs
       .send('service_8hymawn', 'template_r740ll9', templateParams)
-      .then(response => {
-        // toast.success('Email sent successfully!');
-      })
-      .catch(error => {
+      .catch(() => {
         toast.error('Failed to send email from owner.');
       });
   };
 
-  const handlePaymentSubmit = async event => {
+  const handleSubmit = async event => {
     event.preventDefault();
 
     if (!stripe || !elements) {
       const errorMessage = 'Stripe has not loaded correctly.';
-      setErrorMessage(errorMessage);
+      setPaymentError(errorMessage);
       toast.error(errorMessage);
       return;
     }
@@ -204,7 +188,6 @@ const CheckoutForm = ({
       });
 
     if (createPaymentMethodError) {
-      console.error('Error creating payment method:', createPaymentMethodError);
       toast.error(createPaymentMethodError.message);
       return;
     }
@@ -234,7 +217,6 @@ const CheckoutForm = ({
       }
 
       const data = await res.json();
-      console.log('Received data from server:', data);
 
       if (data.paymentIntent.client_secret && data.paymentIntent.status) {
         setClientSecret(data.paymentIntent.client_secret);
@@ -245,7 +227,6 @@ const CheckoutForm = ({
         toast.error('Received incomplete data from server');
       }
     } catch (error) {
-      console.error('Error fetching client secret:', error);
       setPaymentError('Error fetching client secret');
       toast.error('Error fetching client secret');
     }
@@ -266,30 +247,22 @@ const CheckoutForm = ({
         theme='light'
       />
       <div className='flex justify-center items-center h-screen'>
-        <form className='max-w-md w-full p-4 bg-white rounded shadow'>
+        <form
+          className='max-w-md w-full p-4 bg-white rounded shadow'
+          onSubmit={handleSubmit}
+        >
           <h2 className='text-xl font-semibold mb-4'>Payment and Email</h2>
           <div className='mb-4'>
             <label className='block mb-2'>Card Details</label>
             <CardElement className='w-full p-2 border rounded' />
           </div>
           <button
-            type='button'
-            onClick={handlePaymentSubmit}
+            type='submit'
             className='w-full py-2 px-4 bg-blue-600 text-white rounded hover:bg-blue-700 mb-2'
             disabled={!stripe || !elements}
           >
             Pay Amount £{amountInpounds.toFixed(2)}
           </button>
-          {/* <button
-            type='button'
-            onClick={() => {
-              sendEmail();
-              sendEmailowner();
-            }}
-            className='w-full py-2 px-4 bg-green-600 text-white rounded hover:bg-green-700'
-          >
-            Send Email
-          </button> */}
         </form>
       </div>
     </>
