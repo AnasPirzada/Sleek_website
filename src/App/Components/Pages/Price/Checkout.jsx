@@ -201,7 +201,7 @@ const CheckoutForm = ({
 
     try {
       const res = await fetch(
-        'https://gstaxi.azurewebsites.net/stripe/charge',
+        'https://sleek-website-gya6avfca9gkhtf3.uksouth-01.azurewebsites.net/api/charge',
         {
           method: 'POST',
           headers: {
